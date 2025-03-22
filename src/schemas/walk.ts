@@ -6,7 +6,7 @@ export const pairSchema = yup.object({
   id: yup.string().required(),
   users: yup.array().of(yup.string().required()).required(),
   color: yup.string().required(),
-  number: yup.number().required().positive().integer(),
+  emoji: yup.string().required(),
   isTriple: yup.boolean().optional(),
 });
 
