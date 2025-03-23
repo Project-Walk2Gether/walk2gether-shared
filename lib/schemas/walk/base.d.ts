@@ -3,27 +3,27 @@ export declare const pairSchema: yup.ObjectSchema<{
     id: string;
     users: string[];
     color: string;
-    number: number;
+    emoji: string;
     isTriple: boolean | undefined;
 }, yup.AnyObject, {
     id: undefined;
     users: "";
     color: undefined;
-    number: undefined;
+    emoji: undefined;
     isTriple: undefined;
 }, "">;
 export declare const roundSchema: yup.ObjectSchema<{
     id: string;
     walkId: string;
     roundNumber: number;
-    startTime: import("./utils/firebase").Timestamp | undefined;
-    endTime: import("./utils/firebase").Timestamp | undefined;
+    startTime: import("../utils/firebase").Timestamp | undefined;
+    endTime: import("../utils/firebase").Timestamp | undefined;
     pairs: {
         isTriple?: boolean | undefined;
-        number: number;
         id: string;
         users: string[];
         color: string;
+        emoji: string;
     }[];
 }, yup.AnyObject, {
     id: undefined;
@@ -33,46 +33,43 @@ export declare const roundSchema: yup.ObjectSchema<{
     endTime: undefined;
     pairs: "";
 }, "">;
-export declare const walkSchema: yup.ObjectSchema<{
+export declare const walkBaseSchema: yup.ObjectSchema<{
     id: string;
-    date: import("./utils/firebase").Timestamp;
+    date: import("../utils/firebase").Timestamp;
     active: NonNullable<boolean | undefined>;
     rsvpUsers: string[] | undefined;
     checkedInUsers: string[] | undefined;
-    theme: string | undefined;
+    invitedUserIds: string[] | undefined;
     location: {
         name: string;
         placeId: string;
         latitude: number;
         longitude: number;
-    } | undefined;
+    };
     durationMinutes: number;
-    numberOfRotations: number;
-    rounds: {
-        startTime?: import("./utils/firebase").Timestamp | undefined;
-        endTime?: import("./utils/firebase").Timestamp | undefined;
-        id: string;
-        walkId: string;
-        roundNumber: number;
-        pairs: {
-            isTriple?: boolean | undefined;
-            number: number;
+    organizer: {
+        userData: {
+            isAdmin?: boolean | undefined;
+            profilePicUrl?: string | undefined;
+            aboutMe?: string | undefined;
+            fcmToken?: string | undefined;
+            name: string;
             id: string;
-            users: string[];
-            color: string;
-        }[];
-    }[];
-    organizer: string | undefined;
-    createdByUid: string;
-    createdAt: import("./utils/firebase").Timestamp | undefined;
-    updatedAt: import("./utils/firebase").Timestamp | undefined;
+            age: NonNullable<"Younger" | "Older" | undefined>;
+            location: string;
+            email: string;
+        };
+        uid: string;
+    };
+    createdAt: import("../utils/firebase").Timestamp | undefined;
+    updatedAt: import("../utils/firebase").Timestamp | undefined;
 }, yup.AnyObject, {
     id: undefined;
     date: undefined;
     active: undefined;
     rsvpUsers: "";
     checkedInUsers: "";
-    theme: undefined;
+    invitedUserIds: "";
     location: {
         name: undefined;
         placeId: undefined;
@@ -80,13 +77,22 @@ export declare const walkSchema: yup.ObjectSchema<{
         longitude: undefined;
     };
     durationMinutes: undefined;
-    numberOfRotations: undefined;
-    rounds: "";
-    organizer: undefined;
-    createdByUid: undefined;
+    organizer: {
+        uid: undefined;
+        userData: {
+            id: undefined;
+            name: undefined;
+            age: undefined;
+            location: undefined;
+            email: undefined;
+            isAdmin: undefined;
+            profilePicUrl: undefined;
+            aboutMe: undefined;
+            fcmToken: undefined;
+        };
+    };
     createdAt: undefined;
     updatedAt: undefined;
 }, "">;
 export type Pair = yup.InferType<typeof pairSchema>;
 export type Round = yup.InferType<typeof roundSchema>;
-export type Walk = yup.InferType<typeof walkSchema>;
