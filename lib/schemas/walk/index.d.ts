@@ -163,7 +163,7 @@ export declare const walkSchemas: {
         createdAt: import("../utils/firebase").Timestamp | undefined;
         updatedAt: import("../utils/firebase").Timestamp | undefined;
         type: "neighborhood" | undefined;
-        numberOfRotations: number;
+        minimumNumberOfMinutesWithEachPartner: number;
         rounds: {
             startTime?: import("../utils/firebase").Timestamp | undefined;
             endTime?: import("../utils/firebase").Timestamp | undefined;
@@ -209,7 +209,7 @@ export declare const walkSchemas: {
         createdAt: undefined;
         updatedAt: undefined;
         type: undefined;
-        numberOfRotations: undefined;
+        minimumNumberOfMinutesWithEachPartner: 5;
         rounds: "";
     }, "">;
 };
@@ -306,7 +306,7 @@ export declare const walkSchema: yup.Lazy<{
         };
         uid: string;
     };
-    numberOfRotations: number;
+    minimumNumberOfMinutesWithEachPartner: number;
     rounds: {
         startTime?: import("../utils/firebase").Timestamp | undefined;
         endTime?: import("../utils/firebase").Timestamp | undefined;

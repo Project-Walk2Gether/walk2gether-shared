@@ -30,7 +30,7 @@ export declare const neighborhoodWalkSchema: yup.ObjectSchema<{
     createdAt: import("../utils/firebase").Timestamp | undefined;
     updatedAt: import("../utils/firebase").Timestamp | undefined;
     type: "neighborhood" | undefined;
-    numberOfRotations: number;
+    minimumNumberOfMinutesWithEachPartner: number;
     rounds: {
         startTime?: import("../utils/firebase").Timestamp | undefined;
         endTime?: import("../utils/firebase").Timestamp | undefined;
@@ -76,7 +76,7 @@ export declare const neighborhoodWalkSchema: yup.ObjectSchema<{
     createdAt: undefined;
     updatedAt: undefined;
     type: undefined;
-    numberOfRotations: undefined;
+    minimumNumberOfMinutesWithEachPartner: 5;
     rounds: "";
 }, "">;
 export type NeighborhoodWalk = yup.InferType<typeof neighborhoodWalkSchema>;

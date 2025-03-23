@@ -3,7 +3,12 @@ import { roundSchema, walkBaseSchema } from "./base";
 
 export const neighborhoodWalkSchema = walkBaseSchema.shape({
   type: yup.mixed<"neighborhood">().oneOf(["neighborhood"]),
-  numberOfRotations: yup.number().required().integer().min(0),
+  minimumNumberOfMinutesWithEachPartner: yup
+    .number()
+    .required()
+    .integer()
+    .min(0)
+    .default(5),
   rounds: yup.array().of(roundSchema.required()).required(),
 });
 

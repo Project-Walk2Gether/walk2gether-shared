@@ -3,4 +3,4 @@ export * from "./location";
 export * from "./reminder";
 export * from "./rsvp";
 export * from "./userData";
-export * from "./walk/base";
+export * from "./walk";
