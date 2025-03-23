@@ -7,7 +7,6 @@ export * from "./friendWalk";
 export * from "./neighborhoodWalk";
 export declare const walkSchemas: {
     friend: yup.ObjectSchema<{
-        id: string;
         date: import("../utils/firebase").Timestamp;
         active: NonNullable<boolean | undefined>;
         rsvpdUserIds: string[] | undefined;
@@ -20,25 +19,12 @@ export declare const walkSchemas: {
             longitude: number;
         };
         durationMinutes: number;
-        organizer: {
-            userData: {
-                isAdmin?: boolean | undefined;
-                profilePicUrl?: string | undefined;
-                aboutMe?: string | undefined;
-                fcmToken?: string | undefined;
-                name: string;
-                id: string;
-                age: NonNullable<"Younger" | "Older" | undefined>;
-                location: string;
-                email: string;
-            };
-            uid: string;
-        };
+        organizerName: string;
+        createdByUid: string;
         createdAt: import("../utils/firebase").Timestamp | undefined;
         updatedAt: import("../utils/firebase").Timestamp | undefined;
         type: "friend" | undefined;
     }, yup.AnyObject, {
-        id: undefined;
         date: undefined;
         active: undefined;
         rsvpdUserIds: "";
@@ -51,26 +37,13 @@ export declare const walkSchemas: {
             longitude: undefined;
         };
         durationMinutes: undefined;
-        organizer: {
-            uid: undefined;
-            userData: {
-                id: undefined;
-                name: undefined;
-                age: undefined;
-                location: undefined;
-                email: undefined;
-                isAdmin: undefined;
-                profilePicUrl: undefined;
-                aboutMe: undefined;
-                fcmToken: undefined;
-            };
-        };
+        organizerName: undefined;
+        createdByUid: undefined;
         createdAt: undefined;
         updatedAt: undefined;
         type: undefined;
     }, "">;
     friendGroup: yup.ObjectSchema<{
-        id: string;
         date: import("../utils/firebase").Timestamp;
         active: NonNullable<boolean | undefined>;
         rsvpdUserIds: string[] | undefined;
@@ -83,25 +56,12 @@ export declare const walkSchemas: {
             longitude: number;
         };
         durationMinutes: number;
-        organizer: {
-            userData: {
-                isAdmin?: boolean | undefined;
-                profilePicUrl?: string | undefined;
-                aboutMe?: string | undefined;
-                fcmToken?: string | undefined;
-                name: string;
-                id: string;
-                age: NonNullable<"Younger" | "Older" | undefined>;
-                location: string;
-                email: string;
-            };
-            uid: string;
-        };
+        organizerName: string;
+        createdByUid: string;
         createdAt: import("../utils/firebase").Timestamp | undefined;
         updatedAt: import("../utils/firebase").Timestamp | undefined;
         type: "friendGroup" | undefined;
     }, yup.AnyObject, {
-        id: undefined;
         date: undefined;
         active: undefined;
         rsvpdUserIds: "";
@@ -114,26 +74,13 @@ export declare const walkSchemas: {
             longitude: undefined;
         };
         durationMinutes: undefined;
-        organizer: {
-            uid: undefined;
-            userData: {
-                id: undefined;
-                name: undefined;
-                age: undefined;
-                location: undefined;
-                email: undefined;
-                isAdmin: undefined;
-                profilePicUrl: undefined;
-                aboutMe: undefined;
-                fcmToken: undefined;
-            };
-        };
+        organizerName: undefined;
+        createdByUid: undefined;
         createdAt: undefined;
         updatedAt: undefined;
         type: undefined;
     }, "">;
     neighborhood: yup.ObjectSchema<{
-        id: string;
         date: import("../utils/firebase").Timestamp;
         active: NonNullable<boolean | undefined>;
         rsvpdUserIds: string[] | undefined;
@@ -146,20 +93,8 @@ export declare const walkSchemas: {
             longitude: number;
         };
         durationMinutes: number;
-        organizer: {
-            userData: {
-                isAdmin?: boolean | undefined;
-                profilePicUrl?: string | undefined;
-                aboutMe?: string | undefined;
-                fcmToken?: string | undefined;
-                name: string;
-                id: string;
-                age: NonNullable<"Younger" | "Older" | undefined>;
-                location: string;
-                email: string;
-            };
-            uid: string;
-        };
+        organizerName: string;
+        createdByUid: string;
         createdAt: import("../utils/firebase").Timestamp | undefined;
         updatedAt: import("../utils/firebase").Timestamp | undefined;
         type: "neighborhood" | undefined;
@@ -177,7 +112,6 @@ export declare const walkSchemas: {
             }[];
         }[];
     }, yup.AnyObject, {
-        id: undefined;
         date: undefined;
         active: undefined;
         rsvpdUserIds: "";
@@ -190,20 +124,8 @@ export declare const walkSchemas: {
             longitude: undefined;
         };
         durationMinutes: undefined;
-        organizer: {
-            uid: undefined;
-            userData: {
-                id: undefined;
-                name: undefined;
-                age: undefined;
-                location: undefined;
-                email: undefined;
-                isAdmin: undefined;
-                profilePicUrl: undefined;
-                aboutMe: undefined;
-                fcmToken: undefined;
-            };
-        };
+        organizerName: undefined;
+        createdByUid: undefined;
         createdAt: undefined;
         updatedAt: undefined;
         type: undefined;
@@ -218,7 +140,6 @@ export declare const walkSchema: yup.Lazy<{
     rsvpdUserIds?: string[] | undefined;
     checkedInUserIds?: string[] | undefined;
     invitedUserIds?: string[] | undefined;
-    id: string;
     location: {
         name: string;
         placeId: string;
@@ -228,20 +149,8 @@ export declare const walkSchema: yup.Lazy<{
     date: import("../utils/firebase").Timestamp;
     active: NonNullable<boolean | undefined>;
     durationMinutes: number;
-    organizer: {
-        userData: {
-            isAdmin?: boolean | undefined;
-            profilePicUrl?: string | undefined;
-            aboutMe?: string | undefined;
-            fcmToken?: string | undefined;
-            name: string;
-            id: string;
-            age: NonNullable<"Younger" | "Older" | undefined>;
-            location: string;
-            email: string;
-        };
-        uid: string;
-    };
+    organizerName: string;
+    createdByUid: string;
 } | {
     type?: "friend" | undefined;
     createdAt?: import("../utils/firebase").Timestamp | undefined;
@@ -249,7 +158,6 @@ export declare const walkSchema: yup.Lazy<{
     rsvpdUserIds?: string[] | undefined;
     checkedInUserIds?: string[] | undefined;
     invitedUserIds?: string[] | undefined;
-    id: string;
     location: {
         name: string;
         placeId: string;
@@ -259,20 +167,8 @@ export declare const walkSchema: yup.Lazy<{
     date: import("../utils/firebase").Timestamp;
     active: NonNullable<boolean | undefined>;
     durationMinutes: number;
-    organizer: {
-        userData: {
-            isAdmin?: boolean | undefined;
-            profilePicUrl?: string | undefined;
-            aboutMe?: string | undefined;
-            fcmToken?: string | undefined;
-            name: string;
-            id: string;
-            age: NonNullable<"Younger" | "Older" | undefined>;
-            location: string;
-            email: string;
-        };
-        uid: string;
-    };
+    organizerName: string;
+    createdByUid: string;
 } | {
     type?: "neighborhood" | undefined;
     createdAt?: import("../utils/firebase").Timestamp | undefined;
@@ -280,7 +176,6 @@ export declare const walkSchema: yup.Lazy<{
     rsvpdUserIds?: string[] | undefined;
     checkedInUserIds?: string[] | undefined;
     invitedUserIds?: string[] | undefined;
-    id: string;
     location: {
         name: string;
         placeId: string;
@@ -290,20 +185,8 @@ export declare const walkSchema: yup.Lazy<{
     date: import("../utils/firebase").Timestamp;
     active: NonNullable<boolean | undefined>;
     durationMinutes: number;
-    organizer: {
-        userData: {
-            isAdmin?: boolean | undefined;
-            profilePicUrl?: string | undefined;
-            aboutMe?: string | undefined;
-            fcmToken?: string | undefined;
-            name: string;
-            id: string;
-            age: NonNullable<"Younger" | "Older" | undefined>;
-            location: string;
-            email: string;
-        };
-        uid: string;
-    };
+    organizerName: string;
+    createdByUid: string;
     minimumNumberOfMinutesWithEachPartner: number;
     rounds: {
         startTime?: import("../utils/firebase").Timestamp | undefined;

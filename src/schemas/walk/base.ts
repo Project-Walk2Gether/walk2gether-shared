@@ -1,6 +1,5 @@
 import * as yup from "yup";
 import { locationSchema } from "../location";
-import { userDataSchema } from "../userData";
 import { timestampSchema } from "../utils/timestamp";
 
 export const pairSchema = yup.object({
@@ -19,7 +18,6 @@ export const roundSchema = yup.object({
 });
 
 export const walkBaseSchema = yup.object({
-  id: yup.string().required(),
   date: timestampSchema.required(),
   active: yup.boolean().required(),
   rsvpdUserIds: yup.array().of(yup.string().required()),
@@ -27,12 +25,8 @@ export const walkBaseSchema = yup.object({
   invitedUserIds: yup.array().of(yup.string().required()),
   location: locationSchema.required(),
   durationMinutes: yup.number().required().positive().integer(),
-  organizer: yup
-    .object({
-      uid: yup.string().required(),
-      userData: userDataSchema,
-    })
-    .required(),
+  organizerName: yup.string().required(),
+  createdByUid: yup.string().required(),
   createdAt: timestampSchema,
   updatedAt: timestampSchema,
 });
