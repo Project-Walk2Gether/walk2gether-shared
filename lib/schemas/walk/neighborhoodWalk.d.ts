@@ -3,8 +3,8 @@ export declare const neighborhoodWalkSchema: yup.ObjectSchema<{
     id: string;
     date: import("../utils/firebase").Timestamp;
     active: NonNullable<boolean | undefined>;
-    rsvpUsers: string[] | undefined;
-    checkedInUsers: string[] | undefined;
+    rsvpdUserIds: string[] | undefined;
+    checkedInUserIds: string[] | undefined;
     invitedUserIds: string[] | undefined;
     location: {
         name: string;
@@ -34,13 +34,11 @@ export declare const neighborhoodWalkSchema: yup.ObjectSchema<{
     rounds: {
         startTime?: import("../utils/firebase").Timestamp | undefined;
         endTime?: import("../utils/firebase").Timestamp | undefined;
-        id: string;
         walkId: string;
         roundNumber: number;
         pairs: {
             isTriple?: boolean | undefined;
-            id: string;
-            users: string[];
+            userUids: string[];
             color: string;
             emoji: string;
         }[];
@@ -49,8 +47,8 @@ export declare const neighborhoodWalkSchema: yup.ObjectSchema<{
     id: undefined;
     date: undefined;
     active: undefined;
-    rsvpUsers: "";
-    checkedInUsers: "";
+    rsvpdUserIds: "";
+    checkedInUserIds: "";
     invitedUserIds: "";
     location: {
         name: undefined;

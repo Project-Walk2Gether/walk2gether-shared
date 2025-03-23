@@ -1,32 +1,27 @@
 import * as yup from "yup";
 export declare const pairSchema: yup.ObjectSchema<{
-    id: string;
-    users: string[];
+    userUids: string[];
     color: string;
     emoji: string;
     isTriple: boolean | undefined;
 }, yup.AnyObject, {
-    id: undefined;
-    users: "";
+    userUids: "";
     color: undefined;
     emoji: undefined;
     isTriple: undefined;
 }, "">;
 export declare const roundSchema: yup.ObjectSchema<{
-    id: string;
     walkId: string;
     roundNumber: number;
     startTime: import("../utils/firebase").Timestamp | undefined;
     endTime: import("../utils/firebase").Timestamp | undefined;
     pairs: {
         isTriple?: boolean | undefined;
-        id: string;
-        users: string[];
+        userUids: string[];
         color: string;
         emoji: string;
     }[];
 }, yup.AnyObject, {
-    id: undefined;
     walkId: undefined;
     roundNumber: undefined;
     startTime: undefined;
@@ -37,8 +32,8 @@ export declare const walkBaseSchema: yup.ObjectSchema<{
     id: string;
     date: import("../utils/firebase").Timestamp;
     active: NonNullable<boolean | undefined>;
-    rsvpUsers: string[] | undefined;
-    checkedInUsers: string[] | undefined;
+    rsvpdUserIds: string[] | undefined;
+    checkedInUserIds: string[] | undefined;
     invitedUserIds: string[] | undefined;
     location: {
         name: string;
@@ -67,8 +62,8 @@ export declare const walkBaseSchema: yup.ObjectSchema<{
     id: undefined;
     date: undefined;
     active: undefined;
-    rsvpUsers: "";
-    checkedInUsers: "";
+    rsvpdUserIds: "";
+    checkedInUserIds: "";
     invitedUserIds: "";
     location: {
         name: undefined;

@@ -10,8 +10,8 @@ export declare const walkSchemas: {
         id: string;
         date: import("../utils/firebase").Timestamp;
         active: NonNullable<boolean | undefined>;
-        rsvpUsers: string[] | undefined;
-        checkedInUsers: string[] | undefined;
+        rsvpdUserIds: string[] | undefined;
+        checkedInUserIds: string[] | undefined;
         invitedUserIds: string[] | undefined;
         location: {
             name: string;
@@ -41,8 +41,8 @@ export declare const walkSchemas: {
         id: undefined;
         date: undefined;
         active: undefined;
-        rsvpUsers: "";
-        checkedInUsers: "";
+        rsvpdUserIds: "";
+        checkedInUserIds: "";
         invitedUserIds: "";
         location: {
             name: undefined;
@@ -73,8 +73,8 @@ export declare const walkSchemas: {
         id: string;
         date: import("../utils/firebase").Timestamp;
         active: NonNullable<boolean | undefined>;
-        rsvpUsers: string[] | undefined;
-        checkedInUsers: string[] | undefined;
+        rsvpdUserIds: string[] | undefined;
+        checkedInUserIds: string[] | undefined;
         invitedUserIds: string[] | undefined;
         location: {
             name: string;
@@ -104,8 +104,8 @@ export declare const walkSchemas: {
         id: undefined;
         date: undefined;
         active: undefined;
-        rsvpUsers: "";
-        checkedInUsers: "";
+        rsvpdUserIds: "";
+        checkedInUserIds: "";
         invitedUserIds: "";
         location: {
             name: undefined;
@@ -136,8 +136,8 @@ export declare const walkSchemas: {
         id: string;
         date: import("../utils/firebase").Timestamp;
         active: NonNullable<boolean | undefined>;
-        rsvpUsers: string[] | undefined;
-        checkedInUsers: string[] | undefined;
+        rsvpdUserIds: string[] | undefined;
+        checkedInUserIds: string[] | undefined;
         invitedUserIds: string[] | undefined;
         location: {
             name: string;
@@ -167,13 +167,11 @@ export declare const walkSchemas: {
         rounds: {
             startTime?: import("../utils/firebase").Timestamp | undefined;
             endTime?: import("../utils/firebase").Timestamp | undefined;
-            id: string;
             walkId: string;
             roundNumber: number;
             pairs: {
                 isTriple?: boolean | undefined;
-                id: string;
-                users: string[];
+                userUids: string[];
                 color: string;
                 emoji: string;
             }[];
@@ -182,8 +180,8 @@ export declare const walkSchemas: {
         id: undefined;
         date: undefined;
         active: undefined;
-        rsvpUsers: "";
-        checkedInUsers: "";
+        rsvpdUserIds: "";
+        checkedInUserIds: "";
         invitedUserIds: "";
         location: {
             name: undefined;
@@ -217,8 +215,8 @@ export declare const walkSchema: yup.Lazy<{
     type?: "friendGroup" | undefined;
     createdAt?: import("../utils/firebase").Timestamp | undefined;
     updatedAt?: import("../utils/firebase").Timestamp | undefined;
-    rsvpUsers?: string[] | undefined;
-    checkedInUsers?: string[] | undefined;
+    rsvpdUserIds?: string[] | undefined;
+    checkedInUserIds?: string[] | undefined;
     invitedUserIds?: string[] | undefined;
     id: string;
     location: {
@@ -248,8 +246,8 @@ export declare const walkSchema: yup.Lazy<{
     type?: "friend" | undefined;
     createdAt?: import("../utils/firebase").Timestamp | undefined;
     updatedAt?: import("../utils/firebase").Timestamp | undefined;
-    rsvpUsers?: string[] | undefined;
-    checkedInUsers?: string[] | undefined;
+    rsvpdUserIds?: string[] | undefined;
+    checkedInUserIds?: string[] | undefined;
     invitedUserIds?: string[] | undefined;
     id: string;
     location: {
@@ -279,8 +277,8 @@ export declare const walkSchema: yup.Lazy<{
     type?: "neighborhood" | undefined;
     createdAt?: import("../utils/firebase").Timestamp | undefined;
     updatedAt?: import("../utils/firebase").Timestamp | undefined;
-    rsvpUsers?: string[] | undefined;
-    checkedInUsers?: string[] | undefined;
+    rsvpdUserIds?: string[] | undefined;
+    checkedInUserIds?: string[] | undefined;
     invitedUserIds?: string[] | undefined;
     id: string;
     location: {
@@ -310,13 +308,11 @@ export declare const walkSchema: yup.Lazy<{
     rounds: {
         startTime?: import("../utils/firebase").Timestamp | undefined;
         endTime?: import("../utils/firebase").Timestamp | undefined;
-        id: string;
         walkId: string;
         roundNumber: number;
         pairs: {
             isTriple?: boolean | undefined;
-            id: string;
-            users: string[];
+            userUids: string[];
             color: string;
             emoji: string;
         }[];
