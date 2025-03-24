@@ -1,8 +1,10 @@
 import * as yup from "yup";
 import { roundSchema, walkBaseSchema } from "./base";
 
-export const neighborhoodWalkSchema = walkBaseSchema.shape({
-  type: yup.mixed<"neighborhood">().oneOf(["neighborhood"]),
+export const meetupWalkSchema = walkBaseSchema.shape({
+  type: yup.mixed<"meetup">().oneOf(["meetup"]),
+  isPublic: yup.mixed<true>().oneOf([true]),
+  topic: yup.string().required(),
   minimumNumberOfMinutesWithEachPartner: yup
     .number()
     .required()
@@ -12,4 +14,4 @@ export const neighborhoodWalkSchema = walkBaseSchema.shape({
   rounds: yup.array().of(roundSchema.required()).required(),
 });
 
-export type NeighborhoodWalk = yup.InferType<typeof neighborhoodWalkSchema>;
+export type MeetupWalk = yup.InferType<typeof meetupWalkSchema>;

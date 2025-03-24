@@ -1,16 +1,14 @@
 import * as yup from "yup";
-import { FriendGroupWalk, friendGroupWalkSchema } from "./friendGroupWalk";
-import { FriendWalk, friendWalkSchema } from "./friendWalk";
-import { NeighborhoodWalk, neighborhoodWalkSchema } from "./neighborhoodWalk";
+import { FriendsWalk, friendsWalkSchema } from "./friends";
+import { MeetupWalk } from "./meetup";
+import { NeighborhoodWalk, neighborhoodWalkSchema } from "./neighborhood";
 
-export * from "./friendGroupWalk";
-export * from "./friendWalk";
-export * from "./neighborhoodWalk";
+export * from "./friends";
+export * from "./neighborhood";
 
 // Map of walk types to their schemas
 export const walkSchemas = {
-  friend: friendWalkSchema,
-  friendGroup: friendGroupWalkSchema,
+  friends: friendsWalkSchema,
   neighborhood: neighborhoodWalkSchema,
 };
 
@@ -25,28 +23,15 @@ export const walkSchema = yup.lazy((value) => {
     type: yup
       .string()
       .oneOf(Object.keys(walkSchemas))
-      .required("Tactic type is required"),
+      .required("Walk type is required"),
   });
 });
 
-export const walkIsFriendWalk = (value: Walk): value is FriendWalk =>
-  value.type === "friend";
-export const isValidFriendWalk = (value: unknown): value is FriendWalk => {
+export const walkIsFriendsWalk = (value: Walk): value is FriendsWalk =>
+  value.type === "friends";
+export const isValidFriendsWalk = (value: unknown): value is FriendsWalk => {
   try {
-    friendWalkSchema.validateSync(value);
-    return true;
-  } catch (error) {
-    return false;
-  }
-};
-
-export const walkIsFriendGroupWalk = (value: Walk): value is FriendGroupWalk =>
-  value.type === "friendGroup";
-export const isValidFriendGroupWalk = (
-  value: unknown
-): value is FriendGroupWalk => {
-  try {
-    friendGroupWalkSchema.validateSync(value);
+    friendsWalkSchema.validateSync(value);
     return true;
   } catch (error) {
     return false;
@@ -67,4 +52,15 @@ export const isValidNeighborhoodWalk = (
   }
 };
 
-export type Walk = FriendWalk | NeighborhoodWalk | FriendGroupWalk;
+export const walkIsMeetupWalk = (value: Walk): value is MeetupWalk =>
+  value.type === "meetup";
+export const isValidMeetupWalk = (value: unknown): value is MeetupWalk => {
+  try {
+    neighborhoodWalkSchema.validateSync(value);
+    return true;
+  } catch (error) {
+    return false;
+  }
+};
+
+export type Walk = FriendsWalk | NeighborhoodWalk | MeetupWalk;
