@@ -1,5 +1,6 @@
 import * as yup from "yup";
 export declare const friendGroupWalkSchema: yup.ObjectSchema<{
+    id: string | undefined;
     date: import("../utils/firebase").Timestamp;
     active: NonNullable<boolean | undefined>;
     rsvpdUserIds: string[] | undefined;
@@ -18,6 +19,7 @@ export declare const friendGroupWalkSchema: yup.ObjectSchema<{
     updatedAt: import("../utils/firebase").Timestamp | undefined;
     type: "friendGroup" | undefined;
 }, yup.AnyObject, {
+    id: undefined;
     date: undefined;
     active: undefined;
     rsvpdUserIds: "";

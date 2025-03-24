@@ -29,6 +29,7 @@ export declare const roundSchema: yup.ObjectSchema<{
     pairs: "";
 }, "">;
 export declare const walkBaseSchema: yup.ObjectSchema<{
+    id: string | undefined;
     date: import("../utils/firebase").Timestamp;
     active: NonNullable<boolean | undefined>;
     rsvpdUserIds: string[] | undefined;
@@ -46,6 +47,7 @@ export declare const walkBaseSchema: yup.ObjectSchema<{
     createdAt: import("../utils/firebase").Timestamp | undefined;
     updatedAt: import("../utils/firebase").Timestamp | undefined;
 }, yup.AnyObject, {
+    id: undefined;
     date: undefined;
     active: undefined;
     rsvpdUserIds: "";

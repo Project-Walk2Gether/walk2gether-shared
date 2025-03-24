@@ -7,6 +7,7 @@ export * from "./friendWalk";
 export * from "./neighborhoodWalk";
 export declare const walkSchemas: {
     friend: yup.ObjectSchema<{
+        id: string | undefined;
         date: import("../utils/firebase").Timestamp;
         active: NonNullable<boolean | undefined>;
         rsvpdUserIds: string[] | undefined;
@@ -25,6 +26,7 @@ export declare const walkSchemas: {
         updatedAt: import("../utils/firebase").Timestamp | undefined;
         type: "friend" | undefined;
     }, yup.AnyObject, {
+        id: undefined;
         date: undefined;
         active: undefined;
         rsvpdUserIds: "";
@@ -44,6 +46,7 @@ export declare const walkSchemas: {
         type: undefined;
     }, "">;
     friendGroup: yup.ObjectSchema<{
+        id: string | undefined;
         date: import("../utils/firebase").Timestamp;
         active: NonNullable<boolean | undefined>;
         rsvpdUserIds: string[] | undefined;
@@ -62,6 +65,7 @@ export declare const walkSchemas: {
         updatedAt: import("../utils/firebase").Timestamp | undefined;
         type: "friendGroup" | undefined;
     }, yup.AnyObject, {
+        id: undefined;
         date: undefined;
         active: undefined;
         rsvpdUserIds: "";
@@ -81,6 +85,7 @@ export declare const walkSchemas: {
         type: undefined;
     }, "">;
     neighborhood: yup.ObjectSchema<{
+        id: string | undefined;
         date: import("../utils/firebase").Timestamp;
         active: NonNullable<boolean | undefined>;
         rsvpdUserIds: string[] | undefined;
@@ -112,6 +117,7 @@ export declare const walkSchemas: {
             }[];
         }[];
     }, yup.AnyObject, {
+        id: undefined;
         date: undefined;
         active: undefined;
         rsvpdUserIds: "";
@@ -134,6 +140,7 @@ export declare const walkSchemas: {
     }, "">;
 };
 export declare const walkSchema: yup.Lazy<{
+    id?: string | undefined;
     createdAt?: import("../utils/firebase").Timestamp | undefined;
     updatedAt?: import("../utils/firebase").Timestamp | undefined;
     type?: "friendGroup" | undefined;
@@ -152,6 +159,7 @@ export declare const walkSchema: yup.Lazy<{
     organizerName: string;
     createdByUid: string;
 } | {
+    id?: string | undefined;
     createdAt?: import("../utils/firebase").Timestamp | undefined;
     updatedAt?: import("../utils/firebase").Timestamp | undefined;
     type?: "friend" | undefined;
@@ -170,6 +178,7 @@ export declare const walkSchema: yup.Lazy<{
     organizerName: string;
     createdByUid: string;
 } | {
+    id?: string | undefined;
     createdAt?: import("../utils/firebase").Timestamp | undefined;
     updatedAt?: import("../utils/firebase").Timestamp | undefined;
     type?: "neighborhood" | undefined;

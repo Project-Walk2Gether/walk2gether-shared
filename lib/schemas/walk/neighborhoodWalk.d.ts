@@ -1,5 +1,6 @@
 import * as yup from "yup";
 export declare const neighborhoodWalkSchema: yup.ObjectSchema<{
+    id: string | undefined;
     date: import("../utils/firebase").Timestamp;
     active: NonNullable<boolean | undefined>;
     rsvpdUserIds: string[] | undefined;
@@ -31,6 +32,7 @@ export declare const neighborhoodWalkSchema: yup.ObjectSchema<{
         }[];
     }[];
 }, yup.AnyObject, {
+    id: undefined;
     date: undefined;
     active: undefined;
     rsvpdUserIds: "";
