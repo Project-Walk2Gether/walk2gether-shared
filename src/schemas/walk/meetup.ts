@@ -3,7 +3,6 @@ import { roundSchema, walkBaseSchema } from "./base";
 
 export const meetupWalkSchema = walkBaseSchema.shape({
   type: yup.mixed<"meetup">().oneOf(["meetup"]),
-  isPublic: yup.mixed<true>().oneOf([true]),
   topic: yup.string().required(),
   minimumNumberOfMinutesWithEachPartner: yup
     .number()

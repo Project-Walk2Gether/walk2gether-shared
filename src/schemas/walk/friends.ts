@@ -2,7 +2,6 @@ import * as yup from "yup";
 import { walkBaseSchema } from "./base";
 
 export const friendsWalkSchema = walkBaseSchema.shape({
-  isPublic: yup.mixed<false>().oneOf([false]),
   type: yup.mixed<"friends">().oneOf(["friends"]),
   invitedUserIds: yup.array().of(yup.string().required()),
 });
