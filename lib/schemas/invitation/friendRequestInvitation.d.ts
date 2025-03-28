@@ -1,8 +1,8 @@
 import * as yup from "yup";
-export declare const newUserWalkInvitationSchema: yup.ObjectSchema<{
+export declare const friendRequestInvitationSchema: yup.ObjectSchema<{
     invitingUserId: string;
     acceptedAt: import("../utils/firebase").Timestamp | undefined;
-    type: "newUserWalk" | undefined;
+    type: "friendRequest" | undefined;
     walkId: string;
     recipientPhoneNumber: string | undefined;
     code: string;
@@ -14,4 +14,4 @@ export declare const newUserWalkInvitationSchema: yup.ObjectSchema<{
     recipientPhoneNumber: undefined;
     code: undefined;
 }, "">;
-export type NewUserWalkInvitation = yup.InferType<typeof newUserWalkInvitationSchema>;
+export type FriendRequestInvitation = yup.InferType<typeof friendRequestInvitationSchema>;

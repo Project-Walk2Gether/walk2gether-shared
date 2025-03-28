@@ -1,9 +1,12 @@
 import * as yup from "yup";
 import { baseInvitationSchema } from "./base";
 
-export const newUserInvitationSchema = baseInvitationSchema.shape({
-  type: yup.mixed<"newUser">().oneOf(["newUser"]),
+export const newUserWalkInvitationSchema = baseInvitationSchema.shape({
+  type: yup.mixed<"newUserWalk">().oneOf(["newUserWalk"]),
+  walkId: yup.string().required(),
   recipientPhoneNumber: yup.string().optional(),
   code: yup.string().required(),
 });
-export type NewUserInvitation = yup.InferType<typeof newUserInvitationSchema>;
+export type NewUserWalkInvitation = yup.InferType<
+  typeof newUserWalkInvitationSchema
+>;

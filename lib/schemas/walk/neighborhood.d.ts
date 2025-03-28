@@ -17,7 +17,6 @@ export declare const neighborhoodWalkSchema: yup.ObjectSchema<{
     createdByUid: string;
     createdAt: import("../utils/firebase").Timestamp | undefined;
     updatedAt: import("../utils/firebase").Timestamp | undefined;
-    isPublic: true | undefined;
     type: "neighborhood" | undefined;
 }, yup.AnyObject, {
     id: undefined;
@@ -37,7 +36,6 @@ export declare const neighborhoodWalkSchema: yup.ObjectSchema<{
     createdByUid: undefined;
     createdAt: undefined;
     updatedAt: undefined;
-    isPublic: undefined;
     type: undefined;
 }, "">;
 export type NeighborhoodWalk = yup.InferType<typeof neighborhoodWalkSchema>;

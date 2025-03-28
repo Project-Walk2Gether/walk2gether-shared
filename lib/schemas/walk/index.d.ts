@@ -23,7 +23,6 @@ export declare const walkSchemas: {
         createdByUid: string;
         createdAt: import("../utils/firebase").Timestamp | undefined;
         updatedAt: import("../utils/firebase").Timestamp | undefined;
-        isPublic: false | undefined;
         type: "friends" | undefined;
     }, yup.AnyObject, {
         id: undefined;
@@ -43,7 +42,6 @@ export declare const walkSchemas: {
         createdByUid: undefined;
         createdAt: undefined;
         updatedAt: undefined;
-        isPublic: undefined;
         type: undefined;
     }, "">;
     neighborhood: yup.ObjectSchema<{
@@ -64,7 +62,6 @@ export declare const walkSchemas: {
         createdByUid: string;
         createdAt: import("../utils/firebase").Timestamp | undefined;
         updatedAt: import("../utils/firebase").Timestamp | undefined;
-        isPublic: true | undefined;
         type: "neighborhood" | undefined;
     }, yup.AnyObject, {
         id: undefined;
@@ -84,7 +81,6 @@ export declare const walkSchemas: {
         createdByUid: undefined;
         createdAt: undefined;
         updatedAt: undefined;
-        isPublic: undefined;
         type: undefined;
     }, "">;
 };
@@ -96,7 +92,6 @@ export declare const walkSchema: yup.Lazy<{
     rsvpdUserIds?: string[] | undefined;
     checkedInUserIds?: string[] | undefined;
     invitedUserIds?: string[] | undefined;
-    isPublic?: false | undefined;
     location: {
         name: string;
         placeId: string;
@@ -116,7 +111,6 @@ export declare const walkSchema: yup.Lazy<{
     rsvpdUserIds?: string[] | undefined;
     checkedInUserIds?: string[] | undefined;
     invitedUserIds?: string[] | undefined;
-    isPublic?: true | undefined;
     location: {
         name: string;
         placeId: string;

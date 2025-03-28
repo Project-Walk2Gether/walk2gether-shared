@@ -18,7 +18,6 @@ export declare const meetupWalkSchema: yup.ObjectSchema<{
     createdAt: import("../utils/firebase").Timestamp | undefined;
     updatedAt: import("../utils/firebase").Timestamp | undefined;
     type: "meetup" | undefined;
-    isPublic: true | undefined;
     topic: string;
     minimumNumberOfMinutesWithEachPartner: number;
     rounds: {
@@ -52,7 +51,6 @@ export declare const meetupWalkSchema: yup.ObjectSchema<{
     createdAt: undefined;
     updatedAt: undefined;
     type: undefined;
-    isPublic: undefined;
     topic: undefined;
     minimumNumberOfMinutesWithEachPartner: 5;
     rounds: "";
