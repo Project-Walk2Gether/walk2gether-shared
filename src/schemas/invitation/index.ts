@@ -1,23 +1,20 @@
 import * as yup from "yup";
 import {
-  ExistingUserWalkInvitation,
-  existingUserWalkInvitationSchema,
+  ExistingUserInvitation,
+  existingUserInvitationSchema,
 } from "./existingUserInvitation";
-import { friendRequestInvitationSchema } from "./friendRequestInvitation";
 import {
-  NewUserWalkInvitation,
-  newUserWalkInvitationSchema,
+  NewUserInvitation,
+  newUserInvitationSchema,
 } from "./newUserInvitation";
 
 export * from "./existingUserInvitation";
-export * from "./friendRequestInvitation";
 export * from "./newUserInvitation";
 
 // Map of walk types to their schemas
 export const invitationSchemas = {
-  existingUserWalk: existingUserWalkInvitationSchema,
-  newUserWalk: newUserWalkInvitationSchema,
-  friendRequest: friendRequestInvitationSchema,
+  existingUser: existingUserInvitationSchema,
+  newUser: newUserInvitationSchema,
 };
 
 // Dynamic schema that selects the appropriate schema based on the walk type
@@ -35,32 +32,32 @@ export const invitationSchema = yup.lazy((value) => {
   });
 });
 
-export type Invitation = NewUserWalkInvitation | ExistingUserWalkInvitation;
+export type Invitation = NewUserInvitation | ExistingUserInvitation;
 
 // Type guard functions
-export const invitationIsExistingUserWalkInvitation = (
+export const invitationIsExistingUserInvitation = (
   value: Invitation
-): value is ExistingUserWalkInvitation => value.type === "existingUserWalk";
-export const isValidExistingUserWalkInvitation = (
+): value is ExistingUserInvitation => value.type === "existingUser";
+export const isValidExistingUserInvitation = (
   value: unknown
-): value is ExistingUserWalkInvitation => {
+): value is ExistingUserInvitation => {
   try {
-    existingUserWalkInvitationSchema.validateSync(value);
+    existingUserInvitationSchema.validateSync(value);
     return true;
   } catch (error) {
     return false;
   }
 };
 
-export const invitationIsNewUserWalkInvitation = (
+export const invitationIsNewUserInvitation = (
   value: Invitation
-): value is NewUserWalkInvitation => value.type === "newUserWalk";
+): value is NewUserInvitation => value.type === "newUser";
 
-export const isValidNewUserWalkInvitation = (
+export const isValidNewUserInvitation = (
   value: unknown
-): value is NewUserWalkInvitation => {
+): value is NewUserInvitation => {
   try {
-    newUserWalkInvitationSchema.validateSync(value);
+    newUserInvitationSchema.validateSync(value);
     return true;
   } catch (error) {
     return false;

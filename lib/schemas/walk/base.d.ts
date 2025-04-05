@@ -44,6 +44,7 @@ export declare const walkBaseSchema: yup.ObjectSchema<{
     durationMinutes: number;
     organizerName: string;
     createdByUid: string;
+    invitationCode: string;
     createdAt: import("../utils/firebase").Timestamp | undefined;
     updatedAt: import("../utils/firebase").Timestamp | undefined;
 }, yup.AnyObject, {
@@ -62,6 +63,7 @@ export declare const walkBaseSchema: yup.ObjectSchema<{
     durationMinutes: undefined;
     organizerName: undefined;
     createdByUid: undefined;
+    invitationCode: undefined;
     createdAt: undefined;
     updatedAt: undefined;
 }, "">;

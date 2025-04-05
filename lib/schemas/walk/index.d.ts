@@ -22,6 +22,7 @@ export declare const walkSchemas: {
         durationMinutes: number;
         organizerName: string;
         createdByUid: string;
+        invitationCode: string;
         createdAt: import("../utils/firebase").Timestamp | undefined;
         updatedAt: import("../utils/firebase").Timestamp | undefined;
         type: "friends" | undefined;
@@ -41,6 +42,7 @@ export declare const walkSchemas: {
         durationMinutes: undefined;
         organizerName: undefined;
         createdByUid: undefined;
+        invitationCode: undefined;
         createdAt: undefined;
         updatedAt: undefined;
         type: undefined;
@@ -61,6 +63,7 @@ export declare const walkSchemas: {
         durationMinutes: number;
         organizerName: string;
         createdByUid: string;
+        invitationCode: string;
         createdAt: import("../utils/firebase").Timestamp | undefined;
         updatedAt: import("../utils/firebase").Timestamp | undefined;
         type: "neighborhood" | undefined;
@@ -80,35 +83,17 @@ export declare const walkSchemas: {
         durationMinutes: undefined;
         organizerName: undefined;
         createdByUid: undefined;
+        invitationCode: undefined;
         createdAt: undefined;
         updatedAt: undefined;
         type: undefined;
     }, "">;
 };
 export declare const walkSchema: yup.Lazy<{
-    id?: string | undefined;
-    createdAt?: import("../utils/firebase").Timestamp | undefined;
-    updatedAt?: import("../utils/firebase").Timestamp | undefined;
     type?: "friends" | undefined;
-    rsvpdUserIds?: string[] | undefined;
-    checkedInUserIds?: string[] | undefined;
-    invitedUserIds?: string[] | undefined;
-    location: {
-        name: string;
-        placeId: string;
-        latitude: number;
-        longitude: number;
-    };
-    date: import("../utils/firebase").Timestamp;
-    active: NonNullable<boolean | undefined>;
-    durationMinutes: number;
-    organizerName: string;
-    createdByUid: string;
-} | {
     id?: string | undefined;
     createdAt?: import("../utils/firebase").Timestamp | undefined;
     updatedAt?: import("../utils/firebase").Timestamp | undefined;
-    type?: "neighborhood" | undefined;
     rsvpdUserIds?: string[] | undefined;
     checkedInUserIds?: string[] | undefined;
     invitedUserIds?: string[] | undefined;
@@ -123,6 +108,27 @@ export declare const walkSchema: yup.Lazy<{
     durationMinutes: number;
     organizerName: string;
     createdByUid: string;
+    invitationCode: string;
+} | {
+    type?: "neighborhood" | undefined;
+    id?: string | undefined;
+    createdAt?: import("../utils/firebase").Timestamp | undefined;
+    updatedAt?: import("../utils/firebase").Timestamp | undefined;
+    rsvpdUserIds?: string[] | undefined;
+    checkedInUserIds?: string[] | undefined;
+    invitedUserIds?: string[] | undefined;
+    location: {
+        name: string;
+        placeId: string;
+        latitude: number;
+        longitude: number;
+    };
+    date: import("../utils/firebase").Timestamp;
+    active: NonNullable<boolean | undefined>;
+    durationMinutes: number;
+    organizerName: string;
+    createdByUid: string;
+    invitationCode: string;
 } | {
     type: string;
 }, yup.AnyObject, any>;

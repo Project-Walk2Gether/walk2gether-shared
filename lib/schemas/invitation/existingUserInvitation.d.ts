@@ -1,15 +1,15 @@
 import * as yup from "yup";
-export declare const existingUserWalkInvitationSchema: yup.ObjectSchema<{
+export declare const existingUserInvitationSchema: yup.ObjectSchema<{
     invitingUserId: string;
     acceptedAt: import("../utils/firebase").Timestamp | undefined;
-    type: "existingUserWalk" | undefined;
     walkId: string;
+    type: "existingUser" | undefined;
     recipientUserId: string | undefined;
 }, yup.AnyObject, {
     invitingUserId: undefined;
     acceptedAt: undefined;
-    type: undefined;
     walkId: undefined;
+    type: undefined;
     recipientUserId: undefined;
 }, "">;
-export type ExistingUserWalkInvitation = yup.InferType<typeof existingUserWalkInvitationSchema>;
+export type ExistingUserInvitation = yup.InferType<typeof existingUserInvitationSchema>;
