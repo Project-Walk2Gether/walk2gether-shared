@@ -1,7 +1,18 @@
-import { Timestamp } from "../schemas/utils/firebase";
+import * as yup from "yup";
+import { ObjectSchema } from "yup";
+import {
+  DocumentReferenceLike,
+  documentReferenceSchema,
+} from "./documentReference";
 
-export type Persisted<T> = T & {
+type WithMaybeId = { id?: string | undefined };
+
+export const withId = (schema: ObjectSchema<yup.AnyObject, unknown>) =>
+  schema.shape({
+    _ref: documentReferenceSchema,
+    id: yup.string().required(),
+  });
+export type WithId<T extends WithMaybeId> = T & {
   id: string;
-  createdAt: Timestamp;
-  updatedAt: Timestamp;
+  _ref: DocumentReferenceLike<T>;
 };
