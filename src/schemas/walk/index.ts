@@ -3,6 +3,7 @@ import { FriendsWalk, friendsWalkSchema } from "./friends";
 import { MeetupWalk } from "./meetup";
 import { NeighborhoodWalk, neighborhoodWalkSchema } from "./neighborhood";
 
+export * from "./base";
 export * from "./friends";
 export * from "./neighborhood";
 

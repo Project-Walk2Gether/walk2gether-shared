@@ -2,6 +2,7 @@ import * as yup from "yup";
 import { FriendsWalk } from "./friends";
 import { MeetupWalk } from "./meetup";
 import { NeighborhoodWalk } from "./neighborhood";
+export * from "./base";
 export * from "./friends";
 export * from "./neighborhood";
 export declare const walkSchemas: {
