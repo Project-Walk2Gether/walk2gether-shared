@@ -8,6 +8,7 @@ export const userDataSchema = yup.object({
   location: locationSchema,
   email: yup.string().email().required(),
   profilePicUrl: yup.string().url().optional(),
+  friendInvitationCode: yup.string().required(),
   aboutMe: yup.string().optional(),
 });
 
