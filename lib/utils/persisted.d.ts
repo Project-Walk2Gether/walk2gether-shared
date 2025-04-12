@@ -1,6 +1,6 @@
 import * as yup from "yup";
 import { ObjectSchema } from "yup";
-import { DocumentReferenceLike } from "./documentReference";
+import { DocumentReferenceLike } from "../firestore/documentReference";
 type WithMaybeId = {
     id?: string | undefined;
 };

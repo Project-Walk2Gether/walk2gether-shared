@@ -3,7 +3,7 @@ import { ObjectSchema } from "yup";
 import {
   DocumentReferenceLike,
   documentReferenceSchema,
-} from "./documentReference";
+} from "../firestore/documentReference";
 
 type WithMaybeId = { id?: string | undefined };
 
