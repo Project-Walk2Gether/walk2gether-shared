@@ -14,3 +14,4 @@ export declare const messageSchema: yup.ObjectSchema<{
     createdAt: undefined;
     updatedAt: undefined;
 }, "">;
+export type Message = yup.InferType<typeof messageSchema>;

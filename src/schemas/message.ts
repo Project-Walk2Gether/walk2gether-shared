@@ -9,3 +9,5 @@ export const messageSchema = yup.object({
   createdAt: timestampSchema.optional(),
   updatedAt: timestampSchema.optional(),
 });
+
+export type Message = yup.InferType<typeof messageSchema>;
