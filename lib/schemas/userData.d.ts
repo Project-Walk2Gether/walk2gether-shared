@@ -12,6 +12,8 @@ export declare const userDataSchema: yup.ObjectSchema<{
     email: string;
     profilePicUrl: string | undefined;
     friendInvitationCode: string;
+    expoPushToken: string | undefined;
+    deviceInfo: any;
     aboutMe: string | undefined;
 }, yup.AnyObject, {
     id: undefined;
@@ -26,6 +28,8 @@ export declare const userDataSchema: yup.ObjectSchema<{
     email: undefined;
     profilePicUrl: undefined;
     friendInvitationCode: undefined;
+    expoPushToken: undefined;
+    deviceInfo: undefined;
     aboutMe: undefined;
 }, "">;
 export type UserData = yup.InferType<typeof userDataSchema>;
