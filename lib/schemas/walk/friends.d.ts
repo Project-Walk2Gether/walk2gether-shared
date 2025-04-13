@@ -4,7 +4,6 @@ export declare const friendsWalkSchema: yup.ObjectSchema<{
     date: import("../utils/firebase").Timestamp;
     active: NonNullable<boolean | undefined>;
     rsvpdUserIds: string[] | undefined;
-    checkedInUserIds: string[] | undefined;
     invitedUserIds: string[] | undefined;
     location: {
         name: string;
@@ -24,7 +23,6 @@ export declare const friendsWalkSchema: yup.ObjectSchema<{
     date: undefined;
     active: undefined;
     rsvpdUserIds: "";
-    checkedInUserIds: "";
     invitedUserIds: "";
     location: {
         name: undefined;
