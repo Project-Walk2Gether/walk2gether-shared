@@ -25,6 +25,7 @@ export declare const walkSchemas: {
         createdAt: import("../utils/firebase").Timestamp | undefined;
         updatedAt: import("../utils/firebase").Timestamp | undefined;
         type: "friends" | undefined;
+        invitedPhoneNumbers: string[] | undefined;
     }, yup.AnyObject, {
         id: undefined;
         date: undefined;
@@ -44,6 +45,7 @@ export declare const walkSchemas: {
         createdAt: undefined;
         updatedAt: undefined;
         type: undefined;
+        invitedPhoneNumbers: "";
     }, "">;
     neighborhood: yup.ObjectSchema<{
         id: string | undefined;
@@ -92,6 +94,7 @@ export declare const walkSchema: yup.Lazy<{
     updatedAt?: import("../utils/firebase").Timestamp | undefined;
     rsvpdUserIds?: string[] | undefined;
     invitedUserIds?: string[] | undefined;
+    invitedPhoneNumbers?: string[] | undefined;
     location: {
         name: string;
         placeId: string;

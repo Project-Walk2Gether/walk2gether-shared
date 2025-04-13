@@ -18,6 +18,7 @@ export declare const friendsWalkSchema: yup.ObjectSchema<{
     createdAt: import("../utils/firebase").Timestamp | undefined;
     updatedAt: import("../utils/firebase").Timestamp | undefined;
     type: "friends" | undefined;
+    invitedPhoneNumbers: string[] | undefined;
 }, yup.AnyObject, {
     id: undefined;
     date: undefined;
@@ -37,5 +38,6 @@ export declare const friendsWalkSchema: yup.ObjectSchema<{
     createdAt: undefined;
     updatedAt: undefined;
     type: undefined;
+    invitedPhoneNumbers: "";
 }, "">;
 export type FriendsWalk = yup.InferType<typeof friendsWalkSchema>;
