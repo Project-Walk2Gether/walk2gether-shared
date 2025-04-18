@@ -5,11 +5,11 @@ export const participantSchema = yup.object({
   id: yup.string(),
   userUids: yup.array().of(yup.string().required()).required(),
   displayName: yup.string().required(),
-  photoURL: yup.string().optional(),
+  photoURL: yup.string().nullable(),
   lastLocation: yup.object({
     latitude: yup.number().required(),
     longitude: yup.number().required(),
-    timestamp: yup.number().required(),
+    timestamp: timestampSchema,
   }),
   approvedAt: timestampSchema.nullable(),
   rejectedAt: timestampSchema,

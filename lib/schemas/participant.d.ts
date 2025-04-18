@@ -3,11 +3,11 @@ export declare const participantSchema: yup.ObjectSchema<{
     id: string | undefined;
     userUids: string[];
     displayName: string;
-    photoURL: string | undefined;
+    photoURL: string | null | undefined;
     lastLocation: {
+        timestamp?: import("./utils/firebase").Timestamp | undefined;
         latitude: number;
         longitude: number;
-        timestamp: number;
     };
     approvedAt: import("./utils/firebase").Timestamp | null | undefined;
     rejectedAt: import("./utils/firebase").Timestamp | undefined;
