@@ -9,7 +9,7 @@ export const userDataSchema = yup.object({
   email: yup.string().email().required(),
   profilePicUrl: yup.string().url().optional(),
   friendInvitationCode: yup.string().required(),
-  expoPushToken: yup.string(),
+  expoPushToken: yup.string().nullable(),
   deviceInfo: yup.mixed(),
   aboutMe: yup.string().optional(),
 });

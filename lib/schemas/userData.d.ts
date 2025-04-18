@@ -12,7 +12,7 @@ export declare const userDataSchema: yup.ObjectSchema<{
     email: string;
     profilePicUrl: string | undefined;
     friendInvitationCode: string;
-    expoPushToken: string | undefined;
+    expoPushToken: string | null | undefined;
     deviceInfo: any;
     aboutMe: string | undefined;
 }, yup.AnyObject, {
