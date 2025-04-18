@@ -35,8 +35,8 @@ export declare const walkBaseSchema: yup.ObjectSchema<{
     rsvpdUserIds: string[] | undefined;
     invitedUserIds: string[] | undefined;
     location: {
+        placeId?: string | undefined;
         name: string;
-        placeId: string;
         latitude: number;
         longitude: number;
     };

@@ -1,8 +1,8 @@
 import * as yup from "yup";
 export declare const favoriteLocationSchema: yup.ObjectSchema<{
     location: {
+        placeId?: string | undefined;
         name: string;
-        placeId: string;
         latitude: number;
         longitude: number;
     };

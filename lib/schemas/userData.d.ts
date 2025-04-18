@@ -4,8 +4,8 @@ export declare const userDataSchema: yup.ObjectSchema<{
     name: string;
     age: NonNullable<"Younger" | "Older" | undefined>;
     location: {
+        placeId?: string | undefined;
         name: string;
-        placeId: string;
         latitude: number;
         longitude: number;
     };

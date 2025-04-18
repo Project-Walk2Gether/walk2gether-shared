@@ -1,7 +1,7 @@
 import * as yup from "yup";
 export declare const locationSchema: yup.ObjectSchema<{
     name: string;
-    placeId: string;
+    placeId: string | undefined;
     latitude: number;
     longitude: number;
 }, yup.AnyObject, {
