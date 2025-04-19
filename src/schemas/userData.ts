@@ -2,11 +2,9 @@ import * as yup from "yup";
 import { locationSchema } from "./location";
 
 export const userDataSchema = yup.object({
-  id: yup.string().required(),
+  id: yup.string(),
   name: yup.string().required(),
-  age: yup.string().oneOf(["Younger", "Older"]).required(),
   location: locationSchema,
-  email: yup.string().email().required(),
   profilePicUrl: yup.string().url().optional(),
   friendInvitationCode: yup.string().required(),
   expoPushToken: yup.string().nullable(),
