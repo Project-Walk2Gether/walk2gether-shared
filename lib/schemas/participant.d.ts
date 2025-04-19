@@ -1,7 +1,7 @@
 import * as yup from "yup";
 export declare const participantSchema: yup.ObjectSchema<{
     id: string | undefined;
-    userUids: string[];
+    userUid: string;
     displayName: string;
     photoURL: string | null | undefined;
     lastLocation: {
@@ -15,7 +15,7 @@ export declare const participantSchema: yup.ObjectSchema<{
     updatedAt: import("./utils/firebase").Timestamp | undefined;
 }, yup.AnyObject, {
     id: undefined;
-    userUids: "";
+    userUid: undefined;
     displayName: undefined;
     photoURL: undefined;
     lastLocation: {

@@ -3,7 +3,7 @@ import { timestampSchema } from "./utils/timestamp";
 
 export const participantSchema = yup.object({
   id: yup.string(),
-  userUids: yup.array().of(yup.string().required()).required(),
+  userUid: yup.string().required(),
   displayName: yup.string().required(),
   photoURL: yup.string().nullable(),
   lastLocation: yup.object({
