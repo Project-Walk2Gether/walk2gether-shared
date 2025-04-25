@@ -4,7 +4,7 @@ import { locationSchema } from "./location";
 export const userDataSchema = yup.object({
   id: yup.string(),
   name: yup.string().required(),
-  location: locationSchema,
+  location: locationSchema.optional(),
   profilePicUrl: yup.string().url().optional(),
   friendInvitationCode: yup.string().required(),
   expoPushToken: yup.string().nullable(),

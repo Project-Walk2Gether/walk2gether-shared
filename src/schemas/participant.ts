@@ -11,6 +11,10 @@ export const participantSchema = yup.object({
     longitude: yup.number().required(),
     timestamp: timestampSchema,
   }),
+  status: yup
+    .mixed<"pending" | "on-the-way" | "arrived">()
+    .oneOf(["pending", "on-the-way", "arrived"])
+    .required(),
   approvedAt: timestampSchema.nullable(),
   rejectedAt: timestampSchema,
   createdAt: timestampSchema,

@@ -9,6 +9,7 @@ export declare const participantSchema: yup.ObjectSchema<{
         latitude: number;
         longitude: number;
     };
+    status: NonNullable<"pending" | "on-the-way" | "arrived" | undefined>;
     approvedAt: import("./utils/firebase").Timestamp | null | undefined;
     rejectedAt: import("./utils/firebase").Timestamp | undefined;
     createdAt: import("./utils/firebase").Timestamp | undefined;
@@ -23,6 +24,7 @@ export declare const participantSchema: yup.ObjectSchema<{
         longitude: undefined;
         timestamp: undefined;
     };
+    status: undefined;
     approvedAt: undefined;
     rejectedAt: undefined;
     createdAt: undefined;

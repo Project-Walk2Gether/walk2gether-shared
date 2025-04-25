@@ -7,7 +7,7 @@ export declare const userDataSchema: yup.ObjectSchema<{
         name: string;
         latitude: number;
         longitude: number;
-    };
+    } | undefined;
     profilePicUrl: string | undefined;
     friendInvitationCode: string;
     expoPushToken: string | null | undefined;
