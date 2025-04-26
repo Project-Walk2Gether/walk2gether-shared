@@ -1,4 +1,55 @@
 import * as yup from "yup";
+export declare const routePointSchema: yup.ObjectSchema<{
+    latitude: number;
+    longitude: number;
+}, yup.AnyObject, {
+    latitude: undefined;
+    longitude: undefined;
+}, "">;
+export declare const routeDistanceSchema: yup.ObjectSchema<{
+    text: string;
+    value: number;
+}, yup.AnyObject, {
+    text: undefined;
+    value: undefined;
+}, "">;
+export declare const routeDurationSchema: yup.ObjectSchema<{
+    text: string;
+    value: number;
+}, yup.AnyObject, {
+    text: undefined;
+    value: undefined;
+}, "">;
+export declare const routeSchema: yup.ObjectSchema<{
+    points: {
+        latitude: number;
+        longitude: number;
+    }[];
+    distance: {
+        text: string;
+        value: number;
+    };
+    duration: {
+        text: string;
+        value: number;
+    };
+    calculatedAt: import("./utils/firebase").Timestamp | undefined;
+}, yup.AnyObject, {
+    points: "";
+    distance: {
+        text: undefined;
+        value: undefined;
+    };
+    duration: {
+        text: undefined;
+        value: undefined;
+    };
+    calculatedAt: undefined;
+}, "">;
+export type RoutePoint = yup.InferType<typeof routePointSchema>;
+export type RouteDistance = yup.InferType<typeof routeDistanceSchema>;
+export type RouteDuration = yup.InferType<typeof routeDurationSchema>;
+export type Route = yup.InferType<typeof routeSchema>;
 export declare const participantSchema: yup.ObjectSchema<{
     id: string | undefined;
     userUid: string;
@@ -9,6 +60,21 @@ export declare const participantSchema: yup.ObjectSchema<{
         latitude: number;
         longitude: number;
     };
+    route: {
+        calculatedAt?: import("./utils/firebase").Timestamp | undefined;
+        points: {
+            latitude: number;
+            longitude: number;
+        }[];
+        distance: {
+            text: string;
+            value: number;
+        };
+        duration: {
+            text: string;
+            value: number;
+        };
+    } | null;
     status: NonNullable<"pending" | "on-the-way" | "arrived" | undefined>;
     approvedAt: import("./utils/firebase").Timestamp | null | undefined;
     rejectedAt: import("./utils/firebase").Timestamp | undefined;
@@ -24,6 +90,18 @@ export declare const participantSchema: yup.ObjectSchema<{
         longitude: undefined;
         timestamp: undefined;
     };
+    route: {
+        points: "";
+        distance: {
+            text: undefined;
+            value: undefined;
+        };
+        duration: {
+            text: undefined;
+            value: undefined;
+        };
+        calculatedAt: undefined;
+    };
     status: undefined;
     approvedAt: undefined;
     rejectedAt: undefined;
@@ -31,3 +109,6 @@ export declare const participantSchema: yup.ObjectSchema<{
     updatedAt: undefined;
 }, "">;
 export type Participant = yup.InferType<typeof participantSchema>;
+export type ParticipantWithRoute = Participant & {
+    route: Route | null;
+};
