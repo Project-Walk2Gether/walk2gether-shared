@@ -76,6 +76,7 @@ export declare const participantSchema: yup.ObjectSchema<{
         };
     } | null;
     status: NonNullable<"pending" | "on-the-way" | "arrived" | undefined>;
+    navigationMethod: "driving" | "walking";
     approvedAt: import("./utils/firebase").Timestamp | null | undefined;
     rejectedAt: import("./utils/firebase").Timestamp | undefined;
     createdAt: import("./utils/firebase").Timestamp | undefined;
@@ -103,6 +104,7 @@ export declare const participantSchema: yup.ObjectSchema<{
         calculatedAt: undefined;
     };
     status: undefined;
+    navigationMethod: "walking";
     approvedAt: undefined;
     rejectedAt: undefined;
     createdAt: undefined;

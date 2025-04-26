@@ -48,6 +48,11 @@ export const participantSchema = yup.object({
     .mixed<"pending" | "on-the-way" | "arrived">()
     .oneOf(["pending", "on-the-way", "arrived"])
     .required(),
+  // Add navigation method for route calculation
+  navigationMethod: yup
+    .mixed<"driving" | "walking">()
+    .oneOf(["driving", "walking"])
+    .default("walking"),
   approvedAt: timestampSchema.nullable(),
   rejectedAt: timestampSchema,
   createdAt: timestampSchema,
