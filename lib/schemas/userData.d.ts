@@ -13,6 +13,9 @@ export declare const userDataSchema: yup.ObjectSchema<{
     expoPushToken: string | null | undefined;
     deviceInfo: any;
     aboutMe: string | undefined;
+    notificationPreferences: {
+        friendETA?: boolean | undefined;
+    };
 }, yup.AnyObject, {
     id: undefined;
     name: undefined;
@@ -27,5 +30,8 @@ export declare const userDataSchema: yup.ObjectSchema<{
     expoPushToken: undefined;
     deviceInfo: undefined;
     aboutMe: undefined;
+    notificationPreferences: {
+        friendETA: undefined;
+    };
 }, "">;
 export type UserData = yup.InferType<typeof userDataSchema>;

@@ -10,6 +10,9 @@ export const userDataSchema = yup.object({
   expoPushToken: yup.string().nullable(),
   deviceInfo: yup.mixed(),
   aboutMe: yup.string().optional(),
+  notificationPreferences: yup.object({
+    friendETA: yup.boolean().optional(),
+  }),
 });
 
 export type UserData = yup.InferType<typeof userDataSchema>;
