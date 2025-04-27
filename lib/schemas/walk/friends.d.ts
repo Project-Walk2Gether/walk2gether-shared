@@ -5,7 +5,13 @@ export declare const friendsWalkSchema: yup.ObjectSchema<{
     active: NonNullable<boolean | undefined>;
     rsvpdUserIds: string[] | undefined;
     invitedUserIds: string[] | undefined;
-    location: {
+    currentLocation: {
+        placeId?: string | undefined;
+        name: string;
+        latitude: number;
+        longitude: number;
+    };
+    meetupLocation: {
         placeId?: string | undefined;
         name: string;
         latitude: number;
@@ -25,7 +31,13 @@ export declare const friendsWalkSchema: yup.ObjectSchema<{
     active: undefined;
     rsvpdUserIds: "";
     invitedUserIds: "";
-    location: {
+    currentLocation: {
+        name: undefined;
+        placeId: undefined;
+        latitude: undefined;
+        longitude: undefined;
+    };
+    meetupLocation: {
         name: undefined;
         placeId: undefined;
         latitude: undefined;
