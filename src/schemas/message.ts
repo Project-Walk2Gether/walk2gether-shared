@@ -8,6 +8,7 @@ export const messageSchema = yup.object({
   message: yup.string().required(),
   createdAt: timestampSchema.optional(),
   updatedAt: timestampSchema.optional(),
+  read: yup.boolean().default(false),
 });
 
 export type Message = yup.InferType<typeof messageSchema>;

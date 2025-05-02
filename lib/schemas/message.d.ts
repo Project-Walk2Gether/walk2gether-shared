@@ -6,6 +6,7 @@ export declare const messageSchema: yup.ObjectSchema<{
     message: string;
     createdAt: import("./utils/firebase").Timestamp | undefined;
     updatedAt: import("./utils/firebase").Timestamp | undefined;
+    read: boolean;
 }, yup.AnyObject, {
     id: undefined;
     senderId: undefined;
@@ -13,5 +14,6 @@ export declare const messageSchema: yup.ObjectSchema<{
     message: undefined;
     createdAt: undefined;
     updatedAt: undefined;
+    read: false;
 }, "">;
 export type Message = yup.InferType<typeof messageSchema>;
