@@ -2,6 +2,26 @@ import * as yup from "yup";
 export declare const friendshipSchema: yup.ObjectSchema<{
     id: string | undefined;
     uids: string[];
+    userDataByUid: {
+        [x: string]: {
+            location?: {
+                placeId?: string | undefined;
+                name: string;
+                latitude: number;
+                longitude: number;
+            } | undefined;
+            id?: string | undefined;
+            profilePicUrl?: string | undefined;
+            expoPushToken?: string | null | undefined;
+            deviceInfo?: any;
+            aboutMe?: string | undefined;
+            name: string;
+            friendInvitationCode: string;
+            notificationPreferences: {
+                friendETA?: boolean | undefined;
+            };
+        };
+    };
     createdAt: import("./utils/firebase").Timestamp | undefined;
     updatedAt: import("./utils/firebase").Timestamp | undefined;
     createdByUid: string;
@@ -10,6 +30,7 @@ export declare const friendshipSchema: yup.ObjectSchema<{
 }, yup.AnyObject, {
     id: undefined;
     uids: "";
+    userDataByUid: undefined;
     createdAt: undefined;
     updatedAt: undefined;
     createdByUid: undefined;
