@@ -112,10 +112,10 @@ export declare const walkSchemas: {
     }, "">;
 };
 export declare const walkSchema: yup.Lazy<{
-    type?: "friends" | undefined;
     id?: string | undefined;
     createdAt?: import("../utils/firebase").Timestamp | undefined;
     updatedAt?: import("../utils/firebase").Timestamp | undefined;
+    type?: "friends" | undefined;
     rsvpdUserIds?: string[] | undefined;
     invitedUserIds?: string[] | undefined;
     invitedPhoneNumbers?: string[] | undefined;
@@ -138,10 +138,10 @@ export declare const walkSchema: yup.Lazy<{
     createdByUid: string;
     invitationCode: string;
 } | {
-    type?: "neighborhood" | undefined;
     id?: string | undefined;
     createdAt?: import("../utils/firebase").Timestamp | undefined;
     updatedAt?: import("../utils/firebase").Timestamp | undefined;
+    type?: "neighborhood" | undefined;
     rsvpdUserIds?: string[] | undefined;
     invitedUserIds?: string[] | undefined;
     currentLocation: {

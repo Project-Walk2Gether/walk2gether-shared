@@ -1,13 +1,14 @@
 import * as yup from "yup";
 export declare const invitationSchema: yup.ObjectSchema<{
     invitingUserId: string;
-    recipientUserId: string | undefined;
-    recipientPhoneNumber: string | undefined;
     acceptedAt: import("./utils/firebase").Timestamp | undefined;
+    walkId: string;
+    recipientPhoneNumber: string | undefined;
+    code: string;
 }, yup.AnyObject, {
     invitingUserId: undefined;
-    recipientUserId: undefined;
-    recipientPhoneNumber: undefined;
     acceptedAt: undefined;
+    walkId: undefined;
+    recipientPhoneNumber: undefined;
+    code: undefined;
 }, "">;
-export type Invitation = yup.InferType<typeof invitationSchema>;
