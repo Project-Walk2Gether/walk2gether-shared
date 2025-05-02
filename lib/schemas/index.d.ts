@@ -1,5 +1,4 @@
 export * from "./favoriteLocation";
-export * from "./invitation";
 export * from "./location";
 export * from "./message";
 export * from "./notification";
