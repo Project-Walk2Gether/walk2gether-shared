@@ -1,10 +1,9 @@
 import * as yup from "yup";
 import { timestampSchema } from "./utils/timestamp";
 
-export const friendRequestSchema = yup.object({
-  sendingUserId: yup.string().required(),
-  receivingUserId: yup.string().required(),
+export const friendshipSchema = yup.object({
+  uids: yup.array().of(yup.string().required()).required(),
   acceptedAt: timestampSchema,
 });
 
-export type FriendRequest = yup.InferType<typeof friendRequestSchema>;
+export type Friendship = yup.InferType<typeof friendshipSchema>;

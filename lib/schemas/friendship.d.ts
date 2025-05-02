@@ -1,11 +1,9 @@
 import * as yup from "yup";
-export declare const friendRequestSchema: yup.ObjectSchema<{
-    sendingUserId: string;
-    receivingUserId: string;
+export declare const friendshipSchema: yup.ObjectSchema<{
+    uids: string[];
     acceptedAt: import("./utils/firebase").Timestamp | undefined;
 }, yup.AnyObject, {
-    sendingUserId: undefined;
-    receivingUserId: undefined;
+    uids: "";
     acceptedAt: undefined;
 }, "">;
-export type FriendRequest = yup.InferType<typeof friendRequestSchema>;
+export type Friendship = yup.InferType<typeof friendshipSchema>;
