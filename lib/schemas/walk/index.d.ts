@@ -27,6 +27,7 @@ export declare const walkSchemas: {
         durationMinutes: number;
         organizerName: string;
         createdByUid: string;
+        startedAt: import("../utils/firebase").Timestamp | undefined;
         invitationCode: string;
         createdAt: import("../utils/firebase").Timestamp | undefined;
         updatedAt: import("../utils/firebase").Timestamp | undefined;
@@ -53,6 +54,7 @@ export declare const walkSchemas: {
         durationMinutes: undefined;
         organizerName: undefined;
         createdByUid: undefined;
+        startedAt: undefined;
         invitationCode: undefined;
         createdAt: undefined;
         updatedAt: undefined;
@@ -80,6 +82,7 @@ export declare const walkSchemas: {
         durationMinutes: number;
         organizerName: string;
         createdByUid: string;
+        startedAt: import("../utils/firebase").Timestamp | undefined;
         invitationCode: string;
         createdAt: import("../utils/firebase").Timestamp | undefined;
         updatedAt: import("../utils/firebase").Timestamp | undefined;
@@ -105,6 +108,7 @@ export declare const walkSchemas: {
         durationMinutes: undefined;
         organizerName: undefined;
         createdByUid: undefined;
+        startedAt: undefined;
         invitationCode: undefined;
         createdAt: undefined;
         updatedAt: undefined;
@@ -116,6 +120,7 @@ export declare const walkSchema: yup.Lazy<{
     createdAt?: import("../utils/firebase").Timestamp | undefined;
     updatedAt?: import("../utils/firebase").Timestamp | undefined;
     type?: "friends" | undefined;
+    startedAt?: import("../utils/firebase").Timestamp | undefined;
     rsvpdUserIds?: string[] | undefined;
     invitedUserIds?: string[] | undefined;
     invitedPhoneNumbers?: string[] | undefined;
@@ -142,6 +147,7 @@ export declare const walkSchema: yup.Lazy<{
     createdAt?: import("../utils/firebase").Timestamp | undefined;
     updatedAt?: import("../utils/firebase").Timestamp | undefined;
     type?: "neighborhood" | undefined;
+    startedAt?: import("../utils/firebase").Timestamp | undefined;
     rsvpdUserIds?: string[] | undefined;
     invitedUserIds?: string[] | undefined;
     createdByUid: string;

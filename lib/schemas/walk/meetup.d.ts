@@ -20,6 +20,7 @@ export declare const meetupWalkSchema: yup.ObjectSchema<{
     durationMinutes: number;
     organizerName: string;
     createdByUid: string;
+    startedAt: import("../utils/firebase").Timestamp | undefined;
     invitationCode: string;
     createdAt: import("../utils/firebase").Timestamp | undefined;
     updatedAt: import("../utils/firebase").Timestamp | undefined;
@@ -59,6 +60,7 @@ export declare const meetupWalkSchema: yup.ObjectSchema<{
     durationMinutes: undefined;
     organizerName: undefined;
     createdByUid: undefined;
+    startedAt: undefined;
     invitationCode: undefined;
     createdAt: undefined;
     updatedAt: undefined;
