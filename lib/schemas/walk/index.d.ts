@@ -18,7 +18,7 @@ export declare const walkSchemas: {
             latitude: number;
             longitude: number;
         };
-        meetupLocation: {
+        startLocation: {
             placeId?: string | undefined;
             name: string;
             latitude: number;
@@ -44,7 +44,7 @@ export declare const walkSchemas: {
             latitude: undefined;
             longitude: undefined;
         };
-        meetupLocation: {
+        startLocation: {
             name: undefined;
             placeId: undefined;
             latitude: undefined;
@@ -71,7 +71,7 @@ export declare const walkSchemas: {
             latitude: number;
             longitude: number;
         };
-        meetupLocation: {
+        startLocation: {
             placeId?: string | undefined;
             name: string;
             latitude: number;
@@ -96,7 +96,7 @@ export declare const walkSchemas: {
             latitude: undefined;
             longitude: undefined;
         };
-        meetupLocation: {
+        startLocation: {
             name: undefined;
             placeId: undefined;
             latitude: undefined;
@@ -126,7 +126,7 @@ export declare const walkSchema: yup.Lazy<{
         latitude: number;
         longitude: number;
     };
-    meetupLocation: {
+    startLocation: {
         placeId?: string | undefined;
         name: string;
         latitude: number;
@@ -151,7 +151,7 @@ export declare const walkSchema: yup.Lazy<{
         latitude: number;
         longitude: number;
     };
-    meetupLocation: {
+    startLocation: {
         placeId?: string | undefined;
         name: string;
         latitude: number;

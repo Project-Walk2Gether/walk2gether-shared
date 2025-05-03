@@ -26,6 +26,11 @@ export declare const friendshipSchema: yup.ObjectSchema<{
     updatedAt: import("./utils/firebase").Timestamp | undefined;
     createdByUid: string;
     acceptedAt: import("./utils/firebase").Timestamp | undefined;
+    deletedAt: import("./utils/firebase").Timestamp | null;
+    deletedByUid: string | undefined;
+    reportedAt: import("./utils/firebase").Timestamp | undefined;
+    reportedByUid: string | undefined;
+    reportReason: string | undefined;
     lastMessageAt: import("./utils/firebase").Timestamp | undefined;
 }, yup.AnyObject, {
     id: undefined;
@@ -35,6 +40,11 @@ export declare const friendshipSchema: yup.ObjectSchema<{
     updatedAt: undefined;
     createdByUid: undefined;
     acceptedAt: undefined;
+    deletedAt: undefined;
+    deletedByUid: undefined;
+    reportedAt: undefined;
+    reportedByUid: undefined;
+    reportReason: undefined;
     lastMessageAt: undefined;
 }, "">;
 export type Friendship = yup.InferType<typeof friendshipSchema>;

@@ -40,7 +40,7 @@ export declare const walkBaseSchema: yup.ObjectSchema<{
         latitude: number;
         longitude: number;
     };
-    meetupLocation: {
+    startLocation: {
         placeId?: string | undefined;
         name: string;
         latitude: number;
@@ -64,7 +64,7 @@ export declare const walkBaseSchema: yup.ObjectSchema<{
         latitude: undefined;
         longitude: undefined;
     };
-    meetupLocation: {
+    startLocation: {
         name: undefined;
         placeId: undefined;
         latitude: undefined;

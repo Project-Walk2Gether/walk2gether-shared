@@ -29,6 +29,11 @@ export const friendshipSchema = yup.object({
   updatedAt: timestampSchema,
   createdByUid: yup.string().required(),
   acceptedAt: timestampSchema,
+  deletedAt: timestampSchema.nullable().defined(),
+  deletedByUid: yup.string().optional(),
+  reportedAt: timestampSchema,
+  reportedByUid: yup.string().optional(),
+  reportReason: yup.string().optional(),
   lastMessageAt: timestampSchema,
 });
 

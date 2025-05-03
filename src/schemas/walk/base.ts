@@ -24,7 +24,7 @@ export const walkBaseSchema = yup.object({
   rsvpdUserIds: yup.array().of(yup.string().required()),
   invitedUserIds: yup.array().of(yup.string().required()),
   currentLocation: locationSchema,
-  meetupLocation: locationSchema,
+  startLocation: locationSchema,
   durationMinutes: yup.number().required().positive().integer(),
   organizerName: yup.string().required(),
   createdByUid: yup.string().required(),
