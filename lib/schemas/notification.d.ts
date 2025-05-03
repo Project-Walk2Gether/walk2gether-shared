@@ -4,7 +4,8 @@ export declare enum NotificationType {
     WALK_INVITE = "WALK_INVITE",
     WALK_REMINDER = "WALK_REMINDER",
     WALK_CANCELLED = "WALK_CANCELLED",
-    WALK_UPDATED = "WALK_UPDATED"
+    WALK_UPDATED = "WALK_UPDATED",
+    NEW_MESSAGE = "NEW_MESSAGE"
 }
 export declare const notificationSchema: yup.ObjectSchema<{
     id: string | undefined;

@@ -7,6 +7,7 @@ export enum NotificationType {
   WALK_REMINDER = "WALK_REMINDER",
   WALK_CANCELLED = "WALK_CANCELLED",
   WALK_UPDATED = "WALK_UPDATED",
+  NEW_MESSAGE = "NEW_MESSAGE",
 }
 
 export const notificationSchema = yup.object({
