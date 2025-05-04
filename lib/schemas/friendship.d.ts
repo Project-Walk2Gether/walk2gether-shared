@@ -9,7 +9,7 @@ export declare const friendshipSchema: yup.ObjectSchema<{
                 name: string;
                 latitude: number;
                 longitude: number;
-            } | undefined;
+            } | null | undefined;
             id?: string | undefined;
             profilePicUrl?: string | undefined;
             expoPushToken?: string | null | undefined;
