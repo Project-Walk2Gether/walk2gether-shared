@@ -27,8 +27,9 @@ export declare const walkSchemas: {
         durationMinutes: number;
         organizerName: string;
         createdByUid: string;
+        isPublic: boolean | undefined;
+        sharedWithFriendIds: string[] | undefined;
         startedAt: import("../utils/firebase").Timestamp | undefined;
-        invitationCode: string;
         createdAt: import("../utils/firebase").Timestamp | undefined;
         updatedAt: import("../utils/firebase").Timestamp | undefined;
         type: "friends" | undefined;
@@ -54,8 +55,9 @@ export declare const walkSchemas: {
         durationMinutes: undefined;
         organizerName: undefined;
         createdByUid: undefined;
+        isPublic: undefined;
+        sharedWithFriendIds: "";
         startedAt: undefined;
-        invitationCode: undefined;
         createdAt: undefined;
         updatedAt: undefined;
         type: undefined;
@@ -82,8 +84,9 @@ export declare const walkSchemas: {
         durationMinutes: number;
         organizerName: string;
         createdByUid: string;
+        isPublic: boolean | undefined;
+        sharedWithFriendIds: string[] | undefined;
         startedAt: import("../utils/firebase").Timestamp | undefined;
-        invitationCode: string;
         createdAt: import("../utils/firebase").Timestamp | undefined;
         updatedAt: import("../utils/firebase").Timestamp | undefined;
         type: "neighborhood" | undefined;
@@ -108,8 +111,9 @@ export declare const walkSchemas: {
         durationMinutes: undefined;
         organizerName: undefined;
         createdByUid: undefined;
+        isPublic: undefined;
+        sharedWithFriendIds: "";
         startedAt: undefined;
-        invitationCode: undefined;
         createdAt: undefined;
         updatedAt: undefined;
         type: undefined;
@@ -123,6 +127,8 @@ export declare const walkSchema: yup.Lazy<{
     startedAt?: import("../utils/firebase").Timestamp | undefined;
     rsvpdUserIds?: string[] | undefined;
     invitedUserIds?: string[] | undefined;
+    isPublic?: boolean | undefined;
+    sharedWithFriendIds?: string[] | undefined;
     invitedPhoneNumbers?: string[] | undefined;
     createdByUid: string;
     currentLocation: {
@@ -141,7 +147,6 @@ export declare const walkSchema: yup.Lazy<{
     active: NonNullable<boolean | undefined>;
     durationMinutes: number;
     organizerName: string;
-    invitationCode: string;
 } | {
     id?: string | undefined;
     createdAt?: import("../utils/firebase").Timestamp | undefined;
@@ -150,6 +155,8 @@ export declare const walkSchema: yup.Lazy<{
     startedAt?: import("../utils/firebase").Timestamp | undefined;
     rsvpdUserIds?: string[] | undefined;
     invitedUserIds?: string[] | undefined;
+    isPublic?: boolean | undefined;
+    sharedWithFriendIds?: string[] | undefined;
     createdByUid: string;
     currentLocation: {
         placeId?: string | undefined;
@@ -167,7 +174,6 @@ export declare const walkSchema: yup.Lazy<{
     active: NonNullable<boolean | undefined>;
     durationMinutes: number;
     organizerName: string;
-    invitationCode: string;
 } | {
     type: string;
 }, yup.AnyObject, any>;

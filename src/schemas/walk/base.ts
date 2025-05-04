@@ -28,8 +28,9 @@ export const walkBaseSchema = yup.object({
   durationMinutes: yup.number().required().positive().integer(),
   organizerName: yup.string().required(),
   createdByUid: yup.string().required(),
+  isPublic: yup.boolean(),
+  sharedWithFriendIds: yup.array().of(yup.string().required()),
   startedAt: timestampSchema,
-  invitationCode: yup.string().required(),
   createdAt: timestampSchema,
   updatedAt: timestampSchema,
 });
