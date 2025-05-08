@@ -9,13 +9,13 @@ export const routePointSchema = yup.object({
 
 // Schema for route distance
 export const routeDistanceSchema = yup.object({
-  text: yup.string().required(),  // Human-readable distance (e.g., "3.2 mi")
+  text: yup.string().required(), // Human-readable distance (e.g., "3.2 mi")
   value: yup.number().required(), // Distance in meters
 });
 
 // Schema for route duration
 export const routeDurationSchema = yup.object({
-  text: yup.string().required(),  // Human-readable duration (e.g., "10 mins")
+  text: yup.string().required(), // Human-readable duration (e.g., "10 mins")
   value: yup.number().required(), // Duration in seconds
 });
 
