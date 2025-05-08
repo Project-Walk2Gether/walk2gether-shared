@@ -4,6 +4,7 @@ import { timestampSchema } from "./utils/timestamp";
 
 export const messageSchema = yup.object({
   id: yup.string(),
+  walkId: yup.string().required(),
   senderId: yup.string().required(),
   senderName: yup.string().required(),
   recipientId: yup.string().required(),
