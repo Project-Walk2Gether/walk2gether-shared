@@ -1,5 +1,6 @@
 import * as yup from "yup";
 import { locationSchema } from "../location";
+import { routeSchema } from "../participant";
 import { timestampSchema } from "../utils/timestamp";
 
 export const pairSchema = yup.object({
@@ -29,6 +30,7 @@ export const walkBaseSchema = yup.object({
   createdByUid: yup.string().required(),
   isSharedWithPublic: yup.boolean(),
   sharedWithUserUids: yup.array().of(yup.string().required()),
+  route: routeSchema,
   startedAt: timestampSchema,
   endedAt: timestampSchema,
   createdAt: timestampSchema,
