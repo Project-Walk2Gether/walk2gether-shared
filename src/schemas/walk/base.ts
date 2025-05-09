@@ -30,6 +30,7 @@ export const walkBaseSchema = yup.object({
   isSharedWithPublic: yup.boolean(),
   sharedWithUserUids: yup.array().of(yup.string().required()),
   startedAt: timestampSchema,
+  endedAt: timestampSchema,
   createdAt: timestampSchema,
   updatedAt: timestampSchema,
 });
