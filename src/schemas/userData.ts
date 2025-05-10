@@ -1,6 +1,7 @@
-import * as yup from "yup";
 import { keyBy, reduce } from "lodash";
+import * as yup from "yup";
 import { locationSchema } from "./location";
+import { timestampSchema } from "./utils/timestamp";
 
 /**
  * Notification preference types and their associated information
@@ -20,40 +21,42 @@ export const NOTIFICATION_PREFERENCES: NotificationPreferenceInfo[] = [
     key: "friendETA",
     label: "Friend ETA Updates",
     description: "Receive notifications when friends are on their way to walks",
-    defaultValue: true
+    defaultValue: true,
   },
   {
     key: "message",
     label: "Messages",
     description: "Receive notifications for new messages from friends",
-    defaultValue: true
+    defaultValue: true,
   },
   {
     key: "newNeighborhoodWalks",
     label: "New Neighborhood Walks",
     description: "Be notified when new walks are created in your neighborhood",
-    defaultValue: true
+    defaultValue: true,
   },
   {
     key: "invitedToFriendWalks",
     label: "Walk Invitations",
     description: "Receive notifications when friends invite you to walks",
-    defaultValue: true
+    defaultValue: true,
   },
   {
     key: "requestsToJoinMyWalks",
     label: "Join Requests",
     description: "Be notified when someone requests to join your walks",
-    defaultValue: true
-  }
+    defaultValue: true,
+  },
 ];
 
 /**
  * Map of notification preference keys to their display information
  * (derived from the canonical list)
  */
-export const notificationPreferenceLabels: Record<string, NotificationPreferenceInfo> = 
-  keyBy(NOTIFICATION_PREFERENCES, 'key');
+export const notificationPreferenceLabels: Record<
+  string,
+  NotificationPreferenceInfo
+> = keyBy(NOTIFICATION_PREFERENCES, "key");
 
 /**
  * Schema for user notification preferences
@@ -73,6 +76,8 @@ export const notificationPreferencesSchema = yup.object(
 export const userDataSchema = yup.object({
   id: yup.string(),
   name: yup.string().required(),
+  createdAt: timestampSchema,
+  updatedAt: timestampSchema,
   location: locationSchema.optional().nullable(),
   profilePicUrl: yup.string().url().optional(),
   friendInvitationCode: yup.string().required(),
