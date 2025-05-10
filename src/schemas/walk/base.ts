@@ -31,8 +31,10 @@ export const walkBaseSchema = yup.object({
   isSharedWithPublic: yup.boolean(),
   sharedWithUserUids: yup.array().of(yup.string().required()),
   route: routeSchema,
+  totalDistanceMiles: yup.number(),
   startedAt: timestampSchema,
   endedAt: timestampSchema,
+  estimatedEndTime: timestampSchema,
   createdAt: timestampSchema,
   updatedAt: timestampSchema,
 });
