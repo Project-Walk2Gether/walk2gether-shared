@@ -1,5 +1,74 @@
 import * as yup from "yup";
+import { keyBy, reduce } from "lodash";
 import { locationSchema } from "./location";
+
+/**
+ * Notification preference types and their associated information
+ */
+export interface NotificationPreferenceInfo {
+  key: string;
+  label: string;
+  description: string;
+  defaultValue?: boolean;
+}
+
+/**
+ * Canonical definition of all notification preferences
+ */
+export const NOTIFICATION_PREFERENCES: NotificationPreferenceInfo[] = [
+  {
+    key: "friendETA",
+    label: "Friend ETA Updates",
+    description: "Receive notifications when friends are on their way to walks",
+    defaultValue: true
+  },
+  {
+    key: "message",
+    label: "Messages",
+    description: "Receive notifications for new messages from friends",
+    defaultValue: true
+  },
+  {
+    key: "newNeighborhoodWalks",
+    label: "New Neighborhood Walks",
+    description: "Be notified when new walks are created in your neighborhood",
+    defaultValue: true
+  },
+  {
+    key: "invitedToFriendWalks",
+    label: "Walk Invitations",
+    description: "Receive notifications when friends invite you to walks",
+    defaultValue: true
+  },
+  {
+    key: "requestsToJoinMyWalks",
+    label: "Join Requests",
+    description: "Be notified when someone requests to join your walks",
+    defaultValue: true
+  }
+];
+
+/**
+ * Map of notification preference keys to their display information
+ * (derived from the canonical list)
+ */
+export const notificationPreferenceLabels: Record<string, NotificationPreferenceInfo> = 
+  keyBy(NOTIFICATION_PREFERENCES, 'key');
+
+/**
+ * Schema for user notification preferences
+ * (derived from the canonical list)
+ */
+export const notificationPreferencesSchema = yup.object(
+  reduce(
+    NOTIFICATION_PREFERENCES,
+    (acc, pref) => {
+      acc[pref.key] = yup.boolean().optional();
+      return acc;
+    },
+    {} as Record<string, yup.BooleanSchema>
+  )
+);
 
 export const userDataSchema = yup.object({
   id: yup.string(),
@@ -10,9 +79,7 @@ export const userDataSchema = yup.object({
   expoPushToken: yup.string().nullable(),
   deviceInfo: yup.mixed(),
   aboutMe: yup.string().optional(),
-  notificationPreferences: yup.object({
-    friendETA: yup.boolean().optional(),
-  }),
+  notificationPreferences: notificationPreferencesSchema,
 });
 
 export type UserData = yup.InferType<typeof userDataSchema>;
