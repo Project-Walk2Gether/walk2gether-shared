@@ -35,6 +35,8 @@ export const friendshipSchema = yup.object({
   reportedByUid: yup.string().optional(),
   reportReason: yup.string().optional(),
   lastMessageAt: timestampSchema,
+  lastMessagePreview: yup.string().optional(),
+  totalMilesWalked: yup.number(),
 });
 
 export type Friendship = yup.InferType<typeof friendshipSchema>;
