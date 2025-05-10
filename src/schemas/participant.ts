@@ -55,6 +55,7 @@ export const participantSchema = yup.object({
     .default("walking"),
   approvedAt: timestampSchema.nullable(),
   rejectedAt: timestampSchema,
+  cancelledAt: timestampSchema,
   createdAt: timestampSchema,
   updatedAt: timestampSchema,
 });
