@@ -23,11 +23,13 @@ export const walkBaseSchema = yup.object({
   date: timestampSchema.required(),
   active: yup.boolean().required(),
   invitedUserIds: yup.array().of(yup.string().required()),
+  withinRadiusUserIds: yup.array().of(yup.string().required()),
   currentLocation: locationSchema,
   startLocation: locationSchema,
   durationMinutes: yup.number().required().positive().integer(),
   organizerName: yup.string().required(),
   createdByUid: yup.string().required(),
+  // Sharing determins who sees this on the stories screen
   isSharedWithPublic: yup.boolean(),
   sharedWithUserUids: yup.array().of(yup.string().required()),
   route: routeSchema,
