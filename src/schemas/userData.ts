@@ -80,7 +80,7 @@ export const userDataSchema = yup.object({
   updatedAt: timestampSchema,
   location: locationSchema.optional().nullable(),
   profilePicUrl: yup.string().url().optional(),
-  friendInvitationCode: yup.string().required(),
+  friendInvitationCode: yup.string(),
   expoPushToken: yup.string().nullable(),
   deviceInfo: yup.mixed(),
   aboutMe: yup.string().optional(),
