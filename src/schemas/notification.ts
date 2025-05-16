@@ -1,62 +1,18 @@
 import * as yup from "yup";
 import { keyBy } from "lodash";
 import { timestampSchema } from "./utils/timestamp";
+import { NOTIFICATION_PREFERENCES, NotificationPreferenceInfo } from "./userData";
 
 /**
- * Notification type metadata
+ * Notification type metadata - reusing the interface from userData.ts
  */
-export interface NotificationTypeInfo {
-  key: string;
-  label: string;
-  description: string;
-  icon?: string; // Optional icon reference
-}
+export type NotificationTypeInfo = NotificationPreferenceInfo;
 
 /**
  * Canonical list of all notification types in the system
+ * (Reusing notification preferences from userData.ts)
  */
-export const NOTIFICATION_TYPES: NotificationTypeInfo[] = [
-  {
-    key: "NEW_WALK",
-    label: "New Walk",
-    description: "When a new walk is created in your neighborhood"
-  },
-  {
-    key: "WALK_INVITE",
-    label: "Walk Invitation",
-    description: "When you're invited to join a walk"
-  },
-  {
-    key: "WALK_REMINDER",
-    label: "Walk Reminder",
-    description: "Reminder about an upcoming walk"
-  },
-  {
-    key: "WALK_CANCELLED",
-    label: "Walk Cancelled",
-    description: "When a walk you're participating in is cancelled"
-  },
-  {
-    key: "WALK_UPDATED",
-    label: "Walk Updated",
-    description: "When details of a walk you're participating in are updated"
-  },
-  {
-    key: "NEW_MESSAGE",
-    label: "New Message",
-    description: "When you receive a new message from a friend"
-  },
-  {
-    key: "NEW_PARTICIPANT_REQUEST",
-    label: "Join Request",
-    description: "When someone requests to join your walk"
-  },
-  {
-    key: "PARTICIPANT_REQUEST_CANCELLED",
-    label: "Request Cancelled",
-    description: "When someone cancels their request to join your walk"
-  }
-];
+export const NOTIFICATION_TYPES = NOTIFICATION_PREFERENCES;
 
 /**
  * Map of notification type keys for easy access
