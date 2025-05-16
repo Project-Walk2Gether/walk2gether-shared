@@ -38,11 +38,14 @@ export const participantSchema = yup.object({
   userUid: yup.string().required(),
   displayName: yup.string().required(),
   photoURL: yup.string().nullable(),
-  lastLocation: yup.object({
-    latitude: yup.number().required(),
-    longitude: yup.number().required(),
-    timestamp: timestampSchema,
-  }),
+  lastLocation: yup
+    .object({
+      latitude: yup.number().required(),
+      longitude: yup.number().required(),
+      timestamp: timestampSchema,
+    })
+    .optional()
+    .default(undefined),
   route: routeSchema.nullable(),
   status: yup
     .mixed<"pending" | "on-the-way" | "arrived">()
