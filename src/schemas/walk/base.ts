@@ -21,7 +21,6 @@ export const roundSchema = yup.object({
 export const walkBaseSchema = yup.object({
   id: yup.string(),
   date: timestampSchema.required(),
-  active: yup.boolean().required(),
   invitedUserIds: yup.array().of(yup.string().required()),
   currentLocation: locationSchema,
   startLocation: locationSchema,

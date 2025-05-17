@@ -84,6 +84,7 @@ export const userDataSchema = yup.object({
   expoPushToken: yup.string().nullable(),
   deviceInfo: yup.mixed(),
   aboutMe: yup.string().optional(),
+  introduction: yup.string().optional(),
   notificationPreferences: notificationPreferencesSchema,
   // Quote tracking
   currentQuoteIndex: yup.number().default(0),
