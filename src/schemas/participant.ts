@@ -47,6 +47,7 @@ export const participantSchema = yup.object({
     .optional()
     .default(undefined),
   route: routeSchema.nullable(),
+  introduction: yup.string().optional(),
   status: yup
     .mixed<"pending" | "on-the-way" | "arrived">()
     .oneOf(["pending", "on-the-way", "arrived"])
