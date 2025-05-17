@@ -85,6 +85,9 @@ export const userDataSchema = yup.object({
   deviceInfo: yup.mixed(),
   aboutMe: yup.string().optional(),
   notificationPreferences: notificationPreferencesSchema,
+  // Quote tracking
+  currentQuoteIndex: yup.number().default(0),
+  lastQuoteTimestamp: timestampSchema,
 });
 
 export type UserData = yup.InferType<typeof userDataSchema>;
