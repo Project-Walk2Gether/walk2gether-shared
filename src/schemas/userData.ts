@@ -87,7 +87,6 @@ export const userDataSchema = yup.object({
   notificationPreferences: notificationPreferencesSchema,
   // Quote tracking
   currentQuoteIndex: yup.number().default(0),
-  lastQuoteTimestamp: timestampSchema,
 });
 
 export type UserData = yup.InferType<typeof userDataSchema>;
