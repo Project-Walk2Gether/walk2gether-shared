@@ -5,6 +5,7 @@ export * from "./location";
 export * from "./message";
 export * from "./notification";
 export * from "./participant";
+export * from "./quote";
 export * from "./reminder";
 export * from "./rsvp";
 export * from "./userData";

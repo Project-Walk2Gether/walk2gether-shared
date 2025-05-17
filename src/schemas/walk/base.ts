@@ -29,7 +29,7 @@ export const walkBaseSchema = yup.object({
   durationMinutes: yup.number().required().positive().integer(),
   organizerName: yup.string().required(),
   createdByUid: yup.string().required(),
-  route: routeSchema,
+  route: routeSchema.optional().default(undefined),
   invitationCode: yup.string().required(),
   totalDistanceMiles: yup.number(),
   startedAt: timestampSchema,
