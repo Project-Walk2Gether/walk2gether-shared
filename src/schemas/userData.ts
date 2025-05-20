@@ -86,6 +86,7 @@ export const userDataSchema = yup.object({
   aboutMe: yup.string().optional(),
   introduction: yup.string().optional(),
   notificationPreferences: notificationPreferencesSchema,
+  notificationsPermissionsSetAt: timestampSchema,
   // Quote tracking
   currentQuoteIndex: yup.number().default(0),
 });
