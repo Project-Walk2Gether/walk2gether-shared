@@ -24,12 +24,6 @@ export const NOTIFICATION_PREFERENCES: NotificationPreferenceInfo[] = [
     defaultValue: true,
   },
   {
-    key: "message",
-    label: "Messages",
-    description: "Receive notifications for new messages from friends",
-    defaultValue: true,
-  },
-  {
     key: "newNeighborhoodWalks",
     label: "New Neighborhood Walks",
     description: "Be notified when new walks are created in your neighborhood",
@@ -39,12 +33,6 @@ export const NOTIFICATION_PREFERENCES: NotificationPreferenceInfo[] = [
     key: "invitedToFriendWalks",
     label: "Walk Invitations",
     description: "Receive notifications when friends invite you to walks",
-    defaultValue: true,
-  },
-  {
-    key: "requestsToJoinMyWalks",
-    label: "Join Requests",
-    description: "Be notified when someone requests to join your walks",
     defaultValue: true,
   },
 ];
