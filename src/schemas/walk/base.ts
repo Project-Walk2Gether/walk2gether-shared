@@ -1,8 +1,8 @@
 import * as yup from "yup";
+import { objectOf } from "../../utils/objectOf";
 import { locationSchema } from "../location";
 import { baseParticipantSchema, routeSchema } from "../participant";
 import { timestampSchema } from "../utils/timestamp";
-import { objectOf } from "../../utils/objectOf";
 
 export const pairSchema = yup.object({
   userUids: yup.array().of(yup.string().required()).required(),
@@ -22,11 +22,9 @@ export const roundSchema = yup.object({
 export const walkBaseSchema = yup.object({
   id: yup.string(),
   date: timestampSchema.required(),
-  invitedUserIds: yup.array().of(yup.string().required()),
   visibleToUserIds: yup.array().of(yup.string().required()),
   currentLocation: locationSchema,
   startLocation: locationSchema,
-  invitedPhoneNumbers: yup.array().of(yup.string().required()),
   durationMinutes: yup.number().required().positive().integer(),
   organizerName: yup.string().required(),
   createdByUid: yup.string().required(),
@@ -39,10 +37,10 @@ export const walkBaseSchema = yup.object({
   estimatedEndTimeWithBuffer: timestampSchema,
   createdAt: timestampSchema,
   updatedAt: timestampSchema,
-  
+
   // Denormalized participant data for efficient rendering
   participantsById: objectOf(baseParticipantSchema),
-  
+
   // Participant counts derived from participantsById (for convenience)
   approvedParticipantCount: yup.number().integer().min(0).default(0),
   pendingParticipantCount: yup.number().integer().min(0).default(0),
