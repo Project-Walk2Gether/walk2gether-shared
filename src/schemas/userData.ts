@@ -78,6 +78,7 @@ export const userDataSchema = yup.object({
   locationPermissionsSetAt: timestampSchema,
   // Quote tracking
   currentQuoteIndex: yup.number().default(0),
+  neighborhoodWalksHowItWorksDontShowAgain: yup.boolean().default(false),
 });
 
 export type UserData = yup.InferType<typeof userDataSchema>;
