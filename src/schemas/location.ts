@@ -6,6 +6,7 @@ export const locationSchema = yup.object({
   createdAt: timestampSchema,
   updatedAt: timestampSchema,
   placeId: yup.string(),
+  notes: yup.string(),
   latitude: yup.number().required(),
   longitude: yup.number().required(),
 });
