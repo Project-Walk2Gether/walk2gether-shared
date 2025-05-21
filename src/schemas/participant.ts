@@ -33,11 +33,32 @@ export type RouteDistance = yup.InferType<typeof routeDistanceSchema>;
 export type RouteDuration = yup.InferType<typeof routeDurationSchema>;
 export type Route = yup.InferType<typeof routeSchema>;
 
-export const participantSchema = yup.object({
+/**
+ * Base participant schema with simplified properties that will be denormalized into the walk document.
+ * These are the properties needed for rendering participant information in the UI.
+ */
+export const baseParticipantSchema = yup.object({
   id: yup.string(),
   userUid: yup.string().required(),
   displayName: yup.string().required(),
   photoURL: yup.string().nullable(),
+  introduction: yup.string().optional(),
+  status: yup
+    .mixed<"pending" | "on-the-way" | "arrived">()
+    .oneOf(["pending", "on-the-way", "arrived"])
+    .required(),
+  approvedAt: timestampSchema.nullable(),
+  rejectedAt: timestampSchema.nullable(),
+  cancelledAt: timestampSchema.nullable(),
+  createdAt: timestampSchema,
+  updatedAt: timestampSchema,
+});
+
+/**
+ * Full participant schema that extends the base schema with additional properties
+ * that don't need to be denormalized (like location data and route information).
+ */
+export const participantSchema = baseParticipantSchema.shape({
   lastLocation: yup
     .object({
       latitude: yup.number().required(),
@@ -47,23 +68,14 @@ export const participantSchema = yup.object({
     .optional()
     .default(undefined),
   route: routeSchema.nullable(),
-  introduction: yup.string().optional(),
-  status: yup
-    .mixed<"pending" | "on-the-way" | "arrived">()
-    .oneOf(["pending", "on-the-way", "arrived"])
-    .required(),
   // Add navigation method for route calculation
   navigationMethod: yup
     .mixed<"driving" | "walking">()
     .oneOf(["driving", "walking"])
     .default("walking"),
-  approvedAt: timestampSchema.nullable(),
-  rejectedAt: timestampSchema,
-  cancelledAt: timestampSchema,
-  createdAt: timestampSchema,
-  updatedAt: timestampSchema,
 });
 
+export type BaseParticipant = yup.InferType<typeof baseParticipantSchema>;
 export type Participant = yup.InferType<typeof participantSchema>;
 
 // Export the extended participant type with route
