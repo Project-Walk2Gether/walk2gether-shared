@@ -1,0 +1,54 @@
+/**
+ * API types for Walk2gether
+ * 
+ * This file exports the API namespace with all endpoint types.
+ */
+
+// Import all API types
+import {
+  InvitationValidateRequest,
+  InvitationValidateResponse,
+  InvitationAcceptRequest,
+  InvitationAcceptResponse
+} from './invitation';
+
+import {
+  UserDeleteRequest,
+  UserDeleteResponse
+} from './user';
+
+import {
+  SMSSendInvitationsRequest,
+  SMSSendInvitationsResponse
+} from './sms';
+
+// Export a single namespace for better organization
+export namespace API {
+  export namespace Invitation {
+    export namespace Validate {
+      export type RequestBody = InvitationValidateRequest;
+      export type ResponseBody = InvitationValidateResponse;
+    }
+    
+    export namespace Accept {
+      export type RequestBody = InvitationAcceptRequest;
+      export type ResponseBody = InvitationAcceptResponse;
+    }
+  }
+  
+  // User namespace
+  export namespace User {
+    export namespace Delete {
+      export type RequestBody = UserDeleteRequest;
+      export type ResponseBody = UserDeleteResponse;
+    }
+  }
+  
+  // SMS namespace
+  export namespace SMS {
+    export namespace SendInvitations {
+      export type RequestBody = SMSSendInvitationsRequest;
+      export type ResponseBody = SMSSendInvitationsResponse;
+    }
+  }
+}

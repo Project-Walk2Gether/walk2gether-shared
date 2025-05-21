@@ -22,6 +22,7 @@ export const walkBaseSchema = yup.object({
   id: yup.string(),
   date: timestampSchema.required(),
   invitedUserIds: yup.array().of(yup.string().required()),
+  visibleToUserIds: yup.array().of(yup.string().required()),
   currentLocation: locationSchema,
   startLocation: locationSchema,
   invitedPhoneNumbers: yup.array().of(yup.string().required()),
