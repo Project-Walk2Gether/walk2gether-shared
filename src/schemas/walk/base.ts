@@ -38,6 +38,11 @@ export const walkBaseSchema = yup.object({
   estimatedEndTimeWithBuffer: timestampSchema,
   createdAt: timestampSchema,
   updatedAt: timestampSchema,
+  
+  // Participant counts for efficient rendering
+  approvedParticipantCount: yup.number().integer().min(0).default(0),
+  pendingParticipantCount: yup.number().integer().min(0).default(0),
+  rejectedParticipantCount: yup.number().integer().min(0).default(0),
 });
 
 export type Pair = yup.InferType<typeof pairSchema>;
