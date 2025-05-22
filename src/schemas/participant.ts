@@ -51,7 +51,7 @@ export const baseParticipantSchema = yup.object({
     .mixed<"requested" | "invited" | "walk-creator">()
     .oneOf(["requested", "invited", "walk-creator"])
     .required(),
-  approvedAt: timestampSchema.nullable(),
+  acceptedAt: timestampSchema.nullable(),
   rejectedAt: timestampSchema.nullable(),
   cancelledAt: timestampSchema.nullable(),
   createdAt: timestampSchema,
