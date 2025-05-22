@@ -22,7 +22,6 @@ export const roundSchema = yup.object({
 export const walkBaseSchema = yup.object({
   id: yup.string(),
   date: timestampSchema.required(),
-  visibleToUserIds: yup.array().of(yup.string().required()),
   currentLocation: locationSchema,
   startLocation: locationSchema,
   durationMinutes: yup.number().required().positive().integer(),
@@ -37,14 +36,7 @@ export const walkBaseSchema = yup.object({
   estimatedEndTimeWithBuffer: timestampSchema,
   createdAt: timestampSchema,
   updatedAt: timestampSchema,
-
-  // Denormalized participant data for efficient rendering
   participantsById: objectOf(baseParticipantSchema),
-
-  // Participant counts derived from participantsById (for convenience)
-  approvedParticipantCount: yup.number().integer().min(0).default(0),
-  pendingParticipantCount: yup.number().integer().min(0).default(0),
-  rejectedParticipantCount: yup.number().integer().min(0).default(0),
 });
 
 export type Pair = yup.InferType<typeof pairSchema>;
