@@ -48,8 +48,8 @@ export const baseParticipantSchema = yup.object({
     .oneOf(["pending", "on-the-way", "arrived"])
     .required(),
   sourceType: yup
-    .mixed<"requested" | "invited">()
-    .oneOf(["requested", "invited"])
+    .mixed<"requested" | "invited" | "walk-creator">()
+    .oneOf(["requested", "invited", "walk-creator"])
     .required(),
   approvedAt: timestampSchema.nullable(),
   rejectedAt: timestampSchema.nullable(),
