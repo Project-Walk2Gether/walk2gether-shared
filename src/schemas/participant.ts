@@ -47,6 +47,10 @@ export const baseParticipantSchema = yup.object({
     .mixed<"pending" | "on-the-way" | "arrived">()
     .oneOf(["pending", "on-the-way", "arrived"])
     .required(),
+  sourceType: yup
+    .mixed<"requested" | "invited">()
+    .oneOf(["requested", "invited"])
+    .required(),
   approvedAt: timestampSchema.nullable(),
   rejectedAt: timestampSchema.nullable(),
   cancelledAt: timestampSchema.nullable(),
