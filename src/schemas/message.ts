@@ -7,7 +7,6 @@ export const messageSchema = yup.object({
   walkId: yup.string().required(),
   senderId: yup.string().required(),
   senderName: yup.string().required(),
-  recipientId: yup.string().required(),
   message: yup.string().required(),
   createdAt: timestampSchema.optional(),
   updatedAt: timestampSchema.optional(),
