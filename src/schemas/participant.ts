@@ -52,7 +52,7 @@ export const baseParticipantSchema = yup.object({
     .oneOf(["requested", "invited", "walk-creator"])
     .required(),
   acceptedAt: timestampSchema.nullable(),
-  rejectedAt: timestampSchema.nullable(),
+  deniedAt: timestampSchema.nullable(),
   cancelledAt: timestampSchema.nullable(),
   createdAt: timestampSchema,
   updatedAt: timestampSchema,
