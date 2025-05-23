@@ -38,6 +38,7 @@ export const walkBaseSchema = yup.object({
   updatedAt: timestampSchema,
   participantsById: objectOf(baseParticipantSchema),
   participantUids: yup.array().of(yup.string().required()),
+  ownerIsInitiallyAtLocation: yup.boolean().default(false),
 });
 
 export type Pair = yup.InferType<typeof pairSchema>;
