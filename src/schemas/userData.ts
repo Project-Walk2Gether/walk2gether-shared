@@ -67,6 +67,7 @@ export const userDataSchema = yup.object({
   createdAt: timestampSchema,
   updatedAt: timestampSchema,
   lastActiveAt: timestampSchema,
+  tourDismissedAt: timestampSchema,
   location: locationSchema.optional().nullable(),
   profilePicUrl: yup.string().url().optional(),
   friendInvitationCode: yup.string(),
