@@ -81,6 +81,8 @@ export const userDataSchema = yup.object({
   // Quote tracking
   currentQuoteIndex: yup.number().default(0),
   neighborhoodWalksHowItWorksDontShowAgain: yup.boolean().default(false),
+  // User activity tracking
+  hasCreatedNeighborhoodWalk: yup.boolean().default(false),
 });
 
 export type UserData = yup.InferType<typeof userDataSchema>;
