@@ -75,10 +75,8 @@ export const userDataSchema = yup.object({
   deviceInfo: yup.mixed(),
   aboutMe: yup.string().optional(),
   introduction: yup.string().optional(),
-  backgroundLocationTrackingEnabled: yup.boolean().optional(),
   notificationPreferences: notificationPreferencesSchema,
   notificationsPermissionsSetAt: timestampSchema,
-  locationPermissionsSetAt: timestampSchema,
   // Quote tracking
   currentQuoteIndex: yup.number().default(0),
   neighborhoodWalksHowItWorksDontShowAgain: yup.boolean().default(false),
