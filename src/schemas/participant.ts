@@ -54,6 +54,7 @@ export const baseParticipantSchema = yup.object({
   acceptedAt: timestampSchema.nullable(),
   deniedAt: timestampSchema.nullable(),
   cancelledAt: timestampSchema.nullable(),
+  statusUpdatedAt: timestampSchema,
   createdAt: timestampSchema,
   updatedAt: timestampSchema,
 });
