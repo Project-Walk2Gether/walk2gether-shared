@@ -1,26 +1,20 @@
 /**
- * API types for Walk2gether
- * 
+ * API types for Walk2Gether
+ *
  * This file exports the API namespace with all endpoint types.
  */
 
 // Import all API types
 import {
+  InvitationAcceptRequest,
+  InvitationAcceptResponse,
   InvitationValidateRequest,
   InvitationValidateResponse,
-  InvitationAcceptRequest,
-  InvitationAcceptResponse
-} from './invitation';
+} from "./invitation";
 
-import {
-  UserDeleteRequest,
-  UserDeleteResponse
-} from './user';
+import { UserDeleteRequest, UserDeleteResponse } from "./user";
 
-import {
-  SMSSendInvitationsRequest,
-  SMSSendInvitationsResponse
-} from './sms';
+import { SMSSendInvitationsRequest, SMSSendInvitationsResponse } from "./sms";
 
 // Export a single namespace for better organization
 export namespace API {
@@ -29,13 +23,13 @@ export namespace API {
       export type RequestBody = InvitationValidateRequest;
       export type ResponseBody = InvitationValidateResponse;
     }
-    
+
     export namespace Accept {
       export type RequestBody = InvitationAcceptRequest;
       export type ResponseBody = InvitationAcceptResponse;
     }
   }
-  
+
   // User namespace
   export namespace User {
     export namespace Delete {
@@ -43,7 +37,7 @@ export namespace API {
       export type ResponseBody = UserDeleteResponse;
     }
   }
-  
+
   // SMS namespace
   export namespace SMS {
     export namespace SendInvitations {
