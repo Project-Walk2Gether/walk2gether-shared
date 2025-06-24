@@ -82,6 +82,7 @@ export const userDataSchema = yup.object({
   neighborhoodWalksHowItWorksDontShowAgain: yup.boolean().default(false),
   // User activity tracking
   hasCreatedNeighborhoodWalk: yup.boolean().default(false),
+  walkCount: yup.number().default(0),
 });
 
 export type UserData = yup.InferType<typeof userDataSchema>;
