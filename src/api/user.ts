@@ -20,3 +20,16 @@ export interface UserDeleteResponse {
     status: number;
   };
 }
+
+/**
+ * Response type for the /user/auth/:uid endpoint
+ */
+export interface UserAuthResponse {
+  uid: string;
+  email?: string;
+  phoneNumber?: string;
+  emailVerified: boolean;
+  disabled: boolean;
+  creationTime: string;
+  lastSignInTime?: string;
+}

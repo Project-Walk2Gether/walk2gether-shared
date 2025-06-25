@@ -12,7 +12,7 @@ import {
   InvitationValidateResponse,
 } from "./invitation";
 
-import { UserDeleteRequest, UserDeleteResponse } from "./user";
+import { UserDeleteRequest, UserDeleteResponse, UserAuthResponse } from "./user";
 
 import { SMSSendInvitationsRequest, SMSSendInvitationsResponse } from "./sms";
 
@@ -35,6 +35,10 @@ export namespace API {
     export namespace Delete {
       export type RequestBody = UserDeleteRequest;
       export type ResponseBody = UserDeleteResponse;
+    }
+
+    export namespace Auth {
+      export type ResponseBody = UserAuthResponse;
     }
   }
 
