@@ -77,6 +77,7 @@ export const userDataSchema = yup.object({
   introduction: yup.string().optional(),
   notificationPreferences: notificationPreferencesSchema,
   notificationsPermissionsSetAt: timestampSchema,
+  phoneNumber: yup.string().optional(),
   // Quote tracking
   currentQuoteIndex: yup.number().default(0),
   neighborhoodWalksHowItWorksDontShowAgain: yup.boolean().default(false),
