@@ -3,6 +3,7 @@ import { timestampSchema } from "./utils/timestamp";
 
 export const locationSchema = yup.object({
   name: yup.string(),
+  displayName: yup.string(), // City, state, country format for admin display
   createdAt: timestampSchema,
   updatedAt: timestampSchema,
   placeId: yup.string(),
