@@ -1,4 +1,5 @@
 export * from "./attachment";
+export * from "./audit";
 export * from "./favoriteLocation";
 export * from "./friendship";
 export * from "./location";
