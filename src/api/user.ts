@@ -33,3 +33,23 @@ export interface UserAuthResponse {
   creationTime: string;
   lastSignInTime?: string;
 }
+
+/**
+ * Request type for the /user/update-profile endpoint
+ */
+export interface UserUpdateProfileRequest {
+  displayName?: string;
+  photoURL?: string;
+}
+
+/**
+ * Response type for the /user/update-profile endpoint
+ */
+export interface UserUpdateProfileResponse {
+  success: boolean;
+  message?: string;
+  error?: {
+    message: string;
+    status: number;
+  };
+}

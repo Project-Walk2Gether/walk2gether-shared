@@ -1,6 +1,5 @@
 import * as yup from "yup";
 import { objectOf } from "../utils/objectOf";
-import { userDataSchema } from "./userData";
 import { timestampSchema } from "./utils/timestamp";
 
 export const friendshipSchema = yup.object({
@@ -24,7 +23,14 @@ export const friendshipSchema = yup.object({
         return uids[0] !== uids[1];
       }
     ),
-  userDataByUid: objectOf(userDataSchema),
+  // Simplified schema specifically for friendship user data
+  userDataByUid: objectOf(
+    yup.object({
+      name: yup.string().required(),
+      profilePicUrl: yup.string().nullable(),
+      _isSettingUp: yup.boolean().optional()
+    })
+  ),
   createdAt: timestampSchema,
   updatedAt: timestampSchema,
   createdByUid: yup.string().required(),
