@@ -9,6 +9,7 @@ export const pairSchema = yup.object({
 });
 
 export const roundSchema = yup.object({
+  id: yup.string(),
   walkId: yup.string().required(),
   roundNumber: yup.number().required().integer().min(1),
   startTime: timestampSchema,
