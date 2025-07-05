@@ -3,7 +3,6 @@ import { timestampSchema } from "./utils/timestamp";
 
 export const pairSchema = yup.object({
   userUids: yup.array().of(yup.string().required()).required(),
-  color: yup.string().required(),
   emoji: yup.string().required(),
   isTriple: yup.boolean().optional(),
 });
