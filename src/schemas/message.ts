@@ -12,6 +12,9 @@ export const messageSchema = yup.object({
   updatedAt: timestampSchema.optional(),
   read: yup.boolean().default(false),
   attachments: yup.array().of(attachmentSchema.required()).optional(),
+  // Round-related fields
+  roundId: yup.string().optional(),
+  isRoundAnswer: yup.boolean().optional().default(false),
 });
 
 export type Message = yup.InferType<typeof messageSchema>;
