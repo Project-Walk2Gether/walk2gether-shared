@@ -8,6 +8,7 @@ export * from "./notification";
 export * from "./participant";
 export * from "./quotes";
 export * from "./reminder";
+export * from "./round";
 export * from "./rsvp";
 export * from "./userData";
 export * from "./walk";
