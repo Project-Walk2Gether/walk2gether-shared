@@ -1,4 +1,5 @@
 import * as yup from "yup";
+import { roundSchema } from "../round";
 import { walkBaseSchema } from "./base";
 
 export const meetupWalkSchema = walkBaseSchema.shape({
@@ -10,6 +11,7 @@ export const meetupWalkSchema = walkBaseSchema.shape({
     .integer()
     .min(0)
     .default(5),
+  upcomingRounds: yup.array().of(roundSchema.required()),
 });
 
 export type MeetupWalk = yup.InferType<typeof meetupWalkSchema>;

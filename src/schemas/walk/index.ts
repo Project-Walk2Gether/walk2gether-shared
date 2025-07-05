@@ -1,16 +1,18 @@
 import * as yup from "yup";
 import { FriendsWalk, friendsWalkSchema } from "./friends";
-import { MeetupWalk } from "./meetup";
+import { MeetupWalk, meetupWalkSchema } from "./meetup";
 import { NeighborhoodWalk, neighborhoodWalkSchema } from "./neighborhood";
 
 export * from "./base";
 export * from "./friends";
 export * from "./neighborhood";
+export * from "./meetup";
 
 // Map of walk types to their schemas
 export const walkSchemas = {
   friends: friendsWalkSchema,
   neighborhood: neighborhoodWalkSchema,
+  meetup: meetupWalkSchema,
 };
 
 // Dynamic schema that selects the appropriate schema based on the walk type
@@ -57,7 +59,7 @@ export const walkIsMeetupWalk = (value: Walk): value is MeetupWalk =>
   value.type === "meetup";
 export const isValidMeetupWalk = (value: unknown): value is MeetupWalk => {
   try {
-    neighborhoodWalkSchema.validateSync(value);
+    meetupWalkSchema.validateSync(value);
     return true;
   } catch (error) {
     return false;
