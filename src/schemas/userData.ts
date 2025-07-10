@@ -77,6 +77,11 @@ export const userDataSchema = yup.object({
   introduction: yup.string().optional(),
   notificationPreferences: notificationPreferencesSchema,
   notificationsPermissionsSetAt: timestampSchema,
+  distanceUnit: yup
+    .mixed<"km" | "mi">()
+    .oneOf(["km", "mi"])
+    .optional()
+    .default("mi"),
   phoneNumber: yup.string().optional(),
   // Quote tracking
   currentQuoteIndex: yup.number().default(0),

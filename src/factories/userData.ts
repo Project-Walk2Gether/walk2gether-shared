@@ -1,9 +1,9 @@
-import { Sync, each } from 'factory.ts';
-import { UserData } from '../schemas/userData';
+import { Sync } from "factory.ts";
+import { UserData } from "../schemas/userData";
 
 /**
  * Factory for creating UserData objects for testing
- * 
+ *
  * This factory creates data that matches the UserData type from the userData schema
  */
 export const userDataFactory = Sync.makeFactory<UserData>({
@@ -17,13 +17,14 @@ export const userDataFactory = Sync.makeFactory<UserData>({
   friendInvitationCode: "",
   expoPushToken: null,
   deviceInfo: {},
+  distanceUnit: "mi",
   aboutMe: "",
   introduction: "",
   phoneNumber: "",
   notificationPreferences: {
     friendETA: true,
     newNeighborhoodWalks: true,
-    invitedToFriendWalks: true
+    invitedToFriendWalks: true,
   },
   notificationsPermissionsSetAt: { toDate: () => new Date() } as any,
   currentQuoteIndex: 0,
@@ -35,7 +36,7 @@ export const userDataFactory = Sync.makeFactory<UserData>({
 /**
  * Creates a user data object with Firebase server timestamps
  * This is useful when you need to create data that will be stored in Firestore
- * 
+ *
  * @param admin Firebase Admin SDK instance
  * @param overrides Optional overrides for the user data
  * @returns UserData object with server timestamps
@@ -45,13 +46,13 @@ export const createUserDataWithServerTimestamps = (
   overrides: Partial<UserData> = {}
 ): UserData => {
   const serverTimestamp = admin.firestore.FieldValue.serverTimestamp();
-  
+
   return userDataFactory.build({
     createdAt: serverTimestamp,
     updatedAt: serverTimestamp,
     lastActiveAt: serverTimestamp,
     tourDismissedAt: serverTimestamp,
     notificationsPermissionsSetAt: serverTimestamp,
-    ...overrides
+    ...overrides,
   });
 };
