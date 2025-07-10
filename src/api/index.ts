@@ -22,6 +22,8 @@ import {
 
 import { SMSSendInvitationsRequest, SMSSendInvitationsResponse } from "./sms";
 
+import { API as TravelTimeAPI } from "./travelTime";
+
 // Export a single namespace for better organization
 export namespace API {
   export namespace Invitation {
@@ -58,6 +60,14 @@ export namespace API {
     export namespace SendInvitations {
       export type RequestBody = SMSSendInvitationsRequest;
       export type ResponseBody = SMSSendInvitationsResponse;
+    }
+  }
+  
+  // Travel Time namespace
+  export namespace TravelTime {
+    export namespace Check {
+      export type RequestBody = TravelTimeAPI.TravelTime.Check.RequestBody;
+      export type ResponseBody = TravelTimeAPI.TravelTime.Check.ResponseBody;
     }
   }
 }
