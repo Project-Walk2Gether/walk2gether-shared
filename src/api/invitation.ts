@@ -2,6 +2,8 @@
  * API types for invitation endpoints
  */
 
+import { Walk } from "../schemas";
+
 /**
  * Request type for the /invitation/validate endpoint
  */
@@ -22,18 +24,7 @@ export interface InvitationValidateResponse {
     name: string;
     profilePicUrl: string | null;
   };
-  walk?: {
-    id: string;
-    title: string;
-    date: any; // Timestamp
-    startLocation: {
-      name: string;
-      latitude: number;
-      longitude: number;
-    };
-    durationMinutes: number;
-    invitationCode: string;
-  } | null;
+  walk?: Walk;
   error?: {
     message: string;
     status: number;
