@@ -14,7 +14,7 @@ export const roundSchema = yup.object({
   roundNumber: yup.number().required().integer().min(1),
   startTime: timestampSchema,
   endTime: timestampSchema.optional(),
-  questionPrompt: yup.string().optional(),
+  questionPrompt: yup.string().optional().nullable(),
   pairs: yup.array().of(pairSchema.required()).required(),
 });
 
