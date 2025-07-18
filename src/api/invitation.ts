@@ -9,7 +9,7 @@ import { Walk } from "../schemas";
  */
 export interface InvitationValidateRequest {
   data: {
-    code: string;
+    code?: string;
     walkCode?: string;
   };
 }
