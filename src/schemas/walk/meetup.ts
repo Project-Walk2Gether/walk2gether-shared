@@ -4,7 +4,7 @@ import { walkBaseSchema } from "./base";
 export const meetupWalkSchema = walkBaseSchema.shape({
   type: yup.mixed<"meetup">().oneOf(["meetup"]),
   topic: yup.string().required(),
-  descriptionMarkdown: yup.string().required(),
+  descriptionMarkdown: yup.string(),
   questionPrompts: yup.array().of(yup.string().required()),
   minimumNumberOfMinutesWithEachPartner: yup
     .number()
