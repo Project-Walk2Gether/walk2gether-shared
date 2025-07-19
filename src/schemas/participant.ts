@@ -25,6 +25,7 @@ export const routeSchema = yup.object({
   distance: routeDistanceSchema.required(),
   duration: routeDurationSchema.required(),
   calculatedAt: timestampSchema,
+  estimatedArrivalTime: timestampSchema,
 });
 
 // Export types derived from schemas
@@ -51,6 +52,8 @@ export const baseParticipantSchema = yup.object({
     .mixed<"requested" | "invited" | "walk-creator">()
     .oneOf(["requested", "invited", "walk-creator"])
     .required(),
+  estimatedArrivalTime: timestampSchema.nullable(),
+  notifiedEstimatedArrivalTime: timestampSchema.nullable(),
   acceptedAt: timestampSchema.nullable(),
   deniedAt: timestampSchema.nullable(),
   cancelledAt: timestampSchema.nullable(),
