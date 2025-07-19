@@ -57,6 +57,9 @@ export const baseParticipantSchema = yup.object({
   deniedAt: timestampSchema.nullable(),
   cancelledAt: timestampSchema.nullable(),
   statusUpdatedAt: timestampSchema,
+  // After the user rejects a walk invitation, the invite will still be shown on their walks screen
+  // until they mark it as hidden
+  hiddenAt: timestampSchema.nullable(),
   createdAt: timestampSchema,
   updatedAt: timestampSchema,
 });
