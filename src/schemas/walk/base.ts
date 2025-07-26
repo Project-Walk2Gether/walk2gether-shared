@@ -1,5 +1,6 @@
 import * as yup from "yup";
 import { objectOf } from "../../utils/objectOf";
+import { attachmentSchema } from "../attachment";
 import { locationSchema } from "../location";
 import { baseParticipantSchema, routeSchema } from "../participant";
 import { roundSchema } from "../round";
@@ -22,6 +23,7 @@ export const walkBaseSchema = yup.object({
   estimatedEndTimeWithBuffer: timestampSchema,
   createdAt: timestampSchema,
   updatedAt: timestampSchema,
+  meetupSpotPhoto: attachmentSchema,
   participantsById: objectOf(baseParticipantSchema),
   participantUids: yup.array().of(yup.string().required()),
   ownerIsInitiallyAtLocation: yup.boolean().optional().default(undefined),
