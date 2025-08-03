@@ -16,6 +16,7 @@ export const walkBaseSchema = yup.object({
   createdByUid: yup.string().required(),
   upcomingRounds: yup.array().of(roundSchema.required()),
   route: routeSchema.optional().default(undefined),
+  allowLocationSuggestions: yup.boolean().optional().default(true),
   totalDistanceMiles: yup.number(),
   startedAt: timestampSchema,
   endTime: timestampSchema,
