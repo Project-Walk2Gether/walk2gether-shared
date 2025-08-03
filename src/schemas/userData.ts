@@ -70,6 +70,7 @@ export const userDataSchema = yup.object({
   tourDismissedAt: timestampSchema,
   location: locationSchema.optional().nullable(),
   profilePicUrl: yup.string().url().optional(),
+  linkedInProfileUrl: yup.string().url().optional(),
   friendInvitationCode: yup.string(),
   expoPushToken: yup.string().nullable(),
   deviceInfo: yup.mixed(),
