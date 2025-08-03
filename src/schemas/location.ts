@@ -1,4 +1,5 @@
 import * as yup from "yup";
+import { attachmentSchema } from "./attachment";
 import { timestampSchema } from "./utils/timestamp";
 
 export const locationSchema = yup.object({
@@ -14,6 +15,7 @@ export const locationSchema = yup.object({
 
 export const namedLocationSchema = locationSchema.shape({
   name: yup.string().required(),
+  imageAttachment: attachmentSchema,
 });
 
 export type Location = yup.InferType<typeof locationSchema>;

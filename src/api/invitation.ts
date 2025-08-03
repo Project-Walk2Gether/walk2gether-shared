@@ -23,6 +23,7 @@ export interface InvitationValidateResponse {
     id: string;
     name: string;
     profilePicUrl: string | null;
+    linkedInProfileUrl: string | null;
   };
   walk?: Walk;
   error?: {
