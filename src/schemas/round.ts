@@ -16,11 +16,6 @@ export const roundSchema = yup.object({
   endTime: timestampSchema.optional(),
   questionPrompt: yup.string().optional().nullable(),
   pairs: yup.array().of(pairSchema.required()).required(),
-  status: yup
-    .string()
-    .oneOf(["active", "completed"])
-    .optional()
-    .default("active"),
   createdAt: timestampSchema.optional(),
 });
 
