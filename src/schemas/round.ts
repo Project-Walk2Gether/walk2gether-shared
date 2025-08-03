@@ -14,10 +14,13 @@ export const roundSchema = yup.object({
   roundNumber: yup.number().required().integer().min(1),
   startTime: timestampSchema,
   endTime: timestampSchema.optional(),
-  endedAt: timestampSchema.optional(),
   questionPrompt: yup.string().optional().nullable(),
   pairs: yup.array().of(pairSchema.required()).required(),
-  status: yup.string().oneOf(["active", "completed"]).optional().default("active"),
+  status: yup
+    .string()
+    .oneOf(["active", "completed"])
+    .optional()
+    .default("active"),
   createdAt: timestampSchema.optional(),
 });
 
