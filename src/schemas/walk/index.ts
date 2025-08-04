@@ -8,6 +8,9 @@ export * from "./friends";
 export * from "./neighborhood";
 export * from "./meetup";
 
+// Re-export specific types for convenience
+export { TimeOption, WalkBase } from "./base";
+
 // Map of walk types to their schemas
 export const walkSchemas = {
   friends: friendsWalkSchema,

@@ -6,10 +6,15 @@ import { baseParticipantSchema, routeSchema } from "../participant";
 import { roundSchema } from "../round";
 import { timestampSchema } from "../utils/timestamp";
 
+const timeOptionSchema = yup.object({
+  time: timestampSchema.required(),
+  votes: objectOf(yup.boolean().required()),
+});
+
 export const walkBaseSchema = yup.object({
   id: yup.string(),
   date: timestampSchema.required(),
-  timeOptions: yup.array().of(timestampSchema.required()).optional().default([]),
+  timeOptions: yup.array().of(timeOptionSchema).optional().default([]),
   currentLocation: locationSchema,
   startLocation: locationSchema,
   durationMinutes: yup.number().required().positive().integer(),
@@ -29,3 +34,7 @@ export const walkBaseSchema = yup.object({
   participantUids: yup.array().of(yup.string().required()),
   ownerIsInitiallyAtLocation: yup.boolean().optional().default(undefined),
 });
+
+// Export canonical types
+export type WalkBase = yup.InferType<typeof walkBaseSchema>;
+export type TimeOption = yup.InferType<typeof timeOptionSchema>;

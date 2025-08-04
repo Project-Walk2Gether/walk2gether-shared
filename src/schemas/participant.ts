@@ -85,6 +85,8 @@ export const participantSchema = baseParticipantSchema.shape({
     .mixed<"driving" | "walking">()
     .oneOf(["driving", "walking"])
     .default("walking"),
+  // Array of timestamp millis that this participant can make
+  timeVotes: yup.array().of(yup.number().required()).optional().default([]),
 });
 
 export type BaseParticipant = yup.InferType<typeof baseParticipantSchema>;
