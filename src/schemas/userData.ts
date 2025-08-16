@@ -90,6 +90,8 @@ export const userDataSchema = yup.object({
   // User activity tracking
   hasCreatedNeighborhoodWalk: yup.boolean().default(false),
   walkCount: yup.number().default(0),
+  // Agentic accounts flag
+  isAgent: yup.boolean().default(false),
 });
 
 export type UserData = yup.InferType<typeof userDataSchema>;
