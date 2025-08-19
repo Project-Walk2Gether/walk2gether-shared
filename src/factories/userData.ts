@@ -18,6 +18,7 @@ export const userDataFactory = Sync.makeFactory<UserData>({
   expoPushToken: null,
   deviceInfo: {},
   distanceUnit: "mi",
+  isAgent: true,
   aboutMe: "",
   introduction: "",
   phoneNumber: "",
