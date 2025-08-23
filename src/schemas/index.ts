@@ -1,3 +1,4 @@
+export * from "./aiConversation";
 export * from "./attachment";
 export * from "./audit";
 export * from "./availability";
@@ -7,7 +8,8 @@ export * from "./location";
 export * from "./message";
 export * from "./notification";
 export * from "./participant";
-export * from "./quotes";
+export * from "./plan";
+export * from "./quote";
 export * from "./reminder";
 export * from "./round";
 export * from "./rsvp";

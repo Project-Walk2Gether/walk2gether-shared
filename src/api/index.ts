@@ -23,6 +23,14 @@ import {
 import { SMSSendInvitationsRequest, SMSSendInvitationsResponse } from "./sms";
 
 import { API as TravelTimeAPI } from "./travelTime";
+import {
+  GetPlansRequest,
+  GetPlansResponse,
+  GetFriendsRequest,
+  GetFriendsResponse,
+  CreatePlanRequest,
+  CreatePlanResponse,
+} from "./plan";
 
 // Export a single namespace for better organization
 export namespace API {
@@ -68,6 +76,22 @@ export namespace API {
     export namespace Check {
       export type RequestBody = TravelTimeAPI.TravelTime.Check.RequestBody;
       export type ResponseBody = TravelTimeAPI.TravelTime.Check.ResponseBody;
+    }
+  }
+
+  // Planning namespace
+  export namespace Plan {
+    export namespace GetPlans {
+      export type RequestBody = GetPlansRequest;
+      export type ResponseBody = GetPlansResponse;
+    }
+    export namespace GetFriends {
+      export type RequestBody = GetFriendsRequest;
+      export type ResponseBody = GetFriendsResponse;
+    }
+    export namespace Create {
+      export type RequestBody = CreatePlanRequest;
+      export type ResponseBody = CreatePlanResponse;
     }
   }
 }
