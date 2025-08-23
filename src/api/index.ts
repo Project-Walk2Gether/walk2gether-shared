@@ -12,25 +12,17 @@ import {
   InvitationValidateResponse,
 } from "./invitation";
 
-import { 
-  UserDeleteRequest, 
-  UserDeleteResponse, 
+import {
   UserAuthResponse,
+  UserDeleteRequest,
+  UserDeleteResponse,
   UserUpdateProfileRequest,
-  UserUpdateProfileResponse 
+  UserUpdateProfileResponse,
 } from "./user";
 
 import { SMSSendInvitationsRequest, SMSSendInvitationsResponse } from "./sms";
 
 import { API as TravelTimeAPI } from "./travelTime";
-import {
-  GetPlansRequest,
-  GetPlansResponse,
-  GetFriendsRequest,
-  GetFriendsResponse,
-  CreatePlanRequest,
-  CreatePlanResponse,
-} from "./plan";
 
 // Export a single namespace for better organization
 export namespace API {
@@ -56,7 +48,7 @@ export namespace API {
     export namespace Auth {
       export type ResponseBody = UserAuthResponse;
     }
-    
+
     export namespace UpdateProfile {
       export type RequestBody = UserUpdateProfileRequest;
       export type ResponseBody = UserUpdateProfileResponse;
@@ -70,28 +62,12 @@ export namespace API {
       export type ResponseBody = SMSSendInvitationsResponse;
     }
   }
-  
+
   // Travel Time namespace
   export namespace TravelTime {
     export namespace Check {
       export type RequestBody = TravelTimeAPI.TravelTime.Check.RequestBody;
       export type ResponseBody = TravelTimeAPI.TravelTime.Check.ResponseBody;
-    }
-  }
-
-  // Planning namespace
-  export namespace Plan {
-    export namespace GetPlans {
-      export type RequestBody = GetPlansRequest;
-      export type ResponseBody = GetPlansResponse;
-    }
-    export namespace GetFriends {
-      export type RequestBody = GetFriendsRequest;
-      export type ResponseBody = GetFriendsResponse;
-    }
-    export namespace Create {
-      export type RequestBody = CreatePlanRequest;
-      export type ResponseBody = CreatePlanResponse;
     }
   }
 }
