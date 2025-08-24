@@ -1,6 +1,7 @@
 import * as yup from "yup";
 import { attachmentSchema } from "./attachment";
 import { timestampSchema } from "./utils/timestamp";
+import { documentReferenceSchema } from "../firestore/documentReference";
 
 // Differentiated message types for conversations
 export const messageTypeSchema = yup
@@ -25,6 +26,8 @@ export const messageSchema = yup.object({
   id: yup.string(),
   // Walk messages may include a walkId; AI conversation messages won't
   walkId: yup.string().optional(),
+  // Optional reference to a plan document when the message is tied to a plan
+  planDoc: documentReferenceSchema.optional().nullable(),
   // Who authored the message ("ai" for system/assistant entries)
   senderId: yup.string().required(),
   senderName: yup.string().required(),

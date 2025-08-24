@@ -2,6 +2,7 @@ import { keyBy, reduce } from "lodash";
 import * as yup from "yup";
 import { locationSchema } from "./location";
 import { timestampSchema } from "./utils/timestamp";
+import { documentReferenceSchema } from "../firestore/documentReference";
 
 /**
  * Notification preference types and their associated information
@@ -92,6 +93,8 @@ export const userDataSchema = yup.object({
   walkCount: yup.number().default(0),
   // Agentic accounts flag
   isAgent: yup.boolean().default(false),
+  // UI context: which plan the user is actively discussing in the plan screen
+  activelyDiscussingPlanDoc: documentReferenceSchema.optional().nullable(),
 });
 
 export type UserData = yup.InferType<typeof userDataSchema>;
