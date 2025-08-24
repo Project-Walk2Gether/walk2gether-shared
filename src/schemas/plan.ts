@@ -1,8 +1,11 @@
 import * as yup from "yup";
+import {
+  DocumentReferenceLike,
+  documentReferenceSchema,
+} from "../firestore/documentReference";
 import { availabilitySchema } from "./availability";
-import { documentReferenceSchema, DocumentReferenceLike } from "../firestore/documentReference";
-import { timestampSchema } from "./utils/timestamp";
 import { userDataSchema } from "./userData";
+import { timestampSchema } from "./utils/timestamp";
 
 export const planStatusValues = [
   "pending",
@@ -15,9 +18,15 @@ export type PlanStatus = (typeof planStatusValues)[number];
 export const planSchema = yup.object({
   id: yup.string().optional(),
   user: userDataSchema.required(),
-  invitedFriend: documentReferenceSchema.required() as yup.MixedSchema<DocumentReferenceLike<unknown>>, // ref to users/{uid}
+  invitedFriend: documentReferenceSchema.required() as yup.MixedSchema<
+    DocumentReferenceLike<unknown>
+  >, // ref to users/{uid}
   availability: availabilitySchema.required(),
-  status: yup.mixed<PlanStatus>().oneOf(planStatusValues as any).required(),
+  status: yup
+    .mixed<PlanStatus>()
+    .oneOf(planStatusValues as any)
+    .required(),
+  cancelledAt: timestampSchema,
   createdAt: timestampSchema,
   updatedAt: timestampSchema,
 });
