@@ -26,6 +26,7 @@ export const planSchema = yup.object({
     .mixed<PlanStatus>()
     .oneOf(planStatusValues as any)
     .required(),
+  invitedFriendAcceptedAt: timestampSchema,
   cancelledAt: timestampSchema,
   createdAt: timestampSchema,
   updatedAt: timestampSchema,
