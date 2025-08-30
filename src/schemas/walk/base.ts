@@ -4,12 +4,8 @@ import { attachmentSchema } from "../attachment";
 import { locationSchema } from "../location";
 import { baseParticipantSchema, routeSchema } from "../participant";
 import { roundSchema } from "../round";
+import { timeOptionSchema } from "../timeOption";
 import { timestampSchema } from "../utils/timestamp";
-
-const timeOptionSchema = yup.object({
-  time: timestampSchema.required(),
-  votes: objectOf(yup.boolean().required()),
-});
 
 export const walkBaseSchema = yup.object({
   id: yup.string(),
