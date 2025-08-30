@@ -22,6 +22,7 @@ export const planSchema = yup.object({
   availability: availabilitySchema.required(),
   status: yup.mixed<PlanStatus>().oneOf(planStatusValues).required(),
   invitedFriendIsInterested: yup.boolean().optional(),
+  invitedFriendCantMakeIt: yup.boolean().optional(),
   timeOptions: yup.array().of(timeOptionSchema).optional().default([]),
   chosenTimeOption: timeOptionSchema.optional(),
   locationOptions: yup.array().of(locationOptionSchema).optional().default([]),
