@@ -3,7 +3,6 @@ import { documentReferenceSchema } from "../firestore/documentReference";
 import { availabilitySchema } from "./availability";
 import { locationOptionSchema } from "./locationOption";
 import { timeOptionSchema } from "./timeOption";
-import { userDataSchema } from "./userData";
 import { timestampSchema } from "./utils/timestamp";
 
 export const planStatusValues = [
@@ -17,8 +16,9 @@ export type PlanStatus = (typeof planStatusValues)[number];
 
 export const planSchema = yup.object({
   id: yup.string().optional(),
-  user: userDataSchema.required(),
+  initiatingUser: documentReferenceSchema.required(),
   invitedFriend: documentReferenceSchema.required(),
+  title: yup.string().required(),
   availability: availabilitySchema.required(),
   status: yup.mixed<PlanStatus>().oneOf(planStatusValues).required(),
   invitedFriendIsInterested: yup.boolean().optional(),

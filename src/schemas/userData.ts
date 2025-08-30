@@ -95,6 +95,8 @@ export const userDataSchema = yup.object({
   isAgent: yup.boolean().default(false),
   // UI context: which plan the user is actively discussing in the plan screen
   activelyDiscussingPlanDoc: documentReferenceSchema.optional().nullable(),
+  // AI response processing indicator
+  aiResponseProcessingStartedAt: timestampSchema.optional().nullable(),
 });
 
 export type UserData = yup.InferType<typeof userDataSchema>;
