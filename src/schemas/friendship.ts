@@ -8,7 +8,7 @@ export const friendshipSchema = yup.object({
     .array()
     .of(yup.string().required())
     .required()
-    .min(2, "A friendship must have at least 2 users")
+    .min(2, "A friendship must have 2 users")
     .max(2, "A friendship cannot have more than 2 users")
     .test("unique-uids", "User IDs must be unique in a friendship", (uids) => {
       if (!uids) return true;
@@ -28,7 +28,7 @@ export const friendshipSchema = yup.object({
     yup.object({
       name: yup.string().required(),
       profilePicUrl: yup.string().nullable(),
-      _isSettingUp: yup.boolean().optional()
+      _isSettingUp: yup.boolean().optional(),
     })
   ),
   createdAt: timestampSchema,
