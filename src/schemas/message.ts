@@ -1,7 +1,7 @@
 import * as yup from "yup";
+import { documentReferenceSchema } from "../firestore/documentReference";
 import { attachmentSchema } from "./attachment";
 import { timestampSchema } from "./utils/timestamp";
-import { documentReferenceSchema } from "../firestore/documentReference";
 
 // Differentiated message types for conversations
 export const messageTypeSchema = yup
@@ -31,6 +31,7 @@ export const messageSchema = yup.object({
   // Who authored the message ("ai" for system/assistant entries)
   senderId: yup.string().required(),
   senderName: yup.string().required(),
+  senderAvatarUrl: yup.string().url().optional(),
   // Differentiated type: human typed message, ai reply, or tool log entry
   type: messageTypeSchema.optional().default("human"),
   // Text body for human/ai messages. Tool entries may include a summary here.

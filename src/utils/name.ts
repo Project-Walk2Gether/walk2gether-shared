@@ -1,1 +1,1 @@
-export const AGENT_NAME = "Professor WiggleWalk";
+export const AGENT_NAME = "Chester";
