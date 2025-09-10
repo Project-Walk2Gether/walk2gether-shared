@@ -1,4 +1,5 @@
 export * from "./attachment";
+export * from "./aiAudit"
 export * from "./audit";
 export * from "./aiConversationSession";
 export * from "./availability";

@@ -1,5 +1,6 @@
 import * as yup from "yup";
 import { timestampSchema } from "./utils/timestamp";
+import { roleSchema } from "./message/role";
 
 /**
  * Schema for AI agent audit log entries tracking AI calls and responses
@@ -26,7 +27,7 @@ export const aiAuditSchema = yup.object({
     systemPrompt: yup.string().optional(), // System prompt used
     conversationHistory: yup.array().of(
       yup.object({
-        role: yup.string().oneOf(["user", "assistant"]).required(),
+        role: roleSchema.required(),
         content: yup.string().required(),
         timestamp: yup.date().required()
       })
