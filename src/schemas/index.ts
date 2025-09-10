@@ -1,5 +1,6 @@
 export * from "./attachment";
 export * from "./audit";
+export * from "./aiConversationSession";
 export * from "./availability";
 export * from "./favoriteLocation";
 export * from "./friendship";
