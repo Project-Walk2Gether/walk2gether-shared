@@ -17,7 +17,7 @@ export type PlanStatus = (typeof planStatusValues)[number];
 export const planSchema = yup.object({
   id: yup.string().optional(),
   initiatingUser: documentReferenceSchema.required(),
-  invitedFriend: documentReferenceSchema.required(),
+  invitedFriend: documentReferenceSchema.optional(),
   title: yup.string().required(),
   availability: availabilitySchema.required(),
   status: yup.mixed<PlanStatus>().oneOf(planStatusValues).required(),
@@ -28,6 +28,7 @@ export const planSchema = yup.object({
   locationOptions: yup.array().of(locationOptionSchema).optional().default([]),
   chosenLocationOption: locationOptionSchema.optional(),
   walkDoc: documentReferenceSchema.optional(),
+  invitationCode: yup.string().optional(),
   expiresAt: timestampSchema,
   cancelledAt: timestampSchema,
   createdAt: timestampSchema,
