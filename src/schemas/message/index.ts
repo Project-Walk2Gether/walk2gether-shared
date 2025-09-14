@@ -1,5 +1,4 @@
 import * as yup from "yup";
-import { documentReferenceSchema } from "../../firestore/documentReference";
 import { attachmentSchema } from "../attachment";
 import { timestampSchema } from "../utils/timestamp";
 import { toolCallSchema } from "./toolCall";
@@ -36,6 +35,11 @@ export const toolMessageSchema = baseMessageSchema.shape({
   toolCall: toolCallSchema.required(),
 });
 
+export const systemMessageSchema = baseMessageSchema.shape({
+  role: yup.mixed<"system">().oneOf(["system"]).required(),
+  message: yup.string().required(),
+});
+
 // Union schema for all message roles
 export const messageSchema = yup.lazy((value) => {
   switch (value?.type) {
@@ -45,6 +49,8 @@ export const messageSchema = yup.lazy((value) => {
       return assistantMessageSchema;
     case "tool":
       return toolMessageSchema;
+    case "system":
+      return systemMessageSchema;
     default:
       return userMessageSchema; // Default fallback
   }
@@ -54,13 +60,24 @@ export const messageSchema = yup.lazy((value) => {
 export type UserMessage = yup.InferType<typeof userMessageSchema>;
 export type AssistantMessage = yup.InferType<typeof assistantMessageSchema>;
 export type ToolMessage = yup.InferType<typeof toolMessageSchema>;
+export type SystemMessage = yup.InferType<typeof systemMessageSchema>;
 
 // Union type for all messages
-export type Message = UserMessage | AssistantMessage | ToolMessage
+export type Message =
+  | UserMessage
+  | AssistantMessage
+  | ToolMessage
+  | SystemMessage;
 
 export type ToolCall = yup.InferType<typeof toolCallSchema>;
 
 // Type guards for message discrimination
-export const isUserMessage = (message: Message): message is UserMessage => message.role === "user";
-export const isAssistantMessage = (message: Message): message is AssistantMessage => message.role === "assistant";
-export const isToolMessage = (message: Message): message is ToolMessage => message.role === "tool";
+export const isUserMessage = (message: Message): message is UserMessage =>
+  message.role === "user";
+export const isAssistantMessage = (
+  message: Message
+): message is AssistantMessage => message.role === "assistant";
+export const isToolMessage = (message: Message): message is ToolMessage =>
+  message.role === "tool";
+export const isSystemMessage = (message: Message): message is SystemMessage =>
+  message.role === "system";
