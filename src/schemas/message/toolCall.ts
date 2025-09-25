@@ -6,6 +6,7 @@ import { timestampSchema } from "../utils/timestamp";
 export const toolCallSchema = yup.object({
   name: yup.string().required(),
   role: roleSchema.required(),
+  tool_call_id: yup.string().required(),
   args: yup.mixed().optional(),
   result: yup.mixed().optional(),
   status: yup

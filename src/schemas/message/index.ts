@@ -26,6 +26,7 @@ export const assistantMessageSchema = baseMessageSchema.shape({
   role: yup.mixed<"assistant">().oneOf(["assistant"]).required(),
   message: yup.string().required(),
   toolCall: toolCallSchema.optional(),
+  auditId: yup.string().optional(),
 });
 
 // Tool message schema
