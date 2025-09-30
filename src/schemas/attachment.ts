@@ -14,21 +14,7 @@ export const attachmentSchema = yup.object({
   type: yup.string().oneOf(attachmentTypes).required(),
 
   // For any additional type-specific data
-  metadata: yup
-    .object({
-      // Image-specific fields
-      width: yup.number().when("type", {
-        is: "image",
-        then: () => yup.number().optional(),
-        otherwise: () => yup.number().strip(),
-      }),
-      height: yup.number().when("type", {
-        is: "image",
-        then: () => yup.number().optional(),
-        otherwise: () => yup.number().strip(),
-      }),
-    })
-    .optional(),
+  metadata: yup.mixed().optional(),
 });
 
 // Export types

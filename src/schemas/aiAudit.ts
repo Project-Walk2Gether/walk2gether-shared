@@ -12,6 +12,15 @@ export const aiAuditSchema = yup
     id: yup.string().optional(),
     userId: yup.string().required(),
     sessionId: yup.string().required(),
+    
+    // Task context
+    task: yup
+      .object({
+        id: yup.string().required(),
+        name: yup.string().required(),
+        description: yup.string().optional(),
+      })
+      .optional(),
 
     // What we sent to OpenAI
     request: yup

@@ -8,6 +8,7 @@ const baseMessageSchema = yup.object({
   id: yup.string(),
   createdAt: timestampSchema.optional(),
   updatedAt: timestampSchema.optional(),
+  attachments: yup.array().of(attachmentSchema.required()).optional(),
 });
 
 // User message schema
@@ -15,7 +16,6 @@ export const userMessageSchema = baseMessageSchema.shape({
   role: yup.mixed<"user">().oneOf(["user"]).required(),
   type: yup.mixed<"user">().oneOf(["user"]).required(),
   message: yup.string().required(),
-  attachments: yup.array().of(attachmentSchema.required()).optional(),
   walkId: yup.string().optional(),
   senderId: yup.string().required(),
   senderName: yup.string().required(),
@@ -57,21 +57,27 @@ export const templateMessageSchema = baseMessageSchema.shape({
 // Location suggestions message schema for sending location options with images
 export const locationSuggestionsMessageSchema = baseMessageSchema.shape({
   role: yup.mixed<"assistant">().oneOf(["assistant"]).required(),
-  type: yup.mixed<"location_suggestions">().oneOf(["location_suggestions"]).required(),
+  type: yup
+    .mixed<"location_suggestions">()
+    .oneOf(["location_suggestions"])
+    .required(),
   message: yup.string().required(), // Text description of the locations
   planId: yup.string().required(), // The plan these locations are for
-  locations: yup.array().of(
-    yup.object({
-      id: yup.string().required(),
-      name: yup.string().required(),
-      latitude: yup.number().required(),
-      longitude: yup.number().required(),
-      address: yup.string().optional(),
-      description: yup.string().optional(),
-      imageUrl: yup.string().url().optional(),
-      rating: yup.number().optional(),
-    })
-  ).required(),
+  locations: yup
+    .array()
+    .of(
+      yup.object({
+        id: yup.string().required(),
+        name: yup.string().required(),
+        latitude: yup.number().required(),
+        longitude: yup.number().required(),
+        address: yup.string().optional(),
+        description: yup.string().optional(),
+        imageUrl: yup.string().url().optional(),
+        rating: yup.number().optional(),
+      })
+    )
+    .required(),
 });
 
 // Union schema for all message roles
@@ -100,7 +106,9 @@ export type AssistantMessage = yup.InferType<typeof assistantMessageSchema>;
 export type ToolMessage = yup.InferType<typeof toolMessageSchema>;
 export type SystemMessage = yup.InferType<typeof systemMessageSchema>;
 export type TemplateMessage = yup.InferType<typeof templateMessageSchema>;
-export type LocationSuggestionsMessage = yup.InferType<typeof locationSuggestionsMessageSchema>;
+export type LocationSuggestionsMessage = yup.InferType<
+  typeof locationSuggestionsMessageSchema
+>;
 
 // Union type for all messages
 export type Message =
@@ -128,4 +136,5 @@ export const isTemplateMessage = (
 ): message is TemplateMessage => message.type === "template";
 export const isLocationSuggestionsMessage = (
   message: Message
-): message is LocationSuggestionsMessage => message.type === "location_suggestions";
+): message is LocationSuggestionsMessage =>
+  message.type === "location_suggestions";
