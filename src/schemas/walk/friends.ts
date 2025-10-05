@@ -3,7 +3,7 @@ import { locationSchema } from "../location";
 import { walkBaseSchema } from "./base";
 
 export const friendsWalkSchema = walkBaseSchema.shape({
-  type: yup.mixed<"friends">().oneOf(["friends"]),
+  type: yup.mixed<"friends">().oneOf(["friends"]).required(),
   startLocation: locationSchema.required(),
 });
 
