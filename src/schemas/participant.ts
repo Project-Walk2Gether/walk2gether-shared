@@ -85,6 +85,8 @@ export const participantSchema = baseParticipantSchema.shape({
     .mixed<"driving" | "walking">()
     .oneOf(["driving", "walking"])
     .default("walking"),
+  // Track which location option the participant has chosen (for remote walks)
+  chosenLocationIndex: yup.number().optional(),
 });
 
 export type BaseParticipant = yup.InferType<typeof baseParticipantSchema>;

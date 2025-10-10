@@ -2,6 +2,7 @@ import * as yup from "yup";
 import { objectOf } from "../../utils/objectOf";
 import { attachmentSchema } from "../attachment";
 import { locationSchema } from "../location";
+import { locationOptionSchema } from "../locationOption";
 import { baseParticipantSchema, routeSchema } from "../participant";
 import { roundSchema } from "../round";
 import { timeOptionSchema } from "../timeOption";
@@ -11,6 +12,7 @@ export const walkBaseSchema = yup.object({
   id: yup.string(),
   date: timestampSchema.required(),
   timeOptions: yup.array().of(timeOptionSchema).optional().default([]),
+  locationOptions: yup.array().of(locationOptionSchema).optional().default([]),
   currentLocation: locationSchema.nullable(),
   startLocation: locationSchema.nullable(),
   durationMinutes: yup.number().required().positive().integer(),
