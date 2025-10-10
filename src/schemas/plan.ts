@@ -19,6 +19,10 @@ export const planSchema = yup.object({
   initiatingUser: documentReferenceSchema.required(),
   invitedFriend: documentReferenceSchema.optional(),
   invitedFriendName: yup.string().optional(),
+  walkType: yup
+    .string()
+    .oneOf(["friends", "remote"])
+    .required(),
   title: yup.string().required(),
   availability: availabilitySchema.required(),
   status: yup.mixed<PlanStatus>().oneOf(planStatusValues).required(),
