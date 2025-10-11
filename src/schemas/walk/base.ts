@@ -12,7 +12,7 @@ export const walkBaseSchema = yup.object({
   id: yup.string(),
   date: timestampSchema.required(),
   timeOptions: yup.array().of(timeOptionSchema).optional().default([]),
-  locationOptions: yup.array().of(locationOptionSchema).optional().default([]),
+  locationOptions: yup.array().of(locationOptionSchema).min(1, "At least one location option is required").required(),
   chosenLocationIndex: yup.number().nullable().optional(), // Index of the chosen location in locationOptions array
   currentLocation: locationSchema.nullable(),
   durationMinutes: yup.number().required().positive().integer(),
