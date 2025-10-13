@@ -89,6 +89,7 @@ export const userDataSchema = yup.object({
   // Quote tracking
   currentQuoteIndex: yup.number().default(0),
   neighborhoodWalksHowItWorksDontShowAgain: yup.boolean().default(false),
+  remoteWalksHowItWorksDontShowAgain: yup.boolean().default(false),
   // User activity tracking
   hasCreatedNeighborhoodWalk: yup.boolean().default(false),
   walkCount: yup.number().default(0),

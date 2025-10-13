@@ -30,6 +30,7 @@ export const userDataFactory = Sync.makeFactory<UserData>({
   notificationsPermissionsSetAt: { toDate: () => new Date() } as any,
   currentQuoteIndex: 0,
   neighborhoodWalksHowItWorksDontShowAgain: false,
+  remoteWalksHowItWorksDontShowAgain: false,
   hasCreatedNeighborhoodWalk: false,
   walkCount: 0,
 });
