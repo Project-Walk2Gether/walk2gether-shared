@@ -79,6 +79,13 @@ export const participantSchema = baseParticipantSchema.shape({
     })
     .optional()
     .default(undefined),
+  homeLocation: yup
+    .object({
+      latitude: yup.number().required(),
+      longitude: yup.number().required(),
+    })
+    .optional()
+    .default(undefined),
   route: routeSchema.nullable(),
   // Add navigation method for route calculation
   navigationMethod: yup
