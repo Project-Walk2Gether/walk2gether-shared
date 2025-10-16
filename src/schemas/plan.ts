@@ -29,7 +29,7 @@ export const planSchema = yup.object({
   invitedFriendIsInterested: yup.boolean().defined().nullable(),
   invitedFriendAvailability: availabilitySchema.optional(),
   timeOptions: yup.array().of(timeOptionSchema).optional().default([]),
-  chosenTimeOption: timeOptionSchema.optional(),
+  chosenTimeOptionIndex: yup.number().optional().nullable(),
   locationOptions: yup.array().of(locationOptionSchema).optional().default([]),
   // Per-user chosen location indices during planning; each user can choose their own
   initiatingUserChosenLocationOptionIndex: yup.number().optional().nullable(),
