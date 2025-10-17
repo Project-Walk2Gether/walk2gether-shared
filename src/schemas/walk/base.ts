@@ -11,6 +11,7 @@ import { timestampSchema } from "../utils/timestamp";
 export const walkBaseSchema = yup.object({
   id: yup.string(),
   date: timestampSchema.required(),
+  status: yup.string().oneOf(["proposed", "confirmed"]).required(),
   timeOptions: yup.array().of(timeOptionSchema).optional().default([]),
   locationOptions: yup
     .array()
