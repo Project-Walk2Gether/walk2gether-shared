@@ -45,6 +45,7 @@ export const baseParticipantSchema = yup.object({
   displayName: yup.string().required(),
   photoURL: yup.string().nullable(),
   introduction: yup.string().optional(),
+  timezone: yup.string().optional(),
   availability: availabilitySchema.optional(),
   status: yup
     .mixed<"pending" | "on-the-way" | "arrived">()
