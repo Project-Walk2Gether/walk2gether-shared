@@ -10,7 +10,7 @@ export * from "./locationOption";
 export * from "./message";
 export * from "./notification";
 export * from "./participant";
-export * from "./plan";
+// export * from "./plan";
 export * from "./quote";
 export * from "./reminder";
 export * from "./round";
