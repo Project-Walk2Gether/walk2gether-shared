@@ -4,3 +4,4 @@ export * from "./friendship";
 export * from "./locations";
 export * from "./name";
 export * from "./persisted";
+export * from "./walks";
