@@ -65,6 +65,8 @@ export const baseParticipantSchema = yup.object({
   // After the user rejects a walk invitation, the invite will still be shown on their walks screen
   // until they mark it as hidden
   hiddenAt: timestampSchema.nullable(),
+  // Track which location option the participant has chosen (for remote or multi-location walks)
+  chosenLocationIndex: yup.number().optional(),
   createdAt: timestampSchema,
   updatedAt: timestampSchema,
 });
@@ -95,8 +97,6 @@ export const participantSchema = baseParticipantSchema.shape({
     .mixed<"driving" | "walking">()
     .oneOf(["driving", "walking"])
     .default("walking"),
-  // Track which location option the participant has chosen (for remote walks)
-  chosenLocationIndex: yup.number().optional(),
 });
 
 export type BaseParticipant = yup.InferType<typeof baseParticipantSchema>;
