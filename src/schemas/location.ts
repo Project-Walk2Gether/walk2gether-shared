@@ -7,6 +7,7 @@ export const locationSchema = yup.object({
   name: yup.string(),
   displayName: yup.string().required(), // City, state, country format for admin display
   city: yup.string().required(),
+  // address: yup.string().required(),
   createdAt: timestampSchema,
   updatedAt: timestampSchema,
   placeId: yup.string(),
