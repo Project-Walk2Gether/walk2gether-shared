@@ -13,6 +13,7 @@ export const userDataFactory = Sync.makeFactory<UserData>({
   lastActiveAt: { toDate: () => new Date() } as any,
   tourDismissedAt: { toDate: () => new Date() } as any,
   location: null,
+  timezone: "America/Los_Angeles", // IANA timezone
   profilePicUrl: "",
   friendInvitationCode: "",
   expoPushToken: null,
