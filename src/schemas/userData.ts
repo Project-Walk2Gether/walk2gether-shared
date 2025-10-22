@@ -70,7 +70,7 @@ export const userDataSchema = yup.object({
   lastActiveAt: timestampSchema,
   tourDismissedAt: timestampSchema,
   location: locationSchema.optional().nullable(),
-  timezone: yup.string().optional(), // IANA timezone (e.g., "America/New_York")
+  timezone: yup.string().required(), // IANA timezone (e.g., "America/New_York")
   profilePicUrl: yup.string().url().optional(),
   linkedInProfileUrl: yup.string().url().optional(),
   friendInvitationCode: yup.string(),
