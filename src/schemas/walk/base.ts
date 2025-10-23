@@ -11,13 +11,9 @@ export const walkBaseSchema = yup.object({
   id: yup.string(),
   date: timestampSchema.required(),
   status: yup.string().oneOf(["proposed", "confirmed", "expired"]).required(),
-  locationOptions: yup
-    .array()
-    .of(locationOptionSchema)
-    .min(1, "At least one location option is required")
-    .required(),
+  locationOptions: yup.array().of(locationOptionSchema).optional(),
   chosenLocationIndex: yup.number().nullable().optional(), // Index of the chosen location in locationOptions array
-  currentLocation: locationSchema.nullable(),
+  currentLocation: locationSchema.nullable().default(null),
   durationMinutes: yup.number().required().positive().integer(),
   organizerName: yup.string().required(),
   createdByUid: yup.string().required(),
@@ -31,7 +27,7 @@ export const walkBaseSchema = yup.object({
   createdAt: timestampSchema,
   updatedAt: timestampSchema,
   meetupSpotPhoto: attachmentSchema.optional().default(undefined),
-  participantsById: objectOf(baseParticipantSchema),
+  participantsById: objectOf(baseParticipantSchema).optional(),
   participantUids: yup.array().of(yup.string().required()),
   ownerIsInitiallyAtLocation: yup.boolean().optional().default(undefined),
 });
