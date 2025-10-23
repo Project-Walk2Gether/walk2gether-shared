@@ -37,6 +37,7 @@ export const walkBaseSchema = yup.object({
   allowLocationSuggestions: yup.boolean().optional().default(true),
   totalDistanceMiles: yup.number(),
   startedAt: timestampSchema,
+  endedAt: timestampSchema.optional(),
   createdAt: timestampSchema,
   updatedAt: timestampSchema,
   meetupSpotPhoto: attachmentSchema.optional().default(undefined),
