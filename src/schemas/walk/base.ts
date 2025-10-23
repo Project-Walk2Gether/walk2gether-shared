@@ -10,8 +10,23 @@ import { timestampSchema } from "../utils/timestamp";
 export const walkBaseSchema = yup.object({
   id: yup.string(),
   date: timestampSchema.required(),
+  endTime: timestampSchema.required(),
+  endTimeWithBuffer: timestampSchema.required(),
   status: yup.string().oneOf(["proposed", "confirmed", "expired"]).required(),
-  locationOptions: yup.array().of(locationOptionSchema).optional(),
+  locationOptions: yup
+    .array()
+    .of(locationOptionSchema)
+    .when("status", {
+      is: "confirmed",
+      then: (schema) =>
+        schema
+          .required()
+          .min(
+            1,
+            "At least one location option is required for confirmed walks"
+          ),
+      otherwise: (schema) => schema.optional(),
+    }),
   chosenLocationIndex: yup.number().nullable().optional(), // Index of the chosen location in locationOptions array
   currentLocation: locationSchema.nullable().default(null),
   durationMinutes: yup.number().required().positive().integer(),
@@ -22,8 +37,6 @@ export const walkBaseSchema = yup.object({
   allowLocationSuggestions: yup.boolean().optional().default(true),
   totalDistanceMiles: yup.number(),
   startedAt: timestampSchema,
-  endTime: timestampSchema,
-  endTimeWithBuffer: timestampSchema,
   createdAt: timestampSchema,
   updatedAt: timestampSchema,
   meetupSpotPhoto: attachmentSchema.optional().default(undefined),
