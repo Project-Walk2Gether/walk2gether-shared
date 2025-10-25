@@ -55,7 +55,7 @@ export type SpecificDateAvailability = yup.InferType<
  * User Availability root schema
  */
 export const availabilitySchema = yup.object({
-  timezone: yup.string().optional(),
+  timezone: yup.string().required(), // Required for timezone-aware availability comparisons
   windows: yup.array().of(availabilityWindowSchema).default([]),
   exceptions: yup.array().of(specificDateAvailabilitySchema).default([]),
 });
