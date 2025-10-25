@@ -1,6 +1,6 @@
 import * as yup from "yup";
-import { timestampSchema } from "./utils/timestamp";
 import { availabilitySchema } from "./availability";
+import { timestampSchema } from "./utils/timestamp";
 
 // Schema for route points (used in directions)
 export const routePointSchema = yup.object({
@@ -46,7 +46,7 @@ export const baseParticipantSchema = yup.object({
   photoURL: yup.string().nullable(),
   introduction: yup.string().optional(),
   timezone: yup.string().required(),
-  availability: availabilitySchema.optional(),
+  availability: availabilitySchema.optional().default(undefined),
   status: yup
     .mixed<"pending" | "on-the-way" | "arrived">()
     .oneOf(["pending", "on-the-way", "arrived"])
