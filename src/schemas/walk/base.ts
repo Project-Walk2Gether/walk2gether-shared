@@ -9,6 +9,7 @@ import { timestampSchema } from "../utils/timestamp";
 
 export const walkBaseSchema = yup.object({
   id: yup.string(),
+  invitationCode: yup.string().optional(),
   date: timestampSchema.required(),
   endTime: timestampSchema.required(),
   endTimeWithBuffer: timestampSchema.required(),
