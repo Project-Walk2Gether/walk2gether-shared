@@ -18,7 +18,7 @@ export const locationSchema = yup.object({
 
 export const namedLocationSchema = locationSchema.shape({
   name: yup.string().required(),
-  imageAttachment: attachmentSchema.optional(),
+  imageAttachment: attachmentSchema.optional().default(undefined),
 });
 
 export type Location = yup.InferType<typeof locationSchema>;

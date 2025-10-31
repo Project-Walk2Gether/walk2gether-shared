@@ -28,7 +28,6 @@ export const walkBaseSchema = yup.object({
           ),
       otherwise: (schema) => schema.optional(),
     }),
-  chosenLocationIndex: yup.number().nullable().optional(), // Index of the chosen location in locationOptions array
   currentLocation: locationSchema.nullable().default(null),
   durationMinutes: yup.number().required().positive().integer(),
   organizerName: yup.string().required(),
