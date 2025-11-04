@@ -8,7 +8,8 @@
     "build": "tsc",
     "build:watch": "tsc --watch",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "prepare": "npm run build"
+    "prepare": "npm run build",
+    "dev:copy": "./scripts/copy-to-projects"
   },
   "dependencies": {
     "lodash": "^4.17.21",
