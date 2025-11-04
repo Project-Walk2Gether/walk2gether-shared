@@ -41,6 +41,13 @@ export const walkBaseSchema = yup.object({
   createdAt: timestampSchema,
   updatedAt: timestampSchema,
   meetupSpotPhoto: attachmentSchema.optional().default(undefined),
+  // Whether in-person or remote, or both
+  meetupType: yup
+    .object({
+      inPerson: yup.boolean().required(),
+      remote: yup.boolean().required(),
+    })
+    .required(),
   participantsById: objectOf(baseParticipantSchema).optional(),
   participantUids: yup.array().of(yup.string().required()),
   ownerIsInitiallyAtLocation: yup.boolean().optional().default(undefined),
