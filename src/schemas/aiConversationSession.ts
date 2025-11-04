@@ -6,7 +6,7 @@ export const aiConversationSession = yup.object({
   userId: yup.string().required(),
   summary: yup.string().required().nullable(),
   taskId: yup.string().required(),
-  previousSessionId: yup.string().optional(),
+  previousSessionId: yup.string().nullable().default(null),
   expiresAt: timestampSchema,
   createdAt: timestampSchema,
   updatedAt: timestampSchema,
