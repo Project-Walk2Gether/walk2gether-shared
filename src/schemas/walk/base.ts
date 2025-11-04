@@ -48,6 +48,8 @@ export const walkBaseSchema = yup.object({
       remote: yup.boolean().required(),
     })
     .required(),
+  visibility: yup.string().oneOf(["public", "private"]).required(),
+
   participantsById: objectOf(baseParticipantSchema).optional(),
   participantUids: yup.array().of(yup.string().required()),
   ownerIsInitiallyAtLocation: yup.boolean().optional().default(undefined),
