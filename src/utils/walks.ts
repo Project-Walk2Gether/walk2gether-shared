@@ -3,7 +3,7 @@ import { Location, Walk, BaseParticipant } from "../schemas";
 /**
  * Resolve the chosen location for a specific participant in a walk.
  * - If participant.chosenLocationIndex is a valid index, returns that option's location
- * - Otherwise falls back to walk.currentLocation if present
+ * - Otherwise falls back to first locationOption's currentLocation if present
  * - Otherwise returns null
  */
 export function getChosenLocationForParticipant(
@@ -18,12 +18,13 @@ export function getChosenLocationForParticipant(
   ) {
     return walk.locationOptions[idx].location;
   }
-  return walk.currentLocation ?? null;
+  // Fallback to first location option's currentLocation
+  return walk.locationOptions?.[0]?.currentLocation ?? null;
 }
 
 /**
  * For non-remote walks, get the shared location that all participants use.
- * Returns the first participant's chosen location, or currentLocation as fallback.
+ * Returns the first participant's chosen location, or first locationOption's currentLocation as fallback.
  */
 export function getSharedLocationForWalk(walk: Walk): Location | null {
   // Get first participant's chosen location
@@ -32,5 +33,6 @@ export function getSharedLocationForWalk(walk: Walk): Location | null {
     const firstParticipant = participants[0];
     return getChosenLocationForParticipant(walk, firstParticipant);
   }
-  return walk.currentLocation ?? null;
+  // Fallback to first location option's currentLocation
+  return walk.locationOptions?.[0]?.currentLocation ?? null;
 }
