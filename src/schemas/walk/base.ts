@@ -1,7 +1,5 @@
 import * as yup from "yup";
 import { objectOf } from "../../utils/objectOf";
-import { attachmentSchema } from "../attachment";
-import { locationSchema } from "../location";
 import { locationOptionSchema } from "../locationOption";
 import { baseParticipantSchema, routeSchema } from "../participant";
 import { roundSchema } from "../round";
@@ -28,7 +26,6 @@ export const walkBaseSchema = yup.object({
           ),
       otherwise: (schema) => schema.optional(),
     }),
-  currentLocation: locationSchema.nullable().default(null),
   durationMinutes: yup.number().required().positive().integer(),
   organizerName: yup.string().required(),
   createdByUid: yup.string().required(),
@@ -40,7 +37,6 @@ export const walkBaseSchema = yup.object({
   endedAt: timestampSchema.optional(),
   createdAt: timestampSchema,
   updatedAt: timestampSchema,
-  meetupSpotPhoto: attachmentSchema.optional().default(undefined),
   // Whether in-person or remote, or both
   meetupType: yup
     .object({
