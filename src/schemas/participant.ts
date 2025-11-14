@@ -98,6 +98,11 @@ export const participantSchema = baseParticipantSchema.shape({
     .mixed<"driving" | "walking">()
     .oneOf(["driving", "walking"])
     .default("walking"),
+  // Meetup type - whether participant is joining in-person or remotely
+  meetupType: yup
+    .mixed<"inPerson" | "remote">()
+    .oneOf(["inPerson", "remote"])
+    .optional(),
 });
 
 export type BaseParticipant = yup.InferType<typeof baseParticipantSchema>;
