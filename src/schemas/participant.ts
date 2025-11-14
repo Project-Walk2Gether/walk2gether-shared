@@ -68,6 +68,8 @@ export const baseParticipantSchema = yup.object({
   hiddenAt: timestampSchema.nullable(),
   // Track which location option the participant has chosen (for remote or multi-location walks)
   chosenLocationIndex: yup.number().optional(),
+  // Whether this participant has opted in to sharing their location with other participants
+  isLocationShared: yup.boolean().default(true),
   // Meetup type - whether participant is joining in-person or remotely
   meetupType: yup
     .mixed<"inPerson" | "remote">()

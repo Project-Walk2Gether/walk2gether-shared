@@ -2,6 +2,7 @@ export * from "./colors";
 export * from "./findUndefined";
 export * from "./friendship";
 export * from "./locations";
+export * from "./locationSharing";
 export * from "./name";
 export * from "./persisted";
 export * from "./remoteParticipantLocations";
