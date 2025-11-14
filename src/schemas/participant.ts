@@ -68,6 +68,19 @@ export const baseParticipantSchema = yup.object({
   hiddenAt: timestampSchema.nullable(),
   // Track which location option the participant has chosen (for remote or multi-location walks)
   chosenLocationIndex: yup.number().optional(),
+  // Meetup type - whether participant is joining in-person or remotely
+  meetupType: yup
+    .mixed<"inPerson" | "remote">()
+    .oneOf(["inPerson", "remote"])
+    .optional(),
+  // Home location for remote participants (needed for location options)
+  homeLocation: yup
+    .object({
+      latitude: yup.number().required(),
+      longitude: yup.number().required(),
+    })
+    .optional()
+    .default(undefined),
   createdAt: timestampSchema,
   updatedAt: timestampSchema,
 });
@@ -85,24 +98,12 @@ export const participantSchema = baseParticipantSchema.shape({
     })
     .optional()
     .default(undefined),
-  homeLocation: yup
-    .object({
-      latitude: yup.number().required(),
-      longitude: yup.number().required(),
-    })
-    .optional()
-    .default(undefined),
   route: routeSchema.nullable(),
   // Add navigation method for route calculation
   navigationMethod: yup
     .mixed<"driving" | "walking">()
     .oneOf(["driving", "walking"])
     .default("walking"),
-  // Meetup type - whether participant is joining in-person or remotely
-  meetupType: yup
-    .mixed<"inPerson" | "remote">()
-    .oneOf(["inPerson", "remote"])
-    .optional(),
 });
 
 export type BaseParticipant = yup.InferType<typeof baseParticipantSchema>;

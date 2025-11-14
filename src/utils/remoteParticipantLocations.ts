@@ -1,5 +1,5 @@
 import { LocationOption } from "../schemas/locationOption";
-import { Participant } from "../schemas/participant";
+import { BaseParticipant, Participant } from "../schemas/participant";
 
 /**
  * Calculate distance between two coordinates in kilometers using Haversine formula
@@ -46,7 +46,7 @@ function hasNearbyLocation(
  * Generate a location option from a participant's home location
  */
 export function createLocationOptionFromParticipant(
-  participant: Participant,
+  participant: BaseParticipant,
   participantId: string
 ): LocationOption | null {
   if (!participant.homeLocation) {
@@ -86,7 +86,7 @@ export function createLocationOptionFromParticipant(
  * @returns Array of new location options to add
  */
 export function getLocationOptionsForRemoteParticipants(
-  participants: Record<string, Participant>,
+  participants: Record<string, BaseParticipant>,
   existingLocationOptions: LocationOption[] = []
 ): LocationOption[] {
   const newLocationOptions: LocationOption[] = [];
