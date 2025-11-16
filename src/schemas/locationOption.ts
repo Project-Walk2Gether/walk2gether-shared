@@ -2,6 +2,7 @@ import * as yup from "yup";
 import { objectOf } from "../utils/objectOf";
 import { attachmentSchema } from "./attachment";
 import { locationSchema, namedLocationSchema } from "./location";
+import { timestampSchema } from "./utils/timestamp";
 
 export const locationOptionSchema = yup.object({
   location: namedLocationSchema.required(),
@@ -11,6 +12,8 @@ export const locationOptionSchema = yup.object({
   isConfirmed: yup.boolean().optional().default(false),
   meetupSpotPhoto: attachmentSchema.optional().default(undefined),
   currentLocation: locationSchema.nullable().default(null),
+  startedAt: timestampSchema.nullable(),
+  endedAt: timestampSchema.nullable(),
 });
 
 export type LocationOption = yup.InferType<typeof locationOptionSchema>;

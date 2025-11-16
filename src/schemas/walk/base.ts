@@ -33,8 +33,6 @@ export const walkBaseSchema = yup.object({
   route: routeSchema.optional().default(undefined),
   allowLocationSuggestions: yup.boolean().optional().default(true),
   totalDistanceMiles: yup.number(),
-  startedAt: timestampSchema,
-  endedAt: timestampSchema.optional(),
   createdAt: timestampSchema,
   updatedAt: timestampSchema,
   // Whether in-person or remote, or both
