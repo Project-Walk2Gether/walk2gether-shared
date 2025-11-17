@@ -2,11 +2,17 @@ import { Participant } from "../schemas/participant";
 import { UserData } from "../schemas/userData";
 
 export interface ParticipantFromUserOptions {
-  user: Partial<UserData> & { id: string; name?: string; profilePicUrl?: string; location?: { latitude: number; longitude: number } };
+  user: Partial<UserData> & {
+    id: string;
+    name?: string;
+    profilePicUrl?: string;
+    location?: { latitude: number; longitude: number };
+  };
   sourceType: "requested" | "invited" | "walk-creator";
   status?: "pending" | "on-the-way" | "arrived";
   acceptedAt?: any | null; // Can be Timestamp or Date
   navigationMethod?: "driving" | "walking";
+  meetupType?: "inPerson" | "remote";
 }
 
 /**
@@ -22,6 +28,7 @@ export function participantFromUser(
     status = "pending",
     acceptedAt = null,
     navigationMethod = "walking",
+    meetupType,
   } = options;
 
   return {
@@ -52,5 +59,6 @@ export function participantFromUser(
       : undefined,
     route: null,
     navigationMethod,
+    meetupType,
   } as Omit<Participant, "createdAt" | "updatedAt">;
 }

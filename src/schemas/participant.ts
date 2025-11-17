@@ -48,8 +48,8 @@ export const baseParticipantSchema = yup.object({
   timezone: yup.string().required(),
   availability: availabilitySchema.optional().default(undefined),
   status: yup
-    .mixed<"pending" | "on-the-way" | "arrived">()
-    .oneOf(["pending", "on-the-way", "arrived"])
+    .mixed<"pending" | "on-the-way" | "arrived" | "running-late">()
+    .oneOf(["pending", "on-the-way", "arrived", "running-late"])
     .required(),
   sourceType: yup
     .mixed<"requested" | "invited" | "walk-creator">()
@@ -63,6 +63,8 @@ export const baseParticipantSchema = yup.object({
   statusUpdatedAt: timestampSchema,
   suggestedDepartureTime: timestampSchema.nullable(),
   suggestedDepartureNotificationSentAt: timestampSchema.nullable().defined(),
+  // Estimated time of arrival - used when participant is running late
+  eta: timestampSchema.nullable(),
   // After the user rejects a walk invitation, the invite will still be shown on their walks screen
   // until they mark it as hidden
   hiddenAt: timestampSchema.nullable(),
