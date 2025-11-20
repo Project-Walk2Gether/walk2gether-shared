@@ -1,5 +1,6 @@
 import * as yup from "yup";
 import { availabilitySchema } from "./availability";
+import { meetupTypeSchema } from "./meetupType";
 import { timestampSchema } from "./utils/timestamp";
 
 // Schema for route points (used in directions)
@@ -73,10 +74,7 @@ export const baseParticipantSchema = yup.object({
   // Whether this participant has opted in to sharing their location with other participants
   isLocationShared: yup.boolean().default(true),
   // Meetup type - whether participant is joining in-person or remotely
-  meetupType: yup
-    .mixed<"inPerson" | "remote">()
-    .oneOf(["inPerson", "remote"])
-    .optional(),
+  meetupType: meetupTypeSchema,
   // Home location for remote participants (needed for location options)
   homeLocation: yup
     .object({

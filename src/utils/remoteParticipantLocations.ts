@@ -1,5 +1,5 @@
 import { LocationOption } from "../schemas/locationOption";
-import { BaseParticipant, Participant } from "../schemas/participant";
+import { BaseParticipant } from "../schemas/participant";
 
 /**
  * Calculate distance between two coordinates in kilometers using Haversine formula
@@ -36,8 +36,13 @@ function hasNearbyLocation(
     const optionLat = option.location.latitude;
     const optionLon = option.location.longitude;
     if (optionLat === undefined || optionLon === undefined) return false;
-    
-    const distance = calculateDistance(latitude, longitude, optionLat, optionLon);
+
+    const distance = calculateDistance(
+      latitude,
+      longitude,
+      optionLat,
+      optionLon
+    );
     return distance <= thresholdKm;
   });
 }
@@ -67,7 +72,8 @@ export function createLocationOptionFromParticipant(
     votes: {},
     proposedBy: participantId,
     proposedAt: new Date(),
-    isConfirmed: false,
+    isConfirmed: true, // Remote participants' locations are auto-confirmed (no voting needed)
+    meetupType: "remote", // Mark this as a remote location option
     currentLocation: {
       latitude,
       longitude,
@@ -79,10 +85,13 @@ export function createLocationOptionFromParticipant(
 
 /**
  * Process participants and return new location options that should be added
- * for remote participants who don't have a nearby location yet.
- * 
+ * for remote participants.
+ *
+ * For simplicity, each remote participant gets their own location option.
+ * This represents their home city/area where they'll be walking from.
+ *
  * @param participants - Record of participant ID to participant data
- * @param existingLocationOptions - Current location options on the walk
+ * @param existingLocationOptions - Current location options on the walk (not used for remote walks)
  * @returns Array of new location options to add
  */
 export function getLocationOptionsForRemoteParticipants(
@@ -90,6 +99,17 @@ export function getLocationOptionsForRemoteParticipants(
   existingLocationOptions: LocationOption[] = []
 ): LocationOption[] {
   const newLocationOptions: LocationOption[] = [];
+
+  // Get all existing location options that were created for remote participants
+  const existingRemoteLocationsByParticipant = new Map<
+    string,
+    LocationOption
+  >();
+  existingLocationOptions.forEach((option) => {
+    if (option.proposedBy) {
+      existingRemoteLocationsByParticipant.set(option.proposedBy, option);
+    }
+  });
 
   for (const [participantId, participant] of Object.entries(participants)) {
     // Skip if not a remote participant
@@ -105,20 +125,10 @@ export function getLocationOptionsForRemoteParticipants(
       continue;
     }
 
-    const { latitude, longitude } = participant.homeLocation;
-
-    // Check if there's already a location within 1km
-    if (hasNearbyLocation(existingLocationOptions, latitude, longitude)) {
+    // Skip if this participant already has a location option
+    if (existingRemoteLocationsByParticipant.has(participantId)) {
       console.log(
-        `[remoteParticipantLocations] Location already exists near ${participantId}'s home`
-      );
-      continue;
-    }
-
-    // Also check against locations we're about to add
-    if (hasNearbyLocation(newLocationOptions, latitude, longitude)) {
-      console.log(
-        `[remoteParticipantLocations] Location already queued near ${participantId}'s home`
+        `[remoteParticipantLocations] Participant ${participantId} already has a location option`
       );
       continue;
     }

@@ -7,6 +7,7 @@ export * from "./favoriteLocation";
 export * from "./friendship";
 export * from "./location";
 export * from "./locationOption";
+export * from "./meetupType";
 export * from "./message";
 export * from "./notification";
 export * from "./participant";
