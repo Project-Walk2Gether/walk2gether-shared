@@ -2,7 +2,7 @@ import * as yup from "yup";
 import { objectOf } from "../../utils/objectOf";
 import { locationOptionSchema } from "../locationOption";
 import { walkMeetupTypeSchema } from "../meetupType";
-import { baseParticipantSchema, routeSchema } from "../participant";
+import { baseParticipantSchema } from "../participant";
 import { roundSchema } from "../round";
 import { timestampSchema } from "../utils/timestamp";
 
@@ -31,7 +31,6 @@ export const walkBaseSchema = yup.object({
   organizerName: yup.string().required(),
   createdByUid: yup.string().required(),
   upcomingRounds: yup.array().of(roundSchema.required()),
-  route: routeSchema.optional().default(undefined),
   allowLocationSuggestions: yup.boolean().optional().default(true),
   totalDistanceMiles: yup.number(),
   createdAt: timestampSchema,

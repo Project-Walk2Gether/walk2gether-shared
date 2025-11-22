@@ -15,6 +15,7 @@ export * from "./participant";
 export * from "./quote";
 export * from "./reminder";
 export * from "./round";
+export * from "./route";
 export * from "./rsvp";
 export * from "./thread";
 export * from "./userData";

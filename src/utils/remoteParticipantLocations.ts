@@ -80,6 +80,9 @@ export function createLocationOptionFromParticipant(
       displayName: `${displayName}'s Location`,
       city: "Remote Location",
     },
+    startedAt: null,
+    endedAt: null,
+    route: null, // Route will be populated by the participant's tracked route
   };
 }
 

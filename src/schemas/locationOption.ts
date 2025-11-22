@@ -3,6 +3,7 @@ import { objectOf } from "../utils/objectOf";
 import { attachmentSchema } from "./attachment";
 import { locationSchema, namedLocationSchema } from "./location";
 import { meetupTypeSchema } from "./meetupType";
+import { routeSchema } from "./route";
 import { timestampSchema } from "./utils/timestamp";
 
 export const locationOptionSchema = yup.object({
@@ -17,6 +18,7 @@ export const locationOptionSchema = yup.object({
   endedAt: timestampSchema.nullable(),
   meetupType: meetupTypeSchema.default("inPerson"), // Default to in-person for backward compatibility
   locationSharing: yup.object().optional(), // Map of participant UIDs to their location sharing preference for this specific location
+  route: routeSchema.nullable(), // Unified route for this location option (copied from participant routes)
 });
 
 export type LocationOption = yup.InferType<typeof locationOptionSchema>;
