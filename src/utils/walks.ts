@@ -1,4 +1,4 @@
-import { Location, Walk, BaseParticipant } from "../schemas";
+import { BaseParticipant, Location, Walk } from "../schemas";
 
 /**
  * Resolve the chosen location for a specific participant in a walk.
@@ -35,4 +35,27 @@ export function getSharedLocationForWalk(walk: Walk): Location | null {
   }
   // Fallback to first location option's currentLocation
   return walk.locationOptions?.[0]?.currentLocation ?? null;
+}
+
+/**
+ * Check if a walk has started by checking if any location option has startedAt set.
+ * @param walk The walk to check
+ * @returns true if any location option has started, false otherwise
+ */
+export function hasWalkStarted(walk: Walk): boolean {
+  return walk.locationOptions?.some((option) => option.startedAt) ?? false;
+}
+
+/**
+ * Check if a walk has ended by checking if all location options have endedAt set.
+ * @param walk The walk to check
+ * @returns true if all location options have ended, false otherwise
+ */
+export function hasWalkEnded(walk: Walk): boolean {
+  return (
+    (walk.locationOptions &&
+      walk.locationOptions.length > 0 &&
+      walk.locationOptions.every((option) => option.endedAt)) ??
+    false
+  );
 }
