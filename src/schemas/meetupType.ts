@@ -12,11 +12,12 @@ export type MeetupType = (typeof MEETUP_TYPES)[number];
 /**
  * Yup schema for a single meetup type value
  * Used for participants and location options
+ * Required for participants to ensure proper location option handling
  */
 export const meetupTypeSchema = yup
   .mixed<MeetupType>()
   .oneOf(MEETUP_TYPES)
-  .optional();
+  .required("meetupType is required for participants");
 
 /**
  * Yup schema for walk-level meetup type flags
