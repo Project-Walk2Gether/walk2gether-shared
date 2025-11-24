@@ -49,7 +49,9 @@ export function participantFromUser(
     suggestedDepartureTime: null,
     suggestedDepartureNotificationSentAt: null,
     hiddenAt: null,
-    chosenLocationIndex: undefined,
+    chosenLocationOptionId: undefined,
+    isLocationShared: true,
+    eta: null,
     lastLocation: undefined,
     homeLocation: user.location
       ? {

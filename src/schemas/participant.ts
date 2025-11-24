@@ -48,9 +48,7 @@ export const baseParticipantSchema = yup.object({
   // until they mark it as hidden
   hiddenAt: timestampSchema.nullable(),
   // Track which location option the participant has chosen (for remote or multi-location walks)
-  // DEPRECATED: chosenLocationIndex is being replaced by chosenLocationOptionId
-  chosenLocationIndex: yup.number().optional(),
-  // New field: Reference to locationOption document ID in subcollection
+  // Reference to locationOption document ID in subcollection
   chosenLocationOptionId: yup.string().optional(),
   // Whether this participant has opted in to sharing their location with other participants
   isLocationShared: yup.boolean().default(true),
