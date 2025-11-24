@@ -2,6 +2,10 @@ import { BaseParticipant, Location, Walk } from "../schemas";
 
 /**
  * Resolve the chosen location for a specific participant in a walk.
+ *
+ * NOTE: This function expects walk.locationOptions to be populated.
+ * When using subcollections, fetch locationOptions first and pass a walk object with the array populated.
+ *
  * - If participant.chosenLocationIndex is a valid index, returns that option's location
  * - Otherwise falls back to first locationOption's currentLocation if present
  * - Otherwise returns null
@@ -25,6 +29,9 @@ export function getChosenLocationForParticipant(
 /**
  * For non-remote walks, get the shared location that all participants use.
  * Returns the first participant's chosen location, or first locationOption's currentLocation as fallback.
+ *
+ * NOTE: This function expects walk.locationOptions to be populated.
+ * When using subcollections, fetch locationOptions first and pass a walk object with the array populated.
  */
 export function getSharedLocationForWalk(walk: Walk): Location | null {
   // Get first participant's chosen location
@@ -39,6 +46,10 @@ export function getSharedLocationForWalk(walk: Walk): Location | null {
 
 /**
  * Check if a walk has started by checking if any location option has startedAt set.
+ *
+ * NOTE: This function expects walk.locationOptions to be populated.
+ * When using subcollections, fetch locationOptions first and pass a walk object with the array populated.
+ *
  * @param walk The walk to check
  * @returns true if any location option has started, false otherwise
  */
@@ -48,6 +59,10 @@ export function hasWalkStarted(walk: Walk): boolean {
 
 /**
  * Check if a walk has ended by checking if all location options have endedAt set.
+ *
+ * NOTE: This function expects walk.locationOptions to be populated.
+ * When using subcollections, fetch locationOptions first and pass a walk object with the array populated.
+ *
  * @param walk The walk to check
  * @returns true if all location options have ended, false otherwise
  */

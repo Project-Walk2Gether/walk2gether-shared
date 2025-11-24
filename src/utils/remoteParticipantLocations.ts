@@ -93,9 +93,13 @@ export function createLocationOptionFromParticipant(
  * For simplicity, each remote participant gets their own location option.
  * This represents their home city/area where they'll be walking from.
  *
+ * NOTE: When using subcollections, the returned LocationOption objects should be written
+ * to the locationOptions subcollection with proper document IDs, walkId, index, and timestamps.
+ * See LocationOptionDocument schema for the full document structure.
+ *
  * @param participants - Record of participant ID to participant data
- * @param existingLocationOptions - Current location options on the walk (not used for remote walks)
- * @returns Array of new location options to add
+ * @param existingLocationOptions - Array of existing location options (fetch from subcollection)
+ * @returns Array of new location options to add to the subcollection
  */
 export function getLocationOptionsForRemoteParticipants(
   participants: Record<string, BaseParticipant>,

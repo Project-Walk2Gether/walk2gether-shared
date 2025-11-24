@@ -31,6 +31,8 @@ export function allParticipantsShareLocation(
  * This helper implements that rule by returning the original array when
  * everyone has opted in, or an empty array when at least one participant
  * has opted out.
+ *
+ * NOTE: Pass the locationOptions array fetched from the subcollection.
  */
 export function filterLocationOptionsByLocationSharing(
   locationOptions: LocationOption[] | undefined,
