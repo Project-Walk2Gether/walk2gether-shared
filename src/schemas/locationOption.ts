@@ -6,6 +6,9 @@ import { meetupTypeSchema } from "./meetupType";
 import { routeSchema } from "./route";
 import { timestampSchema } from "./utils/timestamp";
 
+/**
+ * Base location option schema - used for both array items and subcollection documents
+ */
 export const locationOptionSchema = yup.object({
   location: namedLocationSchema.required(),
   votes: objectOf(yup.boolean().required()),
@@ -21,4 +24,19 @@ export const locationOptionSchema = yup.object({
   route: routeSchema.nullable(), // Unified route for this location option (copied from participant routes)
 });
 
+/**
+ * Location option document schema - for subcollection documents
+ * Extends base schema with document metadata
+ */
+export const locationOptionDocumentSchema = locationOptionSchema.shape({
+  id: yup.string().required(),
+  walkId: yup.string().required(),
+  index: yup.number().required().min(0).integer(), // Order in the list (0-based)
+  createdAt: timestampSchema.required(),
+  updatedAt: timestampSchema.required(),
+});
+
 export type LocationOption = yup.InferType<typeof locationOptionSchema>;
+export type LocationOptionDocument = yup.InferType<
+  typeof locationOptionDocumentSchema
+>;

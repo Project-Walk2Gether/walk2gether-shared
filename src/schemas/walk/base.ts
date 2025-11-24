@@ -13,20 +13,10 @@ export const walkBaseSchema = yup.object({
   endTime: timestampSchema.required(),
   endTimeWithBuffer: timestampSchema.required(),
   status: yup.string().oneOf(["proposed", "confirmed", "expired"]).required(),
-  locationOptions: yup
-    .array()
-    .of(locationOptionSchema)
-    .when("status", {
-      is: "confirmed",
-      then: (schema) =>
-        schema
-          .required()
-          .min(
-            1,
-            "At least one location option is required for confirmed walks"
-          ),
-      otherwise: (schema) => schema.optional(),
-    }),
+  // DEPRECATED: locationOptions array is being migrated to a subcollection
+  // This field is optional for backward compatibility during migration
+  // New code should query the locationOptions subcollection instead
+  locationOptions: yup.array().of(locationOptionSchema).optional(),
   durationMinutes: yup.number().required().positive().integer(),
   organizerName: yup.string().required(),
   createdByUid: yup.string().required(),
