@@ -1,4 +1,5 @@
 import * as yup from "yup";
+import { documentReferenceSchema } from "../firestore/documentReference";
 import { availabilitySchema } from "./availability";
 import { locationSchema } from "./location";
 import { meetupTypeSchema } from "./meetupType";
@@ -57,6 +58,10 @@ export const baseParticipantSchema = yup.object({
   // Home location for remote participants (needed for location options)
   // Uses full locationSchema to include city and displayName for UI display
   homeLocation: locationSchema.nullable().default(null),
+  // Reference to the participant's current room document (waiting room or pair room)
+  roomDoc: documentReferenceSchema.nullable().default(null),
+  // Timestamp when participant confirmed they're ready to join the call from waiting room
+  readyToJoinRoomAt: timestampSchema.nullable(),
   createdAt: timestampSchema,
   updatedAt: timestampSchema,
 });

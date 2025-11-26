@@ -14,6 +14,7 @@ export * from "./participant";
 // export * from "./plan";
 export * from "./quote";
 export * from "./reminder";
+export * from "./room";
 export * from "./round";
 export * from "./route";
 export * from "./rsvp";
