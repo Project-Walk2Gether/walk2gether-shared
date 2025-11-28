@@ -13,6 +13,7 @@ export const roomSchema = yup.object({
   type: yup.mixed<"pair" | "waiting">().oneOf(["pair", "waiting"]).required(),
   memberUids: yup.array().of(yup.string().required()).required(),
   roundNumber: yup.number().required().integer().min(0),
+  conversationStarterPrompt: yup.string(),
   isActive: yup.boolean().required(),
   createdAt: timestampSchema.required(),
   endedAt: timestampSchema.nullable(),
