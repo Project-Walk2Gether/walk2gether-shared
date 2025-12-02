@@ -40,7 +40,7 @@ export const baseParticipantSchema = yup.object({
   interestExpressedAt: timestampSchema.nullable(),
   deniedAt: timestampSchema.nullable(),
   cancelledAt: timestampSchema.nullable(),
-  statusUpdatedAt: timestampSchema,
+  statusUpdatedAt: timestampSchema.nullable(),
   suggestedDepartureTime: timestampSchema.nullable(),
   suggestedDepartureNotificationSentAt: timestampSchema.nullable().defined(),
   // Estimated time of arrival - used when participant is running late
@@ -79,7 +79,7 @@ export const participantSchema = baseParticipantSchema.shape({
     })
     .optional()
     .default(undefined),
-  route: routeSchema.nullable(),
+  route: routeSchema.nullable().optional().default(undefined),
   // Add navigation method for route calculation
   navigationMethod: yup
     .mixed<"driving" | "walking">()

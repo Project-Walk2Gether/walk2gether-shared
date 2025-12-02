@@ -28,15 +28,22 @@ export function participantFromUser(
     status = "pending",
     acceptedAt = null,
     navigationMethod = "walking",
-    meetupType,
+    meetupType = "inPerson", // Default to inPerson if not specified
   } = options;
+
+  // Get timezone from user data or use browser/system default
+  const timezone =
+    user.timezone ||
+    (typeof Intl !== "undefined"
+      ? Intl.DateTimeFormat().resolvedOptions().timeZone
+      : "UTC");
 
   return {
     userUid: user.id,
     displayName: user.name || "Anonymous",
     photoURL: user.profilePicUrl || null,
     introduction: user.introduction,
-    timezone: user.timezone,
+    timezone,
     availability: (user as any).availability,
     status,
     sourceType,
@@ -45,7 +52,7 @@ export function participantFromUser(
     interestExpressedAt: null,
     deniedAt: null,
     cancelledAt: null,
-    statusUpdatedAt: undefined,
+    statusUpdatedAt: null,
     suggestedDepartureTime: null,
     suggestedDepartureNotificationSentAt: null,
     hiddenAt: null,
