@@ -6,7 +6,6 @@ export interface ParticipantFromUserOptions {
     id: string;
     name?: string;
     profilePicUrl?: string;
-    location?: { latitude: number; longitude: number };
   };
   sourceType: "requested" | "invited" | "walk-creator";
   status?: "pending" | "on-the-way" | "arrived";
@@ -60,12 +59,7 @@ export function participantFromUser(
     isLocationShared: true,
     eta: null,
     lastLocation: undefined,
-    homeLocation: user.location
-      ? {
-          latitude: user.location.latitude,
-          longitude: user.location.longitude,
-        }
-      : undefined,
+    homeLocation: user.location ?? null,
     route: null,
     navigationMethod,
     meetupType,
