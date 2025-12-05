@@ -1,8 +1,8 @@
 import { keyBy, reduce } from "lodash";
 import * as yup from "yup";
+import { documentReferenceSchema } from "../firestore/documentReference";
 import { locationSchema } from "./location";
 import { timestampSchema } from "./utils/timestamp";
-import { documentReferenceSchema } from "../firestore/documentReference";
 
 /**
  * Notification preference types and their associated information
@@ -75,6 +75,9 @@ export const userDataSchema = yup.object({
   linkedInProfileUrl: yup.string().url().optional(),
   friendInvitationCode: yup.string(),
   expoPushToken: yup.string().nullable(),
+  expoPushTokenSetAt: timestampSchema,
+  appVersion: yup.string().optional(),
+  appVersionSetAt: timestampSchema,
   deviceInfo: yup.mixed(),
   aboutMe: yup.string().optional(),
   introduction: yup.string().optional(),
