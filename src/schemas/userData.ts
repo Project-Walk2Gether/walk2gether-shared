@@ -36,6 +36,13 @@ export const NOTIFICATION_PREFERENCES: NotificationPreferenceInfo[] = [
     description: "Receive notifications when friends invite you to walks",
     defaultValue: true,
   },
+  {
+    key: "callStarted",
+    label: "Call Started",
+    description:
+      "Be notified when someone joins the call for a remote walk you're in",
+    defaultValue: true,
+  },
 ];
 
 /**
