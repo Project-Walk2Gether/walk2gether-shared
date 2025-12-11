@@ -1,5 +1,31 @@
 import { BaseParticipant, Location, LocationOption, Walk } from "../schemas";
 
+// Extended walk type that includes locationOptions array (for API responses)
+type WalkWithLocationOptions = Walk & {
+  locationOptions?: LocationOption[];
+};
+
+/**
+ * Get the primary location for a walk.
+ * For walks with locationOptions embedded in the response, returns the first location option's location.
+ * This is useful for displaying walk location in web views where locationOptions are included in the API response.
+ *
+ * @param walk The walk object, potentially with locationOptions array included
+ * @returns The first location option's location, or null if not available
+ */
+export function getChosenLocationForWalk(
+  walk: WalkWithLocationOptions
+): Location | null {
+  const locationOptions = walk.locationOptions;
+  if (!locationOptions || locationOptions.length === 0) {
+    return null;
+  }
+
+  // Return the first location option's location
+  const firstOption = locationOptions[0];
+  return firstOption?.location ?? firstOption?.currentLocation ?? null;
+}
+
 /**
  * Resolve the chosen location for a specific participant in a walk.
  *
