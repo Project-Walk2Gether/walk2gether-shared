@@ -2,6 +2,22 @@ import * as yup from "yup";
 import { objectOf } from "../utils/objectOf";
 import { timestampSchema } from "./utils/timestamp";
 
+export const FRIEND_TAG_OPTIONS = [
+  "just-met",
+  "close-friends",
+  "regular-walkers",
+  "family",
+] as const;
+
+export type FriendTag = (typeof FRIEND_TAG_OPTIONS)[number];
+
+export const FRIEND_TAG_LABELS: Record<FriendTag, string> = {
+  "just-met": "Just met",
+  "close-friends": "Close friends",
+  "regular-walkers": "Regular walkers",
+  family: "Family",
+};
+
 export const friendshipSchema = yup.object({
   id: yup.string(),
   uids: yup
@@ -43,6 +59,10 @@ export const friendshipSchema = yup.object({
   lastMessageAt: timestampSchema,
   lastMessagePreview: yup.string().optional(),
   totalMilesWalked: yup.number(),
+  // Tags are stored per-user, keyed by uid
+  tagsByUid: objectOf(
+    yup.array().of(yup.string().oneOf(FRIEND_TAG_OPTIONS).required()).defined()
+  ).optional(),
 });
 
 export type Friendship = yup.InferType<typeof friendshipSchema>;
