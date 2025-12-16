@@ -1,5 +1,5 @@
 export * from "./aiAudit";
-export * from "./aiConversationSession";
+export * from "./aiConversationState";
 export * from "./attachment";
 export * from "./audit";
 export * from "./availability";

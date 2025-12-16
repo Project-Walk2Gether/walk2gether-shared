@@ -83,6 +83,7 @@ export function createLocationOptionFromParticipant(
     startedAt: null,
     endedAt: null,
     route: null, // Route will be populated by the participant's tracked route
+    destinations: [], // No destinations by default for remote participant locations
   };
 }
 
