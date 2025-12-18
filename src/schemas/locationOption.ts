@@ -27,7 +27,6 @@ export const locationOptionSchema = baseLocationOptionSchema.shape({
   startedAt: timestampSchema.nullable(),
   endedAt: timestampSchema.nullable(),
   meetupType: meetupTypeSchema.default("inPerson").required(), // Default to in-person for backward compatibility
-  locationSharing: yup.object().optional(), // Map of participant UIDs to their location sharing preference for this specific location
   route: routeSchema.nullable().optional().default(undefined), // Unified route for this location option (copied from participant routes)
 
   // Destinations - places to visit during the walk from this starting location
