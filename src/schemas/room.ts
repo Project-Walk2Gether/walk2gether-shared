@@ -16,6 +16,7 @@ export const roomSchema = yup.object({
   conversationStarterPrompt: yup.string(),
   isActive: yup.boolean().required(),
   createdAt: timestampSchema.required(),
+  shouldEndAt: timestampSchema.required(),
   endedAt: timestampSchema.nullable(),
   livekitRoomName: yup.string().nullable(),
 });
