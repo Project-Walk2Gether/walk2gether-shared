@@ -26,6 +26,7 @@ export const locationOptionSchema = baseLocationOptionSchema.shape({
   currentLocation: locationSchema.nullable().default(null),
   startedAt: timestampSchema.nullable(),
   endedAt: timestampSchema.nullable(),
+  estimatedEndTime: timestampSchema.nullable(), // User-adjustable end time for this location option
   meetupType: meetupTypeSchema.default("inPerson").required(), // Default to in-person for backward compatibility
   route: routeSchema.nullable().optional().default(undefined), // Unified route for this location option (copied from participant routes)
 
