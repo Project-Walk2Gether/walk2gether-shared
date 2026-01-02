@@ -94,9 +94,8 @@ export function hasWalkStarted(
 }
 
 /**
- * Check if a walk has ended by checking if all location options have endedAt set.
- *
- * NOTE: locationOptions must be fetched from the subcollection and passed as a parameter.
+ * Check if a walk has ended based on its location options
+ * A walk is considered ended when all its location options have passed their scheduled end time
  *
  * @param walk The walk to check
  * @param locationOptions The location options from the subcollection
@@ -106,10 +105,19 @@ export function hasWalkEnded(
   walk: Walk,
   locationOptions: LocationOption[]
 ): boolean {
+  const now = new Date();
   return (
     (locationOptions &&
       locationOptions.length > 0 &&
-      locationOptions.every((option) => option.endedAt)) ??
+      locationOptions.every((option) => {
+        if (!option.endTime) return false;
+        // Handle both Firestore Timestamp and Date objects
+        const endTimeDate =
+          typeof (option.endTime as any).toDate === "function"
+            ? (option.endTime as any).toDate()
+            : option.endTime;
+        return endTimeDate <= now;
+      })) ??
     false
   );
 }

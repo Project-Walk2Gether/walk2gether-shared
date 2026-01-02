@@ -81,7 +81,7 @@ export function createLocationOptionFromParticipant(
       city: "Remote Location",
     },
     startedAt: null,
-    endedAt: null,
+    endTime: null, // Scheduled end time - walk is considered ended after this time
     route: null, // Route will be populated by the participant's tracked route
     destinations: [], // No destinations by default for remote participant locations
   };
