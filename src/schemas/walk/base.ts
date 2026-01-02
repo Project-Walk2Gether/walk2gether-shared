@@ -2,7 +2,6 @@ import * as yup from "yup";
 import { objectOf } from "../../utils/objectOf";
 import { walkMeetupTypeSchema } from "../meetupType";
 import { baseParticipantSchema } from "../participant";
-import { roundSchema } from "../round";
 import { timestampSchema } from "../utils/timestamp";
 
 export const walkBaseSchema = yup.object({
@@ -15,7 +14,6 @@ export const walkBaseSchema = yup.object({
   durationMinutes: yup.number().required().positive().integer(),
   organizerName: yup.string().required(),
   createdByUid: yup.string().required(),
-  upcomingRounds: yup.array().of(roundSchema.required()),
   allowLocationSuggestions: yup.boolean().optional().default(true),
   totalDistanceMiles: yup.number(),
   createdAt: timestampSchema,
