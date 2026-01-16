@@ -43,6 +43,8 @@ export const baseParticipantSchema = yup.object({
   statusUpdatedAt: timestampSchema.nullable(),
   suggestedDepartureTime: timestampSchema.nullable(),
   suggestedDepartureNotificationSentAt: timestampSchema.nullable().defined(),
+  agentStartedSpeakingAt: timestampSchema.nullable(),
+  agentFinishedSpeakingAt: timestampSchema.nullable(),
   // Estimated time of arrival - used when participant is running late
   eta: timestampSchema.nullable(),
   // After the user rejects a walk invitation, the invite will still be shown on their walks screen
