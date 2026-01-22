@@ -28,8 +28,8 @@ export const baseParticipantSchema = yup.object({
   timezone: yup.string().required(),
   availability: availabilitySchema.optional().default(undefined),
   status: yup
-    .mixed<"pending" | "on-the-way" | "arrived" | "running-late">()
-    .oneOf(["pending", "on-the-way", "arrived", "running-late"])
+    .mixed<"pending" | "on-the-way" | "arrived" | "ready" | "running-late">()
+    .oneOf(["pending", "on-the-way", "arrived", "ready", "running-late"])
     .required(),
   sourceType: yup
     .mixed<"requested" | "invited" | "walk-creator">()
@@ -63,7 +63,7 @@ export const baseParticipantSchema = yup.object({
   // Reference to the participant's current room document (waiting room or pair room)
   roomDoc: documentReferenceSchema.nullable().default(null),
   // Timestamp when participant confirmed they're ready to join the call from waiting room
-  readyToJoinRoomAt: timestampSchema.nullable(),
+  readyAt: timestampSchema.nullable(),
   createdAt: timestampSchema,
   updatedAt: timestampSchema,
 });
