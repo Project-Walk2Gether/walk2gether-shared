@@ -28,8 +28,22 @@ export const baseParticipantSchema = yup.object({
   timezone: yup.string().required(),
   availability: availabilitySchema.optional().default(undefined),
   status: yup
-    .mixed<"pending" | "on-the-way" | "arrived" | "ready" | "running-late">()
-    .oneOf(["pending", "on-the-way", "arrived", "ready", "running-late"])
+    .mixed<
+      | "pending"
+      | "on-the-way"
+      | "arrived"
+      | "ready"
+      | "running-late"
+      | "connected"
+    >()
+    .oneOf([
+      "pending",
+      "on-the-way",
+      "arrived",
+      "ready",
+      "running-late",
+      "connected",
+    ])
     .required(),
   sourceType: yup
     .mixed<"requested" | "invited" | "walk-creator">()
