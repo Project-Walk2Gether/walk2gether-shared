@@ -26,6 +26,7 @@ export const locationOptionSchema = baseLocationOptionSchema.shape({
   currentLocation: locationSchema.nullable().default(null),
   startedAt: timestampSchema.nullable(),
   endTime: timestampSchema.nullable(), // Scheduled end time for this location option - walk is considered ended after this time
+  endedAt: timestampSchema.nullable(), // Actual end time - when the user ended their walk (left the call)
   meetupType: meetupTypeSchema.default("inPerson").required(), // Default to in-person for backward compatibility
   route: routeSchema.nullable().optional().default(undefined), // Unified route for this location option (copied from participant routes)
 
