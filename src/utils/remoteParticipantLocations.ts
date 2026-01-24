@@ -8,7 +8,7 @@ function calculateDistance(
   lat1: number,
   lon1: number,
   lat2: number,
-  lon2: number
+  lon2: number,
 ): number {
   const R = 6371; // Earth's radius in kilometers
   const dLat = ((lat2 - lat1) * Math.PI) / 180;
@@ -30,7 +30,7 @@ function hasNearbyLocation(
   locationOptions: LocationOption[],
   latitude: number,
   longitude: number,
-  thresholdKm: number = 1
+  thresholdKm: number = 1,
 ): boolean {
   return locationOptions.some((option) => {
     const optionLat = option.location.latitude;
@@ -41,7 +41,7 @@ function hasNearbyLocation(
       latitude,
       longitude,
       optionLat,
-      optionLon
+      optionLon,
     );
     return distance <= thresholdKm;
   });
@@ -52,13 +52,13 @@ function hasNearbyLocation(
  */
 export function createLocationOptionFromParticipant(
   participant: BaseParticipant,
-  participantId: string
+  participantId: string,
 ): LocationOption | null {
   if (!participant.homeLocation) {
     return null;
   }
 
-  const { latitude, longitude } = participant.homeLocation;
+  const { latitude, longitude, country } = participant.homeLocation;
   const displayName = participant.displayName || "Unknown";
 
   return {
@@ -68,6 +68,7 @@ export function createLocationOptionFromParticipant(
       name: `${displayName}'s Location`,
       displayName: `${displayName}'s Location`,
       city: "Remote Location", // Generic city name for remote locations
+      country,
     },
     votes: {},
     proposedBy: participantId,
@@ -79,6 +80,7 @@ export function createLocationOptionFromParticipant(
       longitude,
       displayName: `${displayName}'s Location`,
       city: "Remote Location",
+      country,
     },
     startedAt: null,
     endTime: null, // Scheduled end time - walk is considered ended after this time
@@ -104,7 +106,7 @@ export function createLocationOptionFromParticipant(
  */
 export function getLocationOptionsForRemoteParticipants(
   participants: Record<string, BaseParticipant>,
-  existingLocationOptions: LocationOption[] = []
+  existingLocationOptions: LocationOption[] = [],
 ): LocationOption[] {
   const newLocationOptions: LocationOption[] = [];
 
@@ -128,7 +130,7 @@ export function getLocationOptionsForRemoteParticipants(
     // Skip if participant has no home location
     if (!participant.homeLocation) {
       console.warn(
-        `[remoteParticipantLocations] Remote participant ${participantId} has no homeLocation`
+        `[remoteParticipantLocations] Remote participant ${participantId} has no homeLocation`,
       );
       continue;
     }
@@ -136,7 +138,7 @@ export function getLocationOptionsForRemoteParticipants(
     // Skip if this participant already has a location option
     if (existingRemoteLocationsByParticipant.has(participantId)) {
       console.log(
-        `[remoteParticipantLocations] Participant ${participantId} already has a location option`
+        `[remoteParticipantLocations] Participant ${participantId} already has a location option`,
       );
       continue;
     }
@@ -144,13 +146,13 @@ export function getLocationOptionsForRemoteParticipants(
     // Create a new location option for this participant
     const locationOption = createLocationOptionFromParticipant(
       participant,
-      participantId
+      participantId,
     );
 
     if (locationOption) {
       newLocationOptions.push(locationOption);
       console.log(
-        `[remoteParticipantLocations] Added location for remote participant ${participantId}`
+        `[remoteParticipantLocations] Added location for remote participant ${participantId}`,
       );
     }
   }
