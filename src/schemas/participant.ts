@@ -35,6 +35,7 @@ export const baseParticipantSchema = yup.object({
       | "ready"
       | "running-late"
       | "connected"
+      | "disconnected"
     >()
     .oneOf([
       "pending",
@@ -43,6 +44,7 @@ export const baseParticipantSchema = yup.object({
       "ready",
       "running-late",
       "connected",
+      "disconnected",
     ])
     .required(),
   sourceType: yup
