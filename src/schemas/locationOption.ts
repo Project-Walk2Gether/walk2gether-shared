@@ -3,6 +3,7 @@ import { objectOf } from "../utils/objectOf";
 import { attachmentSchema } from "./attachment";
 import { locationSchema, namedLocationSchema } from "./location";
 import { routeSchema } from "./route";
+import { meetupTypeSchema } from "./meetupType";
 
 /**
  * Base location option schema - core fields shared between location options and destinations
@@ -23,6 +24,7 @@ export const locationOptionSchema = baseLocationOptionSchema.shape({
   meetupSpotPhoto: attachmentSchema.optional().default(undefined),
   currentLocation: locationSchema.nullable().default(null),
   route: routeSchema.nullable().optional().default(undefined), // Unified route for this location option (copied from participant routes)
+  meetupType: meetupTypeSchema.default("inPerson").required(), // Default to in-person for backward compatibility
 
   // Destinations - places to visit during the walk from this starting location
   destinations: yup.array(baseLocationOptionSchema).optional().default([]),

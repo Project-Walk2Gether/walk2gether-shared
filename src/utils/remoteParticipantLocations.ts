@@ -74,6 +74,7 @@ export function createLocationOptionFromParticipant(
     proposedBy: participantId,
     proposedAt: new Date(),
     isConfirmed: true, // Remote participants' locations are auto-confirmed (no voting needed)
+    meetupType: "remote", // Mark this as a remote location option
     currentLocation: {
       latitude,
       longitude,
