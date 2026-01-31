@@ -33,6 +33,24 @@ export const notificationSchema = yup.object({
   body: yup.string().required(),
   data: yup.object().optional(),
   expoPushToken: yup.string().required(),
+  sentAt: timestampSchema.optional(),
+  deliveryResponse: yup
+    .array()
+    .of(
+      yup.object({
+        status: yup.string().required(),
+        id: yup.string().optional(),
+        message: yup.string().optional(),
+        details: yup.object().optional(),
+      }),
+    )
+    .optional(),
+  expoReceiptIds: yup.array().of(yup.string().required()).optional(),
+  receiptStatus: yup.string().oneOf(["pending", "none", "complete"]).optional(),
+  pushReceipts: yup.object().optional(),
+  pushReceiptFetchError: yup.string().optional(),
+  error: yup.string().optional(),
+  errorStage: yup.string().optional(),
   createdAt: timestampSchema,
   updatedAt: timestampSchema,
 });
