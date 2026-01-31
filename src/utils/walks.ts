@@ -1,4 +1,10 @@
-import { BaseParticipant, Location, LocationOption, Walk } from "../schemas";
+import {
+  BaseParticipant,
+  Location,
+  LocationOption,
+  Room,
+  Walk,
+} from "../schemas";
 
 // Extended walk type that includes locationOptions array (for API responses)
 type WalkWithLocationOptions = Walk & {
@@ -14,7 +20,7 @@ type WalkWithLocationOptions = Walk & {
  * @returns The first location option's location, or null if not available
  */
 export function getChosenLocationForWalk(
-  walk: WalkWithLocationOptions
+  walk: WalkWithLocationOptions,
 ): Location | null {
   const locationOptions = walk.locationOptions;
   if (!locationOptions || locationOptions.length === 0) {
@@ -38,12 +44,12 @@ export function getChosenLocationForWalk(
 export function getChosenLocationForParticipant(
   walk: Walk,
   participant: BaseParticipant,
-  locationOptions: LocationOption[]
+  locationOptions: LocationOption[],
 ): Location | null {
   const chosenId = participant.chosenLocationOptionId;
   if (chosenId) {
     const chosenOption = locationOptions.find(
-      (opt) => (opt as any).id === chosenId
+      (opt) => (opt as any).id === chosenId,
     );
     if (chosenOption?.location) {
       return chosenOption.location;
@@ -61,7 +67,7 @@ export function getChosenLocationForParticipant(
  */
 export function getSharedLocationForWalk(
   walk: Walk,
-  locationOptions: LocationOption[]
+  locationOptions: LocationOption[],
 ): Location | null {
   // Get first participant's chosen location
   const participants = Object.values(walk.participantsById || {});
@@ -70,7 +76,7 @@ export function getSharedLocationForWalk(
     return getChosenLocationForParticipant(
       walk,
       firstParticipant,
-      locationOptions
+      locationOptions,
     );
   }
   // Fallback to first location option's currentLocation
@@ -78,46 +84,34 @@ export function getSharedLocationForWalk(
 }
 
 /**
- * Check if a walk has started by checking if any location option has startedAt set.
+ * Check if a walk has started by checking if any room has startedAt set.
  *
- * NOTE: locationOptions must be fetched from the subcollection and passed as a parameter.
- *
- * @param walk The walk to check
- * @param locationOptions The location options from the subcollection
- * @returns true if any location option has started, false otherwise
+ * @param rooms The rooms from the subcollection
+ * @returns true if any room has started, false otherwise
  */
-export function hasWalkStarted(
-  walk: Walk,
-  locationOptions: LocationOption[]
-): boolean {
-  return locationOptions?.some((option) => option.startedAt) ?? false;
+export function hasWalkStarted(rooms: Room[]): boolean {
+  return rooms?.some((room) => room.startedAt != null) ?? false;
 }
 
 /**
- * Check if a walk has ended based on its location options
- * A walk is considered ended when all its location options have passed their scheduled end time
+ * Check if a walk has ended based on its rooms.
+ * A walk is considered ended when all its rooms have passed their shouldEndAt time.
  *
- * @param walk The walk to check
- * @param locationOptions The location options from the subcollection
- * @returns true if all location options have ended, false otherwise
+ * @param rooms The rooms from the subcollection
+ * @returns true if all rooms have ended, false otherwise
  */
-export function hasWalkEnded(
-  walk: Walk,
-  locationOptions: LocationOption[]
-): boolean {
+export function hasWalkEnded(rooms: Room[]): boolean {
+  if (!rooms || rooms.length === 0) return false;
+
   const now = new Date();
-  return (
-    (locationOptions &&
-      locationOptions.length > 0 &&
-      locationOptions.every((option) => {
-        if (!option.endTime) return false;
-        // Handle both Firestore Timestamp and Date objects
-        const endTimeDate =
-          typeof (option.endTime as any).toDate === "function"
-            ? (option.endTime as any).toDate()
-            : option.endTime;
-        return endTimeDate <= now;
-      })) ??
-    false
-  );
+  return rooms.every((room) => {
+    if (!room.shouldEndAt) return false;
+    // Handle both Firestore Timestamp and Date objects
+    const endTimeDate =
+      typeof (room.shouldEndAt as unknown as { toDate: () => Date }).toDate ===
+      "function"
+        ? (room.shouldEndAt as unknown as { toDate: () => Date }).toDate()
+        : room.shouldEndAt;
+    return endTimeDate <= now;
+  });
 }

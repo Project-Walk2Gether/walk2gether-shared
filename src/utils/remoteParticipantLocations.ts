@@ -74,7 +74,6 @@ export function createLocationOptionFromParticipant(
     proposedBy: participantId,
     proposedAt: new Date(),
     isConfirmed: true, // Remote participants' locations are auto-confirmed (no voting needed)
-    meetupType: "remote", // Mark this as a remote location option
     currentLocation: {
       latitude,
       longitude,
@@ -82,8 +81,6 @@ export function createLocationOptionFromParticipant(
       city: "Remote Location",
       country,
     },
-    startedAt: null,
-    endTime: null, // Scheduled end time - walk is considered ended after this time
     route: null, // Route will be populated by the participant's tracked route
     destinations: [], // No destinations by default for remote participant locations
   };
