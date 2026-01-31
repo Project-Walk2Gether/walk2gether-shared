@@ -7,3 +7,4 @@ export * from "./name";
 export * from "./persisted";
 export * from "./remoteParticipantLocations";
 export * from "./walks";
+export * from "./notifications";
