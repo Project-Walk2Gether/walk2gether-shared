@@ -65,8 +65,8 @@ export const notificationPreferencesSchema = yup.object(
       acc[pref.key] = yup.boolean().optional();
       return acc;
     },
-    {} as Record<string, yup.BooleanSchema>
-  )
+    {} as Record<string, yup.BooleanSchema>,
+  ),
 );
 
 export const userDataSchema = yup.object({
@@ -87,7 +87,6 @@ export const userDataSchema = yup.object({
   appVersionSetAt: timestampSchema,
   deviceInfo: yup.mixed(),
   aboutMe: yup.string().optional(),
-  introduction: yup.string().optional(),
   notificationPreferences: notificationPreferencesSchema,
   notificationsPermissionsSetAt: timestampSchema,
   distanceUnit: yup
