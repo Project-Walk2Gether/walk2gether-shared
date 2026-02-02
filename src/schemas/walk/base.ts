@@ -18,6 +18,9 @@ export const walkBaseSchema = yup.object({
   totalDistanceMiles: yup.number(),
   createdAt: timestampSchema,
   updatedAt: timestampSchema,
+  // When the walk actually started and ended (set at runtime)
+  startedAt: timestampSchema.nullable(),
+  endedAt: timestampSchema.nullable(),
   // Whether in-person or remote, or both
   meetupType: walkMeetupTypeSchema.required(),
   visibility: yup.string().oneOf(["public", "private"]).required(),

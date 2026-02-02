@@ -2,11 +2,10 @@ import { Participant } from "../schemas/participant";
 import { UserData } from "../schemas/userData";
 
 export interface ParticipantFromUserOptions {
-  user: Partial<UserData> & {
-    id: string;
-    name?: string;
-    profilePicUrl?: string;
-  };
+  userId: string;
+  user: UserData;
+  displayNameOverride?: string;
+  profilePicUrlOverride?: string | null;
   sourceType: "requested" | "invited" | "walk-creator";
   status?: "pending" | "on-the-way" | "arrived";
   acceptedAt?: any | null; // Can be Timestamp or Date
@@ -22,7 +21,10 @@ export function participantFromUser(
   options: ParticipantFromUserOptions,
 ): Omit<Participant, "createdAt" | "updatedAt"> {
   const {
+    userId,
     user,
+    displayNameOverride,
+    profilePicUrlOverride,
     sourceType,
     status = "pending",
     acceptedAt = null,
@@ -38,11 +40,12 @@ export function participantFromUser(
       : "UTC");
 
   return {
-    userUid: user.id,
-    displayName: user.name || "Anonymous",
-    photoURL: user.profilePicUrl || null,
+    userUid: userId,
+    displayName: displayNameOverride || user.name || "Anonymous",
+    photoURL: profilePicUrlOverride ?? user.profilePicUrl ?? null,
+    introduction: user.aboutMe || undefined,
     timezone,
-    availability: (user as any).availability,
+    availability: user.availability,
     status,
     sourceType,
     notifiedEstimatedArrivalTime: null,
