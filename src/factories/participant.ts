@@ -19,7 +19,7 @@ export interface ParticipantFromUserOptions {
  * This ensures consistent participant creation across the app
  */
 export function participantFromUser(
-  options: ParticipantFromUserOptions
+  options: ParticipantFromUserOptions,
 ): Omit<Participant, "createdAt" | "updatedAt"> {
   const {
     user,
@@ -41,7 +41,6 @@ export function participantFromUser(
     userUid: user.id,
     displayName: user.name || "Anonymous",
     photoURL: user.profilePicUrl || null,
-    introduction: user.introduction,
     timezone,
     availability: (user as any).availability,
     status,

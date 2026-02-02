@@ -21,7 +21,6 @@ export const userDataFactory = Sync.makeFactory<UserData>({
   distanceUnit: "mi",
   isAgent: true,
   aboutMe: "",
-  introduction: "",
   phoneNumber: "",
   notificationPreferences: {
     friendETA: true,
@@ -46,7 +45,7 @@ export const userDataFactory = Sync.makeFactory<UserData>({
  */
 export const createUserDataWithServerTimestamps = (
   admin: any,
-  overrides: Partial<UserData> = {}
+  overrides: Partial<UserData> = {},
 ): UserData => {
   const serverTimestamp = admin.firestore.FieldValue.serverTimestamp();
 
