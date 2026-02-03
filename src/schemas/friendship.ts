@@ -37,7 +37,7 @@ export const friendshipSchema = yup.object({
       (uids) => {
         if (!uids || uids.length !== 2) return true;
         return uids[0] !== uids[1];
-      }
+      },
     ),
   // Simplified schema specifically for friendship user data
   userDataByUid: objectOf(
@@ -45,23 +45,23 @@ export const friendshipSchema = yup.object({
       name: yup.string().required(),
       profilePicUrl: yup.string().nullable(),
       _isSettingUp: yup.boolean().optional(),
-    })
+    }),
   ),
   createdAt: timestampSchema,
   updatedAt: timestampSchema,
   createdByUid: yup.string().required(),
-  acceptedAt: timestampSchema,
+  acceptedAt: timestampSchema.nullable().defined(),
   deletedAt: timestampSchema.nullable().defined(),
   deletedByUid: yup.string().optional(),
-  reportedAt: timestampSchema,
+  reportedAt: timestampSchema.nullable().defined(),
   reportedByUid: yup.string().optional(),
   reportReason: yup.string().optional(),
-  lastMessageAt: timestampSchema,
+  lastMessageAt: timestampSchema.nullable().defined(),
   lastMessagePreview: yup.string().optional(),
   totalMilesWalked: yup.number(),
   // Tags are stored per-user, keyed by uid
   tagsByUid: objectOf(
-    yup.array().of(yup.string().oneOf(FRIEND_TAG_OPTIONS).required()).defined()
+    yup.array().of(yup.string().oneOf(FRIEND_TAG_OPTIONS).required()).defined(),
   ).optional(),
 });
 
