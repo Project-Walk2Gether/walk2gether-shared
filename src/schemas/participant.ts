@@ -76,6 +76,8 @@ export const baseParticipantSchema = yup.object({
   isLocationShared: yup.boolean().default(true),
   // Meetup type - whether participant is joining in-person or remotely
   meetupType: meetupTypeSchema,
+  // Whether there's a pending friendship request between current user and this participant
+  isPending: yup.boolean().default(false),
   // Home location for remote participants (needed for location options)
   // Uses full locationSchema to include city and displayName for UI display
   homeLocation: locationSchema.nullable().default(null),
