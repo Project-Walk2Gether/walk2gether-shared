@@ -83,6 +83,12 @@ export const baseParticipantSchema = yup.object({
   homeLocation: locationSchema.nullable().default(null),
   // Reference to the participant's current room document (waiting room or pair room)
   roomDoc: documentReferenceSchema.nullable().default(null),
+  // Track which user UIDs this participant has previously been matched with in pair rooms
+  matchedWithUserIds: yup
+    .array()
+    .of(yup.string().required())
+    .optional()
+    .default([]),
   // Timestamp when participant confirmed they're ready to join the call from waiting room
   readyAt: timestampSchema.nullable(),
   createdAt: timestampSchema,
