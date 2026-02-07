@@ -90,7 +90,7 @@ export const baseParticipantSchema = yup.object({
     .optional()
     .default([]),
   // Timestamp when participant confirmed they're ready to join the call from waiting room
-  readyAt: timestampSchema.nullable(),
+  readyForMatchingAt: timestampSchema.nullable(),
   createdAt: timestampSchema,
   updatedAt: timestampSchema,
 });
