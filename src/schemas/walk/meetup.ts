@@ -6,12 +6,12 @@ export const meetupWalkSchema = walkBaseSchema.shape({
   topic: yup.string().required(),
   descriptionMarkdown: yup.string(),
   questionPrompts: yup.array().of(yup.string().required()),
-  minimumNumberOfMinutesWithEachPartner: yup
-    .number()
-    .required()
-    .integer()
-    .min(0)
-    .default(5),
+  newMatchesPossibleForUserUids: yup
+    .array()
+    .of(yup.string().required())
+    .optional()
+    .default([]),
+  roundLengthMinutes: yup.number().required().integer().min(0).default(5),
 });
 
 export type MeetupWalk = yup.InferType<typeof meetupWalkSchema>;
