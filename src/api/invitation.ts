@@ -2,7 +2,7 @@
  * API types for invitation endpoints
  */
 
-import { Walk } from "../schemas";
+import { Group, Walk } from "../schemas";
 
 /**
  * Request type for the /invitation/validate endpoint
@@ -11,7 +11,14 @@ export interface InvitationValidateRequest {
   data: {
     code?: string;
     walkCode?: string;
+    groupCode?: string;
   };
+}
+
+export interface InvitationValidateGroupInfo {
+  id: string;
+  name: Group["name"];
+  memberCount: number;
 }
 
 /**
@@ -19,13 +26,14 @@ export interface InvitationValidateRequest {
  */
 export interface InvitationValidateResponse {
   success: boolean;
-  inviter: {
+  inviter?: {
     id: string;
     name: string;
     profilePicUrl: string | null;
     linkedInProfileUrl: string | null;
   };
   walk?: Walk;
+  group?: InvitationValidateGroupInfo;
   error?: {
     message: string;
     status: number;
@@ -37,8 +45,9 @@ export interface InvitationValidateResponse {
  */
 export interface InvitationAcceptRequest {
   data: {
-    code: string;
+    code?: string;
     walkCode?: string;
+    groupCode?: string;
   };
 }
 
@@ -51,6 +60,8 @@ export interface InvitationAcceptResponse {
   alreadyConnected?: boolean;
   walkJoined?: boolean;
   walkId?: string;
+  groupJoined?: boolean;
+  groupId?: string;
   error?: {
     message: string;
     status: number;
