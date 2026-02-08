@@ -10,7 +10,10 @@ import { timestampSchema } from "./utils/timestamp";
 export const roomSchema = yup.object({
   id: yup.string(),
   walkId: yup.string().required(),
-  type: yup.mixed<"pair" | "waiting">().oneOf(["pair", "waiting"]).required(),
+  type: yup
+    .mixed<"pair" | "waiting" | "main">()
+    .oneOf(["pair", "waiting", "main"])
+    .required(),
   memberUids: yup.array().of(yup.string().required()).required(),
   roundNumber: yup.number().required().integer().min(0),
   conversationStarterPrompt: yup.string(),
