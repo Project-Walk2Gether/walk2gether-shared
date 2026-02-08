@@ -5,6 +5,7 @@ export * from "./audit";
 export * from "./availability";
 export * from "./favoriteLocation";
 export * from "./friendship";
+export * from "./group";
 export * from "./location";
 export * from "./locationOption";
 export * from "./meetupType";
