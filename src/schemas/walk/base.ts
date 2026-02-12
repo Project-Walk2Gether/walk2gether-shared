@@ -1,6 +1,6 @@
 import * as yup from "yup";
 import { objectOf } from "../../utils/objectOf";
-import { walkMeetupTypeSchema } from "../meetupType";
+import { meetupTypeSchema } from "../meetupType";
 import { baseParticipantSchema } from "../participant";
 import { timestampSchema } from "../utils/timestamp";
 
@@ -22,10 +22,11 @@ export const walkBaseSchema = yup.object({
   startedAt: timestampSchema.nullable(),
   endedAt: timestampSchema.nullable(),
   // Whether in-person or remote, or both
-  meetupType: walkMeetupTypeSchema.required(),
+  meetupType: meetupTypeSchema.required(),
   visibility: yup.string().oneOf(["public", "private"]).required(),
   participantsById: objectOf(baseParticipantSchema).optional(),
   participantUids: yup.array().of(yup.string().required()),
+  invitedGroupsIds: yup.array().of(yup.string().required()),
   ownerIsInitiallyAtLocation: yup.boolean().optional().default(undefined),
 });
 
