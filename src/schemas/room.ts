@@ -11,8 +11,8 @@ export const roomSchema = yup.object({
   id: yup.string(),
   walkId: yup.string().required(),
   type: yup
-    .mixed<"pair" | "waiting" | "main">()
-    .oneOf(["pair", "waiting", "main"])
+    .mixed<"friends" | "meetup">()
+    .oneOf(["friends", "meetup"])
     .required(),
   memberUids: yup.array().of(yup.string().required()).required(),
   roundNumber: yup.number().required().integer().min(0),
