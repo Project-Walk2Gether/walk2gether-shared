@@ -1,10 +1,10 @@
 import * as yup from "yup";
 import { FriendsWalk, friendsWalkSchema } from "./friends";
-import { MeetupWalk, meetupWalkSchema } from "./meetup";
+import { GroupWalk, groupWalkSchema } from "./group";
 
 export * from "./base";
 export * from "./friends";
-export * from "./meetup";
+export * from "./group";
 
 // Re-export specific types for convenience
 export { WalkBase } from "./base";
@@ -12,7 +12,7 @@ export { WalkBase } from "./base";
 // Map of walk types to their schemas
 export const walkSchemas = {
   friends: friendsWalkSchema,
-  meetup: meetupWalkSchema,
+  group: groupWalkSchema,
 };
 
 // Dynamic schema that selects the appropriate schema based on the walk type
@@ -41,15 +41,15 @@ export const isValidFriendsWalk = (value: unknown): value is FriendsWalk => {
   }
 };
 
-export const walkIsMeetupWalk = (value: Walk): value is MeetupWalk =>
-  value.type === "meetup";
-export const isValidMeetupWalk = (value: unknown): value is MeetupWalk => {
+export const walkIsGroupWalk = (value: Walk): value is GroupWalk =>
+  value.type === "group";
+export const isValidGroupWalk = (value: unknown): value is GroupWalk => {
   try {
-    meetupWalkSchema.validateSync(value);
+    groupWalkSchema.validateSync(value);
     return true;
   } catch (error) {
     return false;
   }
 };
 
-export type Walk = FriendsWalk | MeetupWalk;
+export type Walk = FriendsWalk | GroupWalk;

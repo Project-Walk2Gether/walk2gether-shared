@@ -21,7 +21,7 @@ export const baseLocationOptionSchema = yup.object({
  * Full location option schema - extends base with walk-specific fields and destinations
  */
 export const locationOptionSchema = baseLocationOptionSchema.shape({
-  meetupSpotPhoto: attachmentSchema.optional().default(undefined),
+  groupSpotPhoto: attachmentSchema.optional().default(undefined),
   currentLocation: locationSchema.nullable().default(null),
   route: routeSchema.nullable().optional().default(undefined), // Unified route for this location option (copied from participant routes)
   meetupType: meetupTypeSchema.default("inPerson").required(), // Default to in-person for backward compatibility
