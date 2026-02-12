@@ -26,7 +26,7 @@ export const walkBaseSchema = yup.object({
   visibility: yup.string().oneOf(["public", "private"]).required(),
   participantsById: objectOf(baseParticipantSchema).optional(),
   participantUids: yup.array().of(yup.string().required()),
-  invitedGroupsIds: yup.array().of(yup.string().required()),
+  groupId: yup.string().optional(),
   ownerIsInitiallyAtLocation: yup.boolean().optional().default(undefined),
 });
 
