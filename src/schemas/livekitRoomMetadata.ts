@@ -12,7 +12,5 @@ export interface LivekitRoomMetadata {
   walkId: string;
   walkDocPath: string;
   roomDocPath: string;
-  shouldEndAt: string; // ISO timestamp for when the room should end
-  sendWrapUpNotificationAfterMs: number;
   createdAt: string; // ISO timestamp
 }
