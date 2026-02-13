@@ -20,6 +20,7 @@ export const roomSchema = yup.object({
   startedAt: timestampSchema.nullable(),
   shouldEndAt: timestampSchema.required(),
   endedAt: timestampSchema.nullable(),
+  durationMinutes: yup.number().required(),
   livekitRoomName: yup.string().nullable(),
   introductionText: yup.string().required(),
 });
