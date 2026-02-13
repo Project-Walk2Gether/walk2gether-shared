@@ -15,11 +15,13 @@ export const roomSchema = yup.object({
   roundNumber: yup.number().required().integer().min(0),
   conversationStarterPrompt: yup.string(),
   isActive: yup.boolean().required(),
+  isFirstRoomForWalk: yup.boolean(),
   createdAt: timestampSchema.required(),
   startedAt: timestampSchema.nullable(),
   shouldEndAt: timestampSchema.required(),
   endedAt: timestampSchema.nullable(),
   livekitRoomName: yup.string().nullable(),
+  introductionText: yup.string().required(),
 });
 
 export type Room = yup.InferType<typeof roomSchema>;

@@ -24,7 +24,7 @@ export const baseParticipantSchema = yup.object({
   userUid: yup.string().required(),
   displayName: yup.string().required(),
   photoURL: yup.string().nullable(),
-  introduction: yup.string().optional(),
+  aboutMe: yup.string().optional(),
   timezone: yup.string().required(),
   availability: availabilitySchema.optional().default(undefined),
   status: yup
