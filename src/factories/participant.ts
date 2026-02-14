@@ -8,7 +8,7 @@ export interface ParticipantFromUserOptions {
   profilePicUrlOverride?: string | null;
   sourceType: "requested" | "invited" | "walk-creator";
   status?: "pending" | "on-the-way" | "arrived";
-  acceptedAt?: any | null; // Can be Timestamp or Date
+  acceptedAt?: unknown | null; // Can be Timestamp or Date
   navigationMethod?: "driving" | "walking";
   meetupType?: "inPerson" | "remote";
 }
@@ -59,7 +59,10 @@ export function participantFromUser(
     hiddenAt: null,
     chosenLocationOptionId: undefined,
     isLocationShared: true,
+    isPending: false,
     eta: null,
+    roomDoc: null,
+    matchedWithUserIds: [],
     lastLocation: undefined,
     homeLocation: user.location ?? null,
     route: null,

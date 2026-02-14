@@ -104,6 +104,7 @@ export const participantSchema = baseParticipantSchema.shape({
     .optional()
     .default(undefined),
   route: routeSchema.nullable().optional().default(undefined),
+  travelRoute: routeSchema.nullable().optional().default(undefined),
   // Add navigation method for route calculation
   navigationMethod: yup
     .mixed<"driving" | "walking">()
@@ -117,4 +118,5 @@ export type Participant = yup.InferType<typeof participantSchema>;
 // Export the extended participant type with route
 export type ParticipantWithRoute = Participant & {
   route: Route | null;
+  travelRoute?: Route | null;
 };
