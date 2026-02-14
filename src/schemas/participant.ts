@@ -2,7 +2,6 @@ import * as yup from "yup";
 import { documentReferenceSchema } from "../firestore/documentReference";
 import { availabilitySchema } from "./availability";
 import { locationSchema } from "./location";
-import { meetupTypeSchema } from "./meetupType";
 import {
   Route,
   RouteDistance,
@@ -74,8 +73,6 @@ export const baseParticipantSchema = yup.object({
   chosenLocationOptionId: yup.string().optional(),
   // Whether this participant has opted in to sharing their location with other participants
   isLocationShared: yup.boolean().default(true),
-  // Meetup type - whether participant is joining in-person or remotely
-  meetupType: meetupTypeSchema,
   // Whether there's a pending friendship request between current user and this participant
   isPending: yup.boolean().default(false),
   // Home location for remote participants (needed for location options)
