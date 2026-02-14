@@ -1,5 +1,6 @@
 import { LocationOption } from "../schemas/locationOption";
 import { BaseParticipant } from "../schemas/participant";
+import { MeetupType } from "../schemas/meetupType";
 
 /**
  * Calculate distance between two coordinates in kilometers using Haversine formula
@@ -104,9 +105,14 @@ export function createLocationOptionFromParticipant(
  */
 export function getLocationOptionsForRemoteParticipants(
   participants: Record<string, BaseParticipant>,
+  walkMeetupType: MeetupType,
   existingLocationOptions: LocationOption[] = [],
 ): LocationOption[] {
   const newLocationOptions: LocationOption[] = [];
+
+  if (walkMeetupType !== "remote") {
+    return newLocationOptions;
+  }
 
   // Get all existing location options that were created for remote participants
   const existingRemoteLocationsByParticipant = new Map<
@@ -120,11 +126,6 @@ export function getLocationOptionsForRemoteParticipants(
   });
 
   for (const [participantId, participant] of Object.entries(participants)) {
-    // Skip if not a remote participant
-    if (participant.meetupType !== "remote") {
-      continue;
-    }
-
     // Skip if participant has no home location
     if (!participant.homeLocation) {
       console.warn(
