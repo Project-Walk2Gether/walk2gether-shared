@@ -4,16 +4,13 @@ import { timestampSchema } from "./utils/timestamp";
 /**
  * Room schema for the new rooms system that replaces rounds.
  * Rooms can be either:
- * - "waiting": Individual waiting rooms where participants start before joining the main call
- * - "pair": Conversation rooms where 2-3 participants are paired together
+ * - "friends": a room between two people that know each other
+ * - "group": a room between two or more people that likely don't know each other
  */
 export const roomSchema = yup.object({
   id: yup.string(),
   walkId: yup.string().required(),
-  type: yup
-    .mixed<"friends" | "group" | "waiting">()
-    .oneOf(["friends", "group", "waiting"])
-    .required(),
+  type: yup.mixed<"friends" | "group">().oneOf(["friends", "group"]).required(),
   memberUids: yup.array().of(yup.string().required()).required(),
   roundNumber: yup.number().required().integer().min(0),
   conversationStarterPrompt: yup.string().optional(),
