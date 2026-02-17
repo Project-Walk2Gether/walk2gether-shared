@@ -12,6 +12,10 @@ export const groupWalkSchema = walkBaseSchema.shape({
     .optional()
     .default([]),
   roundLengthMinutes: yup.number().required().integer().min(0).default(5),
+  // Track whether we've sent the first "ready" notification to the organizer
+  notifiedFirstReady: yup.boolean().optional().default(false),
+  // Track whether we've sent the first "connected" notification to the organizer
+  notifiedFirstConnected: yup.boolean().optional().default(false),
 });
 
 export type GroupWalk = yup.InferType<typeof groupWalkSchema>;
