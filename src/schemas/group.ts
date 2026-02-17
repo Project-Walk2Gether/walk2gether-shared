@@ -11,6 +11,11 @@ export const groupSchema = yup.object({
     .of(yup.string().required())
     .required()
     .default([]),
+  removedMemberUids: yup
+    .array()
+    .of(yup.string().required())
+    .required()
+    .default([]),
 });
 
 export type Group = yup.InferType<typeof groupSchema>;
