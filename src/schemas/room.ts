@@ -12,7 +12,7 @@ export const roomSchema = yup.object({
   walkId: yup.string().required(),
   type: yup.mixed<"friends" | "group">().oneOf(["friends", "group"]).required(),
   memberUids: yup.array().of(yup.string().required()).required(),
-  roundNumber: yup.number().required().integer().min(0),
+
   conversationStarterPrompt: yup.string().optional(),
   isActive: yup.boolean().required(),
   isFirstRoomForWalk: yup.boolean(),
