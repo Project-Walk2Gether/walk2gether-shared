@@ -18,7 +18,7 @@ export const roomSchema = yup.object({
   isFirstRoomForWalk: yup.boolean(),
   createdAt: timestampSchema.required(),
   startedAt: timestampSchema.nullable(),
-  shouldEndAt: timestampSchema.nullable().required(),
+  shouldEndAt: timestampSchema.nullable(),
   endedAt: timestampSchema.nullable(),
   durationMinutes: yup.number().required(),
   livekitRoomName: yup.string().nullable(),
