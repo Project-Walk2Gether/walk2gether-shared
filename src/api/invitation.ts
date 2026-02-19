@@ -15,10 +15,16 @@ export interface InvitationValidateRequest {
   };
 }
 
+export interface InvitationValidateGroupMember {
+  name: string;
+  profilePicUrl: string | null;
+}
+
 export interface InvitationValidateGroupInfo {
   id: string;
   name: Group["name"];
   memberCount: number;
+  members: InvitationValidateGroupMember[];
 }
 
 /**
