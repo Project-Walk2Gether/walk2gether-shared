@@ -18,11 +18,20 @@ export const roomSchema = yup.object({
   isFirstRoomForWalk: yup.boolean(),
   createdAt: timestampSchema.required(),
   startedAt: timestampSchema.nullable(),
-  shouldEndAt: timestampSchema.required(),
+  shouldEndAt: timestampSchema.nullable().required(),
   endedAt: timestampSchema.nullable(),
   durationMinutes: yup.number().required(),
   livekitRoomName: yup.string().nullable(),
   introductionText: yup.string().required(),
+  memberDistanceAtStartMeters: yup
+    .mixed<Record<string, number>>()
+    .nullable()
+    .default(null),
+  memberDistanceAtEndMeters: yup
+    .mixed<Record<string, number>>()
+    .nullable()
+    .default(null),
+  distanceWalkedMeters: yup.number().nullable().default(null),
 });
 
 export type Room = yup.InferType<typeof roomSchema>;
