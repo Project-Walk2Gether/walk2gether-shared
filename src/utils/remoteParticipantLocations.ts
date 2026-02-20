@@ -59,16 +59,24 @@ export function createLocationOptionFromParticipant(
     return null;
   }
 
-  const { latitude, longitude, country } = participant.homeLocation;
+  const {
+    latitude,
+    longitude,
+    city,
+    country,
+    displayName: locationDisplayName,
+  } = participant.homeLocation;
   const displayName = participant.displayName || "Unknown";
+  const cityName = city || "Remote Location";
+  const locDisplayName = locationDisplayName || `${displayName}'s Location`;
 
   return {
     location: {
       latitude,
       longitude,
-      name: `${displayName}'s Location`,
-      displayName: `${displayName}'s Location`,
-      city: "Remote Location", // Generic city name for remote locations
+      name: locDisplayName,
+      displayName: locDisplayName,
+      city: cityName,
       country,
     },
     votes: {},
@@ -79,8 +87,8 @@ export function createLocationOptionFromParticipant(
     currentLocation: {
       latitude,
       longitude,
-      displayName: `${displayName}'s Location`,
-      city: "Remote Location",
+      displayName: locDisplayName,
+      city: cityName,
       country,
     },
     route: null, // Route will be populated by the participant's tracked route
