@@ -23,6 +23,7 @@ export const roomSchema = yup.object({
   durationMinutes: yup.number().required(),
   livekitRoomName: yup.string().nullable(),
   introductionText: yup.string().required(),
+  staticIntroductionText: yup.string().required(),
   memberDistanceAtStartMeters: yup
     .mixed<Record<string, number>>()
     .nullable()
