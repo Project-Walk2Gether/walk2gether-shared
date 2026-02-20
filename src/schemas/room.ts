@@ -15,7 +15,7 @@ export const roomSchema = yup.object({
 
   conversationStarterPrompt: yup.string().optional(),
   isActive: yup.boolean().required(),
-  isFirstRoomForWalk: yup.boolean(),
+  isFirstRoomFor: yup.mixed<Record<string, boolean>>().nullable().default(null),
   createdAt: timestampSchema.required(),
   startedAt: timestampSchema.nullable(),
   shouldEndAt: timestampSchema.nullable(),
