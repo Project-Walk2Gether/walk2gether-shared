@@ -63,6 +63,8 @@ export function participantFromUser(
     eta: null,
     roomDoc: null,
     matchedWithUserIds: [],
+    connectionRequests: {},
+    declinedConnectionRequestFromUids: [],
     lastLocation: undefined,
     homeLocation: user.location ?? null,
     route: null,

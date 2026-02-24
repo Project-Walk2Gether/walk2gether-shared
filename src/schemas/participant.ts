@@ -86,6 +86,17 @@ export const baseParticipantSchema = yup.object({
     .of(yup.string().required())
     .optional()
     .default([]),
+  // Connection requests from other participants (uid → { note?: string })
+  // When a user swipes right on this participant, their uid is added as a key
+  connectionRequests: yup
+    .mixed<Record<string, { note?: string }>>()
+    .default({}),
+  // UIDs of users whose connection requests this participant has declined
+  declinedConnectionRequestFromUids: yup
+    .array()
+    .of(yup.string().required())
+    .optional()
+    .default([]),
   createdAt: timestampSchema,
   updatedAt: timestampSchema,
 });
