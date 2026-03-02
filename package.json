@@ -9,7 +9,8 @@
     "build:watch": "tsc --watch",
     "test": "echo \"Error: no test specified\" && exit 1",
     "prepare": "npm run build",
-    "dev:copy": "./scripts/copy-to-projects.sh"
+    "dev:copy": "./scripts/copy-to-projects.sh",
+    "pack-and-update": "bash pack-and-update.sh"
   },
   "dependencies": {
     "lodash": "^4.17.21",

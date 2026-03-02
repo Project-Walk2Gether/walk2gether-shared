@@ -33,6 +33,7 @@ export const userDataFactory = Sync.makeFactory<UserData>({
   remoteWalksHowItWorksDontShowAgain: false,
   hasCreatedNeighborhoodWalk: false,
   walkCount: 0,
+  allowLocationSharingForGroupWalks: null,
 });
 
 /**

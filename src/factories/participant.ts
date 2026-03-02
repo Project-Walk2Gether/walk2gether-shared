@@ -11,6 +11,9 @@ export interface ParticipantFromUserOptions {
   acceptedAt?: unknown | null; // Can be Timestamp or Date
   navigationMethod?: "driving" | "walking";
   meetupType?: "inPerson" | "remote";
+  // Used to determine isLocationShared for group walks based on user preference
+  walkType?: "friends" | "group";
+  allowLocationSharingForGroupWalks?: boolean | null;
 }
 
 /**
@@ -30,7 +33,13 @@ export function participantFromUser(
     acceptedAt = null,
     navigationMethod = "walking",
     meetupType = "inPerson", // Default to inPerson if not specified
+    walkType,
+    allowLocationSharingForGroupWalks,
   } = options;
+
+  // For group walks, use the user's preference (default to true if not yet decided)
+  const isLocationShared =
+    walkType === "group" ? (allowLocationSharingForGroupWalks ?? true) : true;
 
   // Get timezone from user data or use browser/system default
   const timezone =
@@ -58,7 +67,7 @@ export function participantFromUser(
     suggestedDepartureNotificationSentAt: null,
     hiddenAt: null,
     chosenLocationOptionId: undefined,
-    isLocationShared: true,
+    isLocationShared,
     isPending: false,
     eta: null,
     roomDoc: null,
