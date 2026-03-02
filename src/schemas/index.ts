@@ -1,4 +1,5 @@
 export * from "./aiAudit";
+export * from "./community";
 export * from "./aiConversationState";
 export * from "./attachment";
 export * from "./audit";

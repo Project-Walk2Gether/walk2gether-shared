@@ -110,6 +110,8 @@ export const userDataSchema = yup.object({
   activelyDiscussingPlanDoc: documentReferenceSchema.optional().nullable(),
   // AI response processing indicator
   aiResponseProcessingStartedAt: timestampSchema.optional().nullable(),
+  // Whether the user allows location sharing for group walks (null = not yet decided)
+  allowLocationSharingForGroupWalks: yup.boolean().nullable().default(null),
 });
 
 export type UserData = yup.InferType<typeof userDataSchema>;
