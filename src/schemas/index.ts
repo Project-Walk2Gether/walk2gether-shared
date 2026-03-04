@@ -7,6 +7,7 @@ export * from "./availability";
 export * from "./favoriteLocation";
 export * from "./friendship";
 export * from "./group";
+export * from "./legalDocument";
 export * from "./livekitRoomMetadata";
 export * from "./location";
 export * from "./locationOption";

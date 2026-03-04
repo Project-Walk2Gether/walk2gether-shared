@@ -112,6 +112,8 @@ export const userDataSchema = yup.object({
   aiResponseProcessingStartedAt: timestampSchema.optional().nullable(),
   // Whether the user allows location sharing for group walks (null = not yet decided)
   allowLocationSharingForGroupWalks: yup.boolean().nullable().default(null),
+  // Version of the privacy policy the user agreed to during signup
+  agreedPrivacyPolicyVersion: yup.number().nullable().default(null),
 });
 
 export type UserData = yup.InferType<typeof userDataSchema>;
