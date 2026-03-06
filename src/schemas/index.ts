@@ -1,5 +1,6 @@
 export * from "./aiAudit";
 export * from "./community";
+export * from "./communityClaimRequest";
 export * from "./aiConversationState";
 export * from "./attachment";
 export * from "./audit";
@@ -7,6 +8,7 @@ export * from "./availability";
 export * from "./favoriteLocation";
 export * from "./friendship";
 export * from "./group";
+export * from "./inviteAcceptance";
 export * from "./legalDocument";
 export * from "./livekitRoomMetadata";
 export * from "./location";

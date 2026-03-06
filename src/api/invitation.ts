@@ -73,3 +73,44 @@ export interface InvitationAcceptResponse {
     status: number;
   };
 }
+
+/**
+ * Request type for the /invitation/accept-lightweight endpoint
+ * Lightweight acceptance: only pairs a phone number with invite codes.
+ * No authentication required.
+ */
+export interface InvitationAcceptLightweightRequest {
+  data: {
+    phoneNumber: string;
+    code?: string;
+    walkCode?: string;
+    groupCode?: string;
+  };
+}
+
+/**
+ * Response type for the /invitation/accept-lightweight endpoint
+ */
+export interface InvitationAcceptLightweightResponse {
+  success: boolean;
+  message: string;
+  error?: {
+    message: string;
+    status: number;
+  };
+}
+
+/**
+ * Pending invite acceptance info returned when querying for a user's phone number
+ */
+export interface PendingInviteAcceptanceInfo {
+  id: string;
+  inviterName: string | null;
+  inviterProfilePicUrl: string | null;
+  inviterUid: string | null;
+  groupName: string | null;
+  groupId: string | null;
+  friendInviteCode: string | null;
+  walkCode: string | null;
+  groupCode: string | null;
+}

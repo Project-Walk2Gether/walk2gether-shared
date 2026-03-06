@@ -6,10 +6,13 @@
 
 // Import all API types
 import {
+  InvitationAcceptLightweightRequest,
+  InvitationAcceptLightweightResponse,
   InvitationAcceptRequest,
   InvitationAcceptResponse,
   InvitationValidateRequest,
   InvitationValidateResponse,
+  PendingInviteAcceptanceInfo,
 } from "./invitation";
 
 import {
@@ -36,6 +39,13 @@ export namespace API {
       export type RequestBody = InvitationAcceptRequest;
       export type ResponseBody = InvitationAcceptResponse;
     }
+
+    export namespace AcceptLightweight {
+      export type RequestBody = InvitationAcceptLightweightRequest;
+      export type ResponseBody = InvitationAcceptLightweightResponse;
+    }
+
+    export type PendingAcceptanceInfo = PendingInviteAcceptanceInfo;
   }
 
   // User namespace

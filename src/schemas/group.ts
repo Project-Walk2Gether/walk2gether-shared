@@ -16,6 +16,7 @@ export const groupSchema = yup.object({
     .of(yup.string().required())
     .required()
     .default([]),
+  communityId: yup.string().nullable().default(null),
 });
 
 export type Group = yup.InferType<typeof groupSchema>;
