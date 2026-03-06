@@ -85,6 +85,7 @@ export interface InvitationAcceptLightweightRequest {
     code?: string;
     walkCode?: string;
     groupCode?: string;
+    inviterCode?: string;
   };
 }
 
