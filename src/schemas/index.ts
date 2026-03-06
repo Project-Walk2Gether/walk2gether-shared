@@ -9,6 +9,7 @@ export * from "./favoriteLocation";
 export * from "./friendship";
 export * from "./group";
 export * from "./inviteAcceptance";
+export * from "./membership";
 export * from "./legalDocument";
 export * from "./livekitRoomMetadata";
 export * from "./location";
