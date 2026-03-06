@@ -3,11 +3,69 @@ set -e
 
 SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
 SHARED_DIR="$SCRIPT_DIR"
-FUNCTIONS_DIR="$SCRIPT_DIR/../walk2gether-functions"
-EXPO_DIR="$SCRIPT_DIR/../walk2gether-expo"
-ADMIN_DIR="$SCRIPT_DIR/../walk2gether-admin-next"
-DASHBOARD_DIR="$SCRIPT_DIR/../walk2gether-dashboard"
-VOICE_AGENT_DIR="$SCRIPT_DIR/../walk2gether-voice-agent"
+
+# Consumer short names, directories, and static flags (parallel arrays)
+ALL_NAMES=(    "functions"                               "expo"                               "admin"                                    "dashboard"                               "voice-agent"                               "website")
+ALL_DIRS=(     "$SCRIPT_DIR/../walk2gether-functions"    "$SCRIPT_DIR/../walk2gether-expo"    "$SCRIPT_DIR/../walk2gether-admin-next"    "$SCRIPT_DIR/../walk2gether-dashboard"    "$SCRIPT_DIR/../walk2gether-voice-agent"    "$SCRIPT_DIR/../walk2gether-website")
+ALL_STATIC=(   "false"                                   "false"                              "false"                                    "false"                                   "true"                                      "false")
+
+get_dir_for_name() {
+  local target="$1"
+  for i in "${!ALL_NAMES[@]}"; do
+    if [ "${ALL_NAMES[$i]}" = "$target" ]; then
+      echo "${ALL_DIRS[$i]}"
+      return 0
+    fi
+  done
+  return 1
+}
+
+get_static_for_name() {
+  local target="$1"
+  for i in "${!ALL_NAMES[@]}"; do
+    if [ "${ALL_NAMES[$i]}" = "$target" ]; then
+      echo "${ALL_STATIC[$i]}"
+      return 0
+    fi
+  done
+  echo "false"
+}
+
+# Parse --only argument (comma-separated list of short names)
+ONLY_CONSUMERS=()
+for arg in "$@"; do
+  case "$arg" in
+    --only=*)
+      IFS=',' read -ra ONLY_CONSUMERS <<< "${arg#--only=}"
+      ;;
+    --help|-h)
+      echo "Usage: ./pack-and-update.sh [--only=name1,name2,...]"
+      echo ""
+      echo "Consumer names: ${ALL_NAMES[*]}"
+      echo ""
+      echo "Examples:"
+      echo "  ./pack-and-update.sh                        # update all consumers"
+      echo "  ./pack-and-update.sh --only=functions        # update only functions"
+      echo "  ./pack-and-update.sh --only=functions,expo   # update functions and expo"
+      exit 0
+      ;;
+  esac
+done
+
+# Determine which consumers to target
+if [ ${#ONLY_CONSUMERS[@]} -gt 0 ]; then
+  TARGET_NAMES=("${ONLY_CONSUMERS[@]}")
+  for name in "${TARGET_NAMES[@]}"; do
+    if ! get_dir_for_name "$name" > /dev/null 2>&1; then
+      echo "❌ Unknown consumer: $name"
+      echo "   Valid names: ${ALL_NAMES[*]}"
+      exit 1
+    fi
+  done
+  echo "==> Targeting only: ${TARGET_NAMES[*]}"
+else
+  TARGET_NAMES=("${ALL_NAMES[@]}")
+fi
 
 # Generate a timestamp-based prerelease version to bust npm cache
 TIMESTAMP=$(date +%s)
@@ -21,19 +79,19 @@ npm version "$VERSION" --no-git-tag-version --allow-same-version
 echo "==> Building walk2gether-shared"
 npm run build
 
-# Pack to each consumer directory
-CONSUMERS=("$FUNCTIONS_DIR" "$EXPO_DIR" "$ADMIN_DIR" "$DASHBOARD_DIR" "$VOICE_AGENT_DIR")
-for DIR in "${CONSUMERS[@]}"; do
+# Pack to each target consumer directory
+for name in "${TARGET_NAMES[@]}"; do
+  DIR=$(get_dir_for_name "$name")
   if [ -d "$DIR" ]; then
-    echo "==> Packing to $(basename "$DIR")"
+    echo "==> Packing to ${name}"
     npm pack --pack-destination "$DIR"
   fi
 done
 
 update_consumer() {
   local DIR="$1"
-  local NAME=$(basename "$DIR")
-  local USE_STATIC="${2:-false}"
+  local NAME="$2"
+  local USE_STATIC="${3:-false}"
 
   if [ ! -d "$DIR" ]; then
     echo "==> Skipping ${NAME} (directory not found)"
@@ -82,11 +140,11 @@ update_consumer() {
   fi
 }
 
-update_consumer "$FUNCTIONS_DIR"
-update_consumer "$EXPO_DIR"
-update_consumer "$ADMIN_DIR"
-update_consumer "$DASHBOARD_DIR"
-update_consumer "$VOICE_AGENT_DIR" true
+for name in "${TARGET_NAMES[@]}"; do
+  DIR=$(get_dir_for_name "$name")
+  USE_STATIC=$(get_static_for_name "$name")
+  update_consumer "$DIR" "$name" "$USE_STATIC"
+done
 
 echo ""
-echo "✅ walk2gether-shared ${VERSION} installed in all consumer projects"
+echo "✅ walk2gether-shared ${VERSION} installed in: ${TARGET_NAMES[*]}"
