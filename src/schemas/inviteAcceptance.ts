@@ -14,6 +14,7 @@ export const inviteAcceptanceSchema = yup.object({
   inviterUid: yup.string().nullable().default(null),
   // Cached group info for display in the app
   groupName: yup.string().nullable().default(null),
+  groupDescription: yup.string().nullable().default(null),
   groupId: yup.string().nullable().default(null),
   // Whether this has been processed (finalized into friendship/group/walk)
   status: yup

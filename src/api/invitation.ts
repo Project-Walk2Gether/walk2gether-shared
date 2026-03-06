@@ -110,6 +110,7 @@ export interface PendingInviteAcceptanceInfo {
   inviterProfilePicUrl: string | null;
   inviterUid: string | null;
   groupName: string | null;
+  groupDescription: string | null;
   groupId: string | null;
   friendInviteCode: string | null;
   walkCode: string | null;
