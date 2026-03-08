@@ -2,13 +2,7 @@ import * as yup from "yup";
 import { documentReferenceSchema } from "../firestore/documentReference";
 import { availabilitySchema } from "./availability";
 import { locationSchema } from "./location";
-import {
-  Route,
-  RouteDistance,
-  RouteDuration,
-  RoutePoint,
-  routeSchema,
-} from "./route";
+import { Route, RouteDistance, RouteDuration, RoutePoint } from "./route";
 import { timestampSchema } from "./utils/timestamp";
 
 // Re-export route types for backward compatibility
@@ -103,20 +97,13 @@ export const baseParticipantSchema = yup.object({
 
 /**
  * Full participant schema that extends the base schema with additional properties
- * that don't need to be denormalized (like location data and route information).
+ * that don't need to be denormalized.
+ *
+ * High-frequency fields (lastLocation, route, travelRoute) have been moved to
+ * the participantTelemetry document to avoid write contention.
  */
 export const participantSchema = baseParticipantSchema.shape({
-  lastLocation: yup
-    .object({
-      latitude: yup.number().required(),
-      longitude: yup.number().required(),
-      timestamp: timestampSchema,
-    })
-    .optional()
-    .default(undefined),
-  route: routeSchema.nullable().optional().default(undefined),
-  travelRoute: routeSchema.nullable().optional().default(undefined),
-  // Add navigation method for route calculation
+  // Navigation mode for travelRoute calculation (user preference, low-frequency)
   navigationMethod: yup
     .mixed<"driving" | "walking">()
     .oneOf(["driving", "walking"])
@@ -125,9 +112,3 @@ export const participantSchema = baseParticipantSchema.shape({
 
 export type BaseParticipant = yup.InferType<typeof baseParticipantSchema>;
 export type Participant = yup.InferType<typeof participantSchema>;
-
-// Export the extended participant type with route
-export type ParticipantWithRoute = Participant & {
-  route: Route | null;
-  travelRoute?: Route | null;
-};

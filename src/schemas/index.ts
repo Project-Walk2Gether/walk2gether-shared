@@ -18,6 +18,7 @@ export * from "./meetupType";
 export * from "./message";
 export * from "./notification";
 export * from "./participant";
+export * from "./participantTelemetry";
 // export * from "./plan";
 export * from "./quote";
 export * from "./reminder";
