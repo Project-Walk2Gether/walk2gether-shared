@@ -12,6 +12,7 @@ export interface InvitationValidateRequest {
     code?: string;
     walkCode?: string;
     groupCode?: string;
+    inviterCode?: string;
   };
 }
 
