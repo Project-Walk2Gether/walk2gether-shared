@@ -51,6 +51,8 @@ export const friendshipSchema = yup.object({
   updatedAt: timestampSchema,
   createdByUid: yup.string().required(),
   acceptedAt: timestampSchema.nullable().defined(),
+  shouldNotify: yup.boolean().required().default(false),
+  notificationSentAt: timestampSchema.nullable().defined(),
   deletedAt: timestampSchema.nullable().defined(),
   deletedByUid: yup.string().optional(),
   reportedAt: timestampSchema.nullable().defined(),

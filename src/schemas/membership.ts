@@ -14,6 +14,8 @@ export const membershipSchema = yup.object({
     .required()
     .default("member"),
   notifyNewGroupWalks: yup.boolean().required().default(true),
+  shouldNotify: yup.boolean().required().default(false),
+  notificationSentAt: timestampSchema.nullable().defined(),
   joinedAt: timestampSchema.required(),
 });
 

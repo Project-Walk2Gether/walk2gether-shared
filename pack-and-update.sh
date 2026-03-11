@@ -107,16 +107,16 @@ update_consumer() {
     # Dockerized consumers: use static name walk2gether-shared.tgz
     cp "$DIR/$TARBALL_NAME" "$DIR/walk2gether-shared.tgz"
     if [[ "$(uname)" == "Darwin" ]]; then
-      sed -i '' "s|\"walk2gether-shared\": \"file:[^\"]*\"|\"walk2gether-shared\": \"file:walk2gether-shared.tgz\"|" "$DIR/package.json"
+      sed -i '' "s|\"walk2gether-shared\": \"[^\"]*\"|\"walk2gether-shared\": \"file:walk2gether-shared.tgz\"|" "$DIR/package.json"
     else
-      sed -i "s|\"walk2gether-shared\": \"file:[^\"]*\"|\"walk2gether-shared\": \"file:walk2gether-shared.tgz\"|" "$DIR/package.json"
+      sed -i "s|\"walk2gether-shared\": \"[^\"]*\"|\"walk2gether-shared\": \"file:walk2gether-shared.tgz\"|" "$DIR/package.json"
     fi
   else
     # Non-Dockerized consumers: use dynamic name for cache busting
     if [[ "$(uname)" == "Darwin" ]]; then
-      sed -i '' "s|\"walk2gether-shared\": \"file:[^\"]*\"|\"walk2gether-shared\": \"file:${TARBALL_NAME}\"|" "$DIR/package.json"
+      sed -i '' "s|\"walk2gether-shared\": \"[^\"]*\"|\"walk2gether-shared\": \"file:${TARBALL_NAME}\"|" "$DIR/package.json"
     else
-      sed -i "s|\"walk2gether-shared\": \"file:[^\"]*\"|\"walk2gether-shared\": \"file:${TARBALL_NAME}\"|" "$DIR/package.json"
+      sed -i "s|\"walk2gether-shared\": \"[^\"]*\"|\"walk2gether-shared\": \"file:${TARBALL_NAME}\"|" "$DIR/package.json"
     fi
   fi
 
@@ -134,9 +134,9 @@ update_consumer() {
     local FINAL_REF="file:${TARBALL_NAME}"
   fi
   if [[ "$(uname)" == "Darwin" ]]; then
-    sed -i '' "s|\"walk2gether-shared\": \"file:[^\"]*\"|\"walk2gether-shared\": \"${FINAL_REF}\"|" "$DIR/package.json"
+    sed -i '' "s|\"walk2gether-shared\": \"[^\"]*\"|\"walk2gether-shared\": \"${FINAL_REF}\"|" "$DIR/package.json"
   else
-    sed -i "s|\"walk2gether-shared\": \"file:[^\"]*\"|\"walk2gether-shared\": \"${FINAL_REF}\"|" "$DIR/package.json"
+    sed -i "s|\"walk2gether-shared\": \"[^\"]*\"|\"walk2gether-shared\": \"${FINAL_REF}\"|" "$DIR/package.json"
   fi
 }
 

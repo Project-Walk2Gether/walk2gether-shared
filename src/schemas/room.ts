@@ -33,6 +33,10 @@ export const roomSchema = yup.object({
     .nullable()
     .default(null),
   distanceWalkedMeters: yup.number().nullable().default(null),
+  // Announcement text for when a new member is added to an existing room (third-wheel joining)
+  newMemberAnnouncement: yup.string().nullable().default(null),
+  // Whether this is the final "all together" room at the end of a walk
+  isFinalRoom: yup.boolean().optional().default(false),
 });
 
 export type Room = yup.InferType<typeof roomSchema>;
