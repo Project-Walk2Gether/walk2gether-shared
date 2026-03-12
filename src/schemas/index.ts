@@ -23,6 +23,7 @@ export * from "./participantTelemetry";
 export * from "./quote";
 export * from "./reminder";
 export * from "./room";
+export * from "./roomAnnouncement";
 export * from "./route";
 export * from "./thread";
 export * from "./transcriptItem";

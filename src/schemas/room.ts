@@ -12,6 +12,11 @@ export const roomSchema = yup.object({
   walkId: yup.string().required(),
   type: yup.mixed<"friends" | "group">().oneOf(["friends", "group"]).required(),
   memberUids: yup.array().of(yup.string().required()).required(),
+  thirdWheelMemberUids: yup
+    .array()
+    .of(yup.string().required())
+    .required()
+    .default([]),
 
   conversationStarterPrompt: yup.string().optional(),
   isActive: yup.boolean().required(),
@@ -33,8 +38,6 @@ export const roomSchema = yup.object({
     .nullable()
     .default(null),
   distanceWalkedMeters: yup.number().nullable().default(null),
-  // Announcement text for when a new member is added to an existing room (third-wheel joining)
-  newMemberAnnouncement: yup.string().nullable().default(null),
   // Whether this is the final "all together" room at the end of a walk
   isFinalRoom: yup.boolean().optional().default(false),
 });
