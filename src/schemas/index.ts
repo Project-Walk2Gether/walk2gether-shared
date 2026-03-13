@@ -30,3 +30,4 @@ export * from "./transcriptItem";
 export * from "./userData";
 export * from "./walk";
 export * from "./walkDraft";
+export * from "./systemUpdate";
