@@ -52,8 +52,6 @@ export const baseParticipantSchema = yup.object({
   statusUpdatedAt: timestampSchema.nullable(),
   suggestedDepartureTime: timestampSchema.nullable(),
   suggestedDepartureNotificationSentAt: timestampSchema.nullable().defined(),
-  agentStartedSpeakingAt: timestampSchema.nullable(),
-  agentFinishedSpeakingAt: timestampSchema.nullable(),
   // When the participant actually starts and finishes their walk (used for tracking)
   startedAt: timestampSchema.nullable(),
   finishedAt: timestampSchema.nullable(),
