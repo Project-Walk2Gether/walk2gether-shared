@@ -2,6 +2,7 @@ import * as yup from "yup";
 import { objectOf } from "../../utils/objectOf";
 import { meetupTypeSchema } from "../meetupType";
 import { baseParticipantSchema } from "../participant";
+import { walkRecentMessageSchema } from "./recentMessage";
 import { timestampSchema } from "../utils/timestamp";
 
 export const walkBaseSchema = yup.object({
@@ -25,6 +26,7 @@ export const walkBaseSchema = yup.object({
   meetupType: meetupTypeSchema.required(),
   visibility: yup.string().oneOf(["public", "private"]).required(),
   participantsById: objectOf(baseParticipantSchema).optional(),
+  recentMessagesByUserId: objectOf(walkRecentMessageSchema).optional(),
   participantUids: yup.array().of(yup.string().required()),
   groupId: yup.string().optional(),
   ownerIsInitiallyAtLocation: yup.boolean().optional().default(undefined),

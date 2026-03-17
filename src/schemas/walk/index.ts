@@ -5,6 +5,7 @@ import { GroupWalk, groupWalkSchema } from "./group";
 export * from "./base";
 export * from "./friends";
 export * from "./group";
+export * from "./recentMessage";
 
 // Re-export specific types for convenience
 export { WalkBase } from "./base";
