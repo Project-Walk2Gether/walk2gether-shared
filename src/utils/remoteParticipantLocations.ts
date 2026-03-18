@@ -87,11 +87,11 @@ export function createLocationOptionFromParticipant(
     currentLocation: {
       latitude,
       longitude,
+      name: locDisplayName,
       displayName: locDisplayName,
       city: cityName,
       country,
     },
-    route: null, // Route will be populated by the participant's tracked route
     destinations: [], // No destinations by default for remote participant locations
   };
 }
