@@ -1,5 +1,6 @@
 import * as yup from "yup";
 import { timestampSchema } from "./utils/timestamp";
+import { walkRecentMessageSchema } from "./walk/recentMessage";
 
 /**
  * Room schema for the new rooms system that replaces rounds.
@@ -41,6 +42,8 @@ export const roomSchema = yup.object({
     .mixed<Record<string, number>>()
     .nullable()
     .default(null),
+  // Denormalized last chat message sent in this room
+  lastMessage: walkRecentMessageSchema.nullable().default(null),
   // Whether this is the final "all together" room at the end of a walk
   isFinalRoom: yup.boolean().optional().default(false),
 });
