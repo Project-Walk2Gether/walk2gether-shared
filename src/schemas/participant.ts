@@ -2,11 +2,7 @@ import * as yup from "yup";
 import { documentReferenceSchema } from "../firestore/documentReference";
 import { availabilitySchema } from "./availability";
 import { locationSchema } from "./location";
-import { Route, RouteDistance, RouteDuration, RoutePoint } from "./route";
 import { timestampSchema } from "./utils/timestamp";
-
-// Re-export route types for backward compatibility
-export type { Route, RouteDistance, RouteDuration, RoutePoint };
 
 /**
  * Base participant schema with simplified properties that will be denormalized into the walk document.
@@ -97,8 +93,8 @@ export const baseParticipantSchema = yup.object({
  * Full participant schema that extends the base schema with additional properties
  * that don't need to be denormalized.
  *
- * High-frequency fields (lastLocation, route, travelRoute) have been moved to
- * the participantTelemetry document to avoid write contention.
+ * High-frequency fields (lastLocation, route, travelRoute) live on the
+ * participantTelemetry document to avoid write contention.
  */
 export const participantSchema = baseParticipantSchema.shape({
   // Navigation mode for travelRoute calculation (user preference, low-frequency)

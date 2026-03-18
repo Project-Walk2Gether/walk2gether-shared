@@ -37,7 +37,10 @@ export const roomSchema = yup.object({
     .mixed<Record<string, number>>()
     .nullable()
     .default(null),
-  distanceWalkedMeters: yup.number().nullable().default(null),
+  memberDistanceWalkedMeters: yup
+    .mixed<Record<string, number>>()
+    .nullable()
+    .default(null),
   // Whether this is the final "all together" room at the end of a walk
   isFinalRoom: yup.boolean().optional().default(false),
 });
