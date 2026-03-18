@@ -14,6 +14,7 @@ export * from "./legalDocument";
 export * from "./livekitRoomMetadata";
 export * from "./location";
 export * from "./locationOption";
+export * from "./locationOptionTelemetry";
 export * from "./meetupType";
 export * from "./message";
 export * from "./notification";
