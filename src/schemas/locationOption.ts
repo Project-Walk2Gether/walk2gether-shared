@@ -1,7 +1,7 @@
 import * as yup from "yup";
 import { objectOf } from "../utils/objectOf";
 import { attachmentSchema } from "./attachment";
-import { locationSchema, namedLocationSchema } from "./location";
+import { namedLocationSchema } from "./location";
 import { meetupTypeSchema } from "./meetupType";
 
 /**
@@ -21,7 +21,6 @@ export const baseLocationOptionSchema = yup.object({
  */
 export const locationOptionSchema = baseLocationOptionSchema.shape({
   groupSpotPhoto: attachmentSchema.optional().default(undefined),
-  currentLocation: locationSchema.nullable().default(null),
   meetupType: meetupTypeSchema.default("inPerson").required(), // Default to in-person for backward compatibility
 
   // Destinations - places to visit during the walk from this starting location

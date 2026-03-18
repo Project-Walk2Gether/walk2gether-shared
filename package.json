@@ -1,6 +1,6 @@
 {
   "name": "walk2gether-shared",
-  "version": "1.0.0-1773803749",
+  "version": "1.0.0-1773873756",
   "description": "Shared types and schemas for walkmate projects",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
