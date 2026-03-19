@@ -29,7 +29,7 @@ export function getChosenLocationForWalk(
 
   // Return the first location option's location
   const firstOption = locationOptions[0];
-  return firstOption?.location ?? firstOption?.currentLocation ?? null;
+  return firstOption?.location ?? null;
 }
 
 /**
@@ -38,7 +38,7 @@ export function getChosenLocationForWalk(
  * NOTE: locationOptions must be fetched from the subcollection and passed as a parameter.
  *
  * - If participant.chosenLocationOptionId matches an option, returns that option's location
- * - Otherwise falls back to first locationOption's currentLocation if present
+ * - Otherwise falls back to the first locationOption's stable location
  * - Otherwise returns null
  */
 export function getChosenLocationForParticipant(
@@ -55,13 +55,12 @@ export function getChosenLocationForParticipant(
       return chosenOption.location;
     }
   }
-  // Fallback to first location option's currentLocation
-  return locationOptions?.[0]?.currentLocation ?? null;
+  return locationOptions?.[0]?.location ?? null;
 }
 
 /**
  * For non-remote walks, get the shared location that all participants use.
- * Returns the first participant's chosen location, or first locationOption's currentLocation as fallback.
+ * Returns the first participant's chosen location, or first locationOption's stable location as fallback.
  *
  * NOTE: locationOptions must be fetched from the subcollection and passed as a parameter.
  */
@@ -79,8 +78,7 @@ export function getSharedLocationForWalk(
       locationOptions,
     );
   }
-  // Fallback to first location option's currentLocation
-  return locationOptions?.[0]?.currentLocation ?? null;
+  return locationOptions?.[0]?.location ?? null;
 }
 
 /**
