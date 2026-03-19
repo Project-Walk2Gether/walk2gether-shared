@@ -103,6 +103,24 @@ export interface InvitationAcceptLightweightResponse {
 }
 
 /**
+ * Request type for the /invitation/check-user endpoint
+ * Checks if a phone number belongs to an existing user.
+ * No authentication required.
+ */
+export interface InvitationCheckUserRequest {
+  data: {
+    phoneNumber: string;
+  };
+}
+
+/**
+ * Response type for the /invitation/check-user endpoint
+ */
+export interface InvitationCheckUserResponse {
+  exists: boolean;
+}
+
+/**
  * Pending invite acceptance info returned when querying for a user's phone number
  */
 export interface PendingInviteAcceptanceInfo {

@@ -10,6 +10,8 @@ import {
   InvitationAcceptLightweightResponse,
   InvitationAcceptRequest,
   InvitationAcceptResponse,
+  InvitationCheckUserRequest,
+  InvitationCheckUserResponse,
   InvitationValidateRequest,
   InvitationValidateResponse,
   PendingInviteAcceptanceInfo,
@@ -43,6 +45,11 @@ export namespace API {
     export namespace AcceptLightweight {
       export type RequestBody = InvitationAcceptLightweightRequest;
       export type ResponseBody = InvitationAcceptLightweightResponse;
+    }
+
+    export namespace CheckUser {
+      export type RequestBody = InvitationCheckUserRequest;
+      export type ResponseBody = InvitationCheckUserResponse;
     }
 
     export type PendingAcceptanceInfo = PendingInviteAcceptanceInfo;
