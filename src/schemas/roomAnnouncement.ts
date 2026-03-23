@@ -2,13 +2,27 @@ import * as yup from "yup";
 import { timestampSchema } from "./utils/timestamp";
 
 export const roomAnnouncementKindSchema = yup
-  .mixed<"third_wheel_join" | "third_wheel_departure" | "admin">()
-  .oneOf(["third_wheel_join", "third_wheel_departure", "admin"])
+  .mixed<
+    | "third_wheel_join"
+    | "third_wheel_departure"
+    | "admin"
+    | "introduction"
+    | "wrap_up"
+    | "enjoy_walk"
+  >()
+  .oneOf([
+    "third_wheel_join",
+    "third_wheel_departure",
+    "admin",
+    "introduction",
+    "wrap_up",
+    "enjoy_walk",
+  ])
   .required();
 
 export const roomAnnouncementSoundSchema = yup
-  .mixed<"default" | "bonus_chime">()
-  .oneOf(["default", "bonus_chime"])
+  .mixed<"default" | "bonus_chime" | "none">()
+  .oneOf(["default", "bonus_chime", "none"])
   .required();
 
 export const roomAnnouncementSchema = yup.object({
@@ -16,6 +30,7 @@ export const roomAnnouncementSchema = yup.object({
   kind: roomAnnouncementKindSchema,
   text: yup.string().required(),
   sound: roomAnnouncementSoundSchema,
+  playAt: timestampSchema.required(),
   createdAt: timestampSchema.required(),
   processedAt: timestampSchema.nullable().default(null),
 });
