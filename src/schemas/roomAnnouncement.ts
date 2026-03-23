@@ -30,6 +30,7 @@ export const roomAnnouncementSchema = yup.object({
   kind: roomAnnouncementKindSchema,
   text: yup.string().required(),
   sound: roomAnnouncementSoundSchema,
+  audioUrl: yup.string().nullable().default(null),
   playAt: timestampSchema.required(),
   createdAt: timestampSchema.required(),
   processedAt: timestampSchema.nullable().default(null),
