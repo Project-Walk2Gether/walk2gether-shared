@@ -18,6 +18,10 @@ export const FRIEND_TAG_LABELS: Record<FriendTag, string> = {
   family: "Family",
 };
 
+export const FRIENDSHIP_STATUS_OPTIONS = ["requested", "accepted"] as const;
+
+export type FriendshipStatus = (typeof FRIENDSHIP_STATUS_OPTIONS)[number];
+
 export const friendshipSchema = yup.object({
   id: yup.string(),
   uids: yup
@@ -39,6 +43,11 @@ export const friendshipSchema = yup.object({
         return uids[0] !== uids[1];
       },
     ),
+  status: yup
+    .string()
+    .oneOf(FRIENDSHIP_STATUS_OPTIONS)
+    .required()
+    .default("accepted"),
   // Simplified schema specifically for friendship user data
   userDataByUid: objectOf(
     yup.object({
@@ -51,6 +60,7 @@ export const friendshipSchema = yup.object({
   updatedAt: timestampSchema,
   createdByUid: yup.string().required(),
   acceptedAt: timestampSchema.nullable().defined(),
+  rejectedAt: timestampSchema.nullable().defined(),
   shouldNotify: yup.boolean().required().default(false),
   notificationSentAt: timestampSchema.nullable().defined(),
   deletedAt: timestampSchema.nullable().defined(),
