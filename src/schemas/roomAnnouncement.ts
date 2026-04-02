@@ -38,6 +38,7 @@ export const announcementStepSchema = yup.object({
     .optional(),
   text: yup.string().optional(),
   audioUrl: yup.string().nullable().default(null),
+  delayAfterMs: yup.number().optional(),
 });
 
 export const roomAnnouncementSchema = yup.object({

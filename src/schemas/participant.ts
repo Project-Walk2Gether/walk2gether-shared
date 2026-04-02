@@ -45,6 +45,9 @@ export const baseParticipantSchema = yup.object({
   interestExpressedAt: timestampSchema.nullable(),
   deniedAt: timestampSchema.nullable(),
   cancelledAt: timestampSchema.nullable(),
+  // The walk date at the time the participant last responded (accepted/declined/suggested time).
+  // Compare with walk.date to detect if the response is stale after a time change.
+  respondedToDate: timestampSchema.nullable(),
   statusUpdatedAt: timestampSchema.nullable(),
   suggestedDepartureTime: timestampSchema.nullable(),
   suggestedDepartureNotificationSentAt: timestampSchema.nullable().defined(),

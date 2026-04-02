@@ -114,6 +114,8 @@ export const userDataSchema = yup.object({
   allowLocationSharingForGroupWalks: yup.boolean().nullable().default(null),
   // Version of the privacy policy the user agreed to during signup
   agreedPrivacyPolicyVersion: yup.number().nullable().default(null),
+  walkTourDismissedAt: timestampSchema.optional().nullable(),
+  roomTourDismissedAt: timestampSchema.optional().nullable(),
 });
 
 export type UserData = yup.InferType<typeof userDataSchema>;

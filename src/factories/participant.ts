@@ -62,6 +62,7 @@ export function participantFromUser(
     interestExpressedAt: null,
     deniedAt: null,
     cancelledAt: null,
+    respondedToDate: null,
     statusUpdatedAt: null,
     suggestedDepartureTime: null,
     suggestedDepartureNotificationSentAt: null,

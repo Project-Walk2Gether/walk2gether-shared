@@ -30,6 +30,7 @@ export const walkBaseSchema = yup.object({
   participantUids: yup.array().of(yup.string().required()),
   groupId: yup.string().optional(),
   ownerIsInitiallyAtLocation: yup.boolean().optional().default(undefined),
+  allowParticipantInvites: yup.boolean().optional().default(false),
 });
 
 // Export canonical types
