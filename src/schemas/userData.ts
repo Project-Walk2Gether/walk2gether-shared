@@ -114,6 +114,23 @@ export const userDataSchema = yup.object({
   allowLocationSharingForGroupWalks: yup.boolean().nullable().default(null),
   // Version of the privacy policy the user agreed to during signup
   agreedPrivacyPolicyVersion: yup.number().nullable().default(null),
+  // Location permission status (synced from device for observability)
+  locationPermissions: yup
+    .object({
+      foreground: yup
+        .mixed<"granted" | "denied" | "undetermined">()
+        .oneOf(["granted", "denied", "undetermined"])
+        .required(),
+      background: yup
+        .mixed<"granted" | "denied" | "undetermined">()
+        .oneOf(["granted", "denied", "undetermined"])
+        .required(),
+      updatedAt: timestampSchema,
+      platform: yup.mixed<"ios" | "android">().oneOf(["ios", "android"]),
+    })
+    .optional()
+    .nullable()
+    .default(null),
   walkTourDismissedAt: timestampSchema.optional().nullable(),
   roomTourDismissedAt: timestampSchema.optional().nullable(),
 });
