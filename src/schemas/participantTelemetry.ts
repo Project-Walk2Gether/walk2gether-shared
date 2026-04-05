@@ -33,6 +33,12 @@ export const participantTelemetrySchema = yup.object({
   // Google Maps directions route to the walk location
   travelRoute: routeSchema.nullable().default(null),
 
+  // RDP-simplified route generated when participant finishes
+  smoothedRoute: routeSchema.nullable().default(null),
+
+  // Public URL of a static map PNG showing the smoothed route
+  routeImageUrl: yup.string().nullable().default(null),
+
   updatedAt: timestampSchema,
 });
 

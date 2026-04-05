@@ -24,6 +24,7 @@ export interface InvitationValidateGroupMember {
 export interface InvitationValidateGroupInfo {
   id: string;
   name: Group["name"];
+  description: Group["description"];
   memberCount: number;
   members: InvitationValidateGroupMember[];
 }
