@@ -88,6 +88,8 @@ export const baseParticipantSchema = yup.object({
     .of(yup.string().required())
     .optional()
     .default([]),
+  // Selfie URL taken before joining the final room (used for walk collage)
+  selfieUrl: yup.string().url().nullable().default(null),
   createdAt: timestampSchema,
   updatedAt: timestampSchema,
 });

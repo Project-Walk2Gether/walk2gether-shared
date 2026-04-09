@@ -75,6 +75,7 @@ export function participantFromUser(
     matchedWithUserIds: [],
     connectionRequests: {},
     declinedConnectionRequestFromUids: [],
+    selfieUrl: null,
     lastLocation: undefined,
     homeLocation: user.location ?? null,
     route: null,

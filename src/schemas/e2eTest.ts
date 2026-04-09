@@ -11,6 +11,26 @@ export const e2eTestStatusSchema = yup
 export type E2ETestStatus = yup.InferType<typeof e2eTestStatusSchema>;
 
 /**
+ * A single step within an E2E test.
+ */
+export const e2eTestStepSchema = yup.object({
+  /** Human-readable step description */
+  name: yup.string().required(),
+  /** ms offset from start of test recording */
+  startOffsetMs: yup.number().required(),
+  /** ms offset from start of test recording */
+  endOffsetMs: yup.number().required(),
+  /** Duration of this step in ms */
+  durationMs: yup.number().required(),
+  /** Whether this step passed or failed */
+  status: yup.string().oneOf(["passed", "failed"]).required(),
+  /** Error message if the step failed */
+  errorMessage: yup.string().nullable().default(null),
+});
+
+export type E2ETestStep = yup.InferType<typeof e2eTestStepSchema>;
+
+/**
  * A single E2E test case tracked across runs.
  * Stored in `e2eTestCases/{testId}`.
  *
@@ -38,6 +58,8 @@ export const e2eTestCaseSchema = yup.object({
   videoUrl: yup.string().url().nullable().default(null),
   /** Firebase Storage URL of the failure screenshot */
   screenshotUrl: yup.string().url().nullable().default(null),
+  /** Ordered list of steps recorded during the most recent run */
+  steps: yup.array().of(e2eTestStepSchema).nullable().default(null),
   /** ID of the run that last updated this test case */
   lastRunId: yup.string().nullable().default(null),
   /** When this test case was first seen */

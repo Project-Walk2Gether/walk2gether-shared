@@ -46,6 +46,12 @@ export const roomSchema = yup.object({
   lastMessage: walkRecentMessageSchema.nullable().default(null),
   // Whether this is the final "all together" room at the end of a walk
   isFinalRoom: yup.boolean().optional().default(false),
+  // Action to complete before connecting to this room (e.g. "selfie")
+  preConnection: yup
+    .mixed<"selfie">()
+    .oneOf(["selfie"])
+    .nullable()
+    .default(null),
 });
 
 export type Room = yup.InferType<typeof roomSchema>;

@@ -31,6 +31,8 @@ export const walkBaseSchema = yup.object({
   groupId: yup.string().optional(),
   ownerIsInitiallyAtLocation: yup.boolean().optional().default(undefined),
   allowParticipantInvites: yup.boolean().optional().default(false),
+  // URL of the generated selfie collage image for this walk
+  collageUrl: yup.string().url().nullable().default(null),
 });
 
 // Export canonical types
