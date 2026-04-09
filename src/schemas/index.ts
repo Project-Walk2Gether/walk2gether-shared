@@ -1,5 +1,6 @@
 export * from "./aiAudit";
 export * from "./community";
+export * from "./e2eTest";
 export * from "./communityClaimRequest";
 export * from "./aiConversationState";
 export * from "./attachment";
