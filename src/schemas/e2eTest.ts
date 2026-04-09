@@ -60,6 +60,10 @@ export const e2eTestCaseSchema = yup.object({
   screenshotUrl: yup.string().url().nullable().default(null),
   /** Ordered list of steps recorded during the most recent run */
   steps: yup.array().of(e2eTestStepSchema).nullable().default(null),
+  /** Hash of step names — changes when test structure changes */
+  stepsHash: yup.string().nullable().default(null),
+  /** stepsHash at the time the video was recorded — compare with stepsHash to detect stale videos */
+  videoStepsHash: yup.string().nullable().default(null),
   /** ID of the run that last updated this test case */
   lastRunId: yup.string().nullable().default(null),
   /** When this test case was first seen */

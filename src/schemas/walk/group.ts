@@ -16,6 +16,8 @@ export const groupWalkSchema = walkBaseSchema.shape({
   notifiedFirstReady: yup.boolean().optional().default(false),
   // Track whether we've sent the first "connected" notification to the organizer
   notifiedFirstConnected: yup.boolean().optional().default(false),
+  // Whether to show a selfie prompt before the final "all together" room
+  enableFinalRoomSelfie: yup.boolean().optional().default(false),
 });
 
 export type GroupWalk = yup.InferType<typeof groupWalkSchema>;
