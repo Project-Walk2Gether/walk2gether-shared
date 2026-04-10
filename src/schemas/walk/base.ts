@@ -33,6 +33,8 @@ export const walkBaseSchema = yup.object({
   allowParticipantInvites: yup.boolean().optional().default(false),
   // URL of the generated selfie collage image for this walk
   collageUrl: yup.string().url().nullable().default(null),
+  // Deadline by which participants should submit their selfie (2 min after the final room is created)
+  selfieDeadlineAt: timestampSchema.nullable().default(null),
 });
 
 // Export canonical types

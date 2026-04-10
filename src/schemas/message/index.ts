@@ -20,6 +20,8 @@ export const userMessageSchema = baseMessageSchema.shape({
   senderId: yup.string().required(),
   senderName: yup.string().required(),
   senderAvatarUrl: yup.string().url().optional(),
+  // When true, the server skips push notifications and recent-message preview for this message
+  suppressNotification: yup.boolean().optional(),
 });
 
 // Assistant message schema
