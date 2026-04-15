@@ -51,6 +51,8 @@ export const notificationSchema = yup.object({
   pushReceiptFetchError: yup.string().optional(),
   error: yup.string().optional(),
   errorStage: yup.string().optional(),
+  retryCount: yup.number().optional(),
+  lastRetryAt: timestampSchema.optional(),
   createdAt: timestampSchema,
   updatedAt: timestampSchema,
 });
