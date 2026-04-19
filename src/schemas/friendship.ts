@@ -71,6 +71,9 @@ export const friendshipSchema = yup.object({
   lastMessageAt: timestampSchema.nullable().defined(),
   lastMessagePreview: yup.string().optional(),
   totalMilesWalked: yup.number(),
+  introductionId: yup.string().nullable().optional(),
+  introReason: yup.string().nullable().optional(),
+  introducedByName: yup.string().nullable().optional(),
   // Tags are stored per-user, keyed by uid
   tagsByUid: objectOf(
     yup.array().of(yup.string().oneOf(FRIEND_TAG_OPTIONS).required()).defined(),

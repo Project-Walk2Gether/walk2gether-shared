@@ -8,6 +8,7 @@ export const inviteAcceptanceSchema = yup.object({
   friendInviteCode: yup.string().nullable().default(null),
   walkCode: yup.string().nullable().default(null),
   groupCode: yup.string().nullable().default(null),
+  introCode: yup.string().nullable().default(null),
   // Cached inviter info for display in the app
   inviterName: yup.string().nullable().default(null),
   inviterProfilePicUrl: yup.string().nullable().default(null),

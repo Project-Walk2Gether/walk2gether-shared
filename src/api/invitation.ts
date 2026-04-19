@@ -13,6 +13,7 @@ export interface InvitationValidateRequest {
     walkCode?: string;
     groupCode?: string;
     inviterCode?: string;
+    introCode?: string;
   };
 }
 
@@ -42,6 +43,13 @@ export interface InvitationValidateResponse {
   };
   walk?: Walk;
   group?: InvitationValidateGroupInfo;
+  introduction?: {
+    introducerName: string;
+    introducerProfilePicUrl: string | null;
+    otherPersonName: string;
+    otherPersonProfilePicUrl: string | null;
+    reason: string;
+  };
   error?: {
     message: string;
     status: number;
@@ -88,6 +96,7 @@ export interface InvitationAcceptLightweightRequest {
     walkCode?: string;
     groupCode?: string;
     inviterCode?: string;
+    introCode?: string;
   };
 }
 
@@ -135,4 +144,9 @@ export interface PendingInviteAcceptanceInfo {
   friendInviteCode: string | null;
   walkCode: string | null;
   groupCode: string | null;
+  introCode: string | null;
+  introReason: string | null;
+  introducerName: string | null;
+  otherPersonName: string | null;
+  otherPersonProfilePicUrl: string | null;
 }

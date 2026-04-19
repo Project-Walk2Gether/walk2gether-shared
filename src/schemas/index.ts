@@ -8,6 +8,7 @@ export * from "./audit";
 export * from "./availability";
 export * from "./favoriteLocation";
 export * from "./friendship";
+export * from "./introduction";
 export * from "./group";
 export * from "./inviteAcceptance";
 export * from "./membership";
