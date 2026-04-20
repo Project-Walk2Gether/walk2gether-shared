@@ -49,6 +49,7 @@ export interface InvitationValidateResponse {
     otherPersonName: string;
     otherPersonProfilePicUrl: string | null;
     reason: string;
+    expiresAt: string | null;
   };
   error?: {
     message: string;
