@@ -52,3 +52,10 @@ export function getE2ETestResultDocPath(
 ): string {
   return `${E2E_TEST_RUNS_COLLECTION}/${runId}/results/${testId}`;
 }
+
+/**
+ * Get the path to a test case's comments subcollection
+ */
+export function getE2ETestCommentsCollectionPath(testId: string): string {
+  return `${E2E_TEST_CASES_COLLECTION}/${testId}/comments`;
+}

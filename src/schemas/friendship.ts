@@ -18,7 +18,7 @@ export const FRIEND_TAG_LABELS: Record<FriendTag, string> = {
   family: "Family",
 };
 
-export const FRIENDSHIP_STATUS_OPTIONS = ["requested", "accepted"] as const;
+export const FRIENDSHIP_STATUS_OPTIONS = ["requested", "accepted", "introduced"] as const;
 
 export type FriendshipStatus = (typeof FRIENDSHIP_STATUS_OPTIONS)[number];
 

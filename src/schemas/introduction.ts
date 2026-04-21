@@ -45,6 +45,7 @@ export const introductionSchema = yup.object({
     .required()
     .default("pending"),
   friendshipId: yup.string().nullable().default(null),
+  firstWalkStartedAt: timestampSchema.nullable().default(null),
   createdAt: timestampSchema,
   updatedAt: timestampSchema,
 });

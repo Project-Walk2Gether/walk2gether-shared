@@ -31,6 +31,32 @@ export const e2eTestStepSchema = yup.object({
 export type E2ETestStep = yup.InferType<typeof e2eTestStepSchema>;
 
 /**
+ * Feature approval status for an E2E test case.
+ */
+export const e2eFeatureApprovalSchema = yup
+  .string()
+  .oneOf(["pending", "approved"])
+  .required();
+
+export type E2EFeatureApproval = yup.InferType<
+  typeof e2eFeatureApprovalSchema
+>;
+
+/**
+ * A comment on an E2E test case (for feature approval discussion).
+ * Stored in `e2eTestCases/{testId}/comments/{commentId}`.
+ */
+export const e2eTestCommentSchema = yup.object({
+  id: yup.string().required(),
+  uid: yup.string().required(),
+  displayName: yup.string().required(),
+  text: yup.string().required(),
+  createdAt: yup.date().required(),
+});
+
+export type E2ETestComment = yup.InferType<typeof e2eTestCommentSchema>;
+
+/**
  * A single E2E test case tracked across runs.
  * Stored in `e2eTestCases/{testId}`.
  *
@@ -66,6 +92,20 @@ export const e2eTestCaseSchema = yup.object({
   videoStepsHash: yup.string().nullable().default(null),
   /** ID of the run that last updated this test case */
   lastRunId: yup.string().nullable().default(null),
+  /** Feature approval status — null means not submitted for approval */
+  featureApproval: e2eFeatureApprovalSchema.nullable().default(null),
+  /** UID of the user who submitted this for approval */
+  submittedByUid: yup.string().nullable().default(null),
+  /** Display name of the user who submitted this for approval */
+  submittedByName: yup.string().nullable().default(null),
+  /** When approval was requested */
+  submittedAt: yup.date().nullable().default(null),
+  /** UID of the user who approved this feature */
+  approvedByUid: yup.string().nullable().default(null),
+  /** Display name of the user who approved */
+  approvedByName: yup.string().nullable().default(null),
+  /** When the feature was approved */
+  approvedAt: yup.date().nullable().default(null),
   /** When this test case was first seen */
   createdAt: yup.date().required(),
   /** When this test case was last updated */

@@ -56,6 +56,39 @@ export const templateMessageSchema = baseMessageSchema.shape({
   templateVariables: yup.array().of(yup.string().required()).required(),
 });
 
+// First walk prompt message schema for introduced friendships
+export const firstWalkPromptMessageSchema = baseMessageSchema.shape({
+  role: yup.mixed<"system">().oneOf(["system"]).required(),
+  type: yup
+    .mixed<"first_walk_prompt">()
+    .oneOf(["first_walk_prompt"])
+    .required(),
+  message: yup.string().required(),
+  introducerName: yup.string().required(),
+  introReason: yup.string().optional(),
+});
+
+// Availability update message — posted when a user sets their availability
+export const availabilityUpdateMessageSchema = baseMessageSchema.shape({
+  role: yup.mixed<"system">().oneOf(["system"]).required(),
+  type: yup
+    .mixed<"availability_update">()
+    .oneOf(["availability_update"])
+    .required(),
+  message: yup.string().required(),
+  senderName: yup.string().required(),
+  windows: yup
+    .array()
+    .of(
+      yup.object({
+        day: yup.number().min(0).max(6).required(),
+        startMinutes: yup.number().min(0).max(1440).required(),
+        endMinutes: yup.number().min(0).max(1440).required(),
+      }),
+    )
+    .required(),
+});
+
 // Location suggestions message schema for sending location options with images
 export const locationSuggestionsMessageSchema = baseMessageSchema.shape({
   role: yup.mixed<"assistant">().oneOf(["assistant"]).required(),
@@ -97,6 +130,10 @@ export const messageSchema = yup.lazy((value) => {
       return templateMessageSchema;
     case "location_suggestions":
       return locationSuggestionsMessageSchema;
+    case "first_walk_prompt":
+      return firstWalkPromptMessageSchema;
+    case "availability_update":
+      return availabilityUpdateMessageSchema;
     default:
       return userMessageSchema; // Default fallback
   }
@@ -111,6 +148,12 @@ export type TemplateMessage = yup.InferType<typeof templateMessageSchema>;
 export type LocationSuggestionsMessage = yup.InferType<
   typeof locationSuggestionsMessageSchema
 >;
+export type FirstWalkPromptMessage = yup.InferType<
+  typeof firstWalkPromptMessageSchema
+>;
+export type AvailabilityUpdateMessage = yup.InferType<
+  typeof availabilityUpdateMessageSchema
+>;
 
 // Union type for all messages
 export type Message =
@@ -119,7 +162,9 @@ export type Message =
   | ToolMessage
   | SystemMessage
   | TemplateMessage
-  | LocationSuggestionsMessage;
+  | LocationSuggestionsMessage
+  | FirstWalkPromptMessage
+  | AvailabilityUpdateMessage;
 
 export type ToolCall = yup.InferType<typeof toolCallSchema>;
 
@@ -140,3 +185,11 @@ export const isLocationSuggestionsMessage = (
   message: Message
 ): message is LocationSuggestionsMessage =>
   message.type === "location_suggestions";
+export const isFirstWalkPromptMessage = (
+  message: Message
+): message is FirstWalkPromptMessage =>
+  message.type === "first_walk_prompt";
+export const isAvailabilityUpdateMessage = (
+  message: Message
+): message is AvailabilityUpdateMessage =>
+  message.type === "availability_update";
