@@ -42,6 +42,18 @@ export const roomSchema = yup.object({
     .mixed<Record<string, number>>()
     .nullable()
     .default(null),
+  memberStepsAtStart: yup
+    .mixed<Record<string, number>>()
+    .nullable()
+    .default(null),
+  memberStepsAtEnd: yup
+    .mixed<Record<string, number>>()
+    .nullable()
+    .default(null),
+  memberStepsWalked: yup
+    .mixed<Record<string, number>>()
+    .nullable()
+    .default(null),
   // Denormalized last chat message sent in this room
   lastMessage: walkRecentMessageSchema.nullable().default(null),
   // Whether this is the final "all together" room at the end of a walk

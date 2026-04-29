@@ -18,6 +18,10 @@ export const groupWalkSchema = walkBaseSchema.shape({
   notifiedFirstConnected: yup.boolean().optional().default(false),
   // Whether to show a selfie prompt before the final "all together" room
   enableFinalRoomSelfie: yup.boolean().optional().default(false),
+  // Whether to reserve time for a final "all together" room at the end
+  enableFinalRoom: yup.boolean().optional().default(true),
+  // Target duration (in minutes) for the final room, computed at creation time
+  targetFinalRoomMinutes: yup.number().optional().integer().min(0).default(0),
 });
 
 export type GroupWalk = yup.InferType<typeof groupWalkSchema>;

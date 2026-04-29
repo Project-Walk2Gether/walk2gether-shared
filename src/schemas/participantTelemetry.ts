@@ -39,6 +39,9 @@ export const participantTelemetrySchema = yup.object({
   // Public URL of a static map PNG showing the smoothed route
   routeImageUrl: yup.string().nullable().default(null),
 
+  // Cumulative step count since walk tracking started (from device pedometer)
+  steps: yup.number().nullable().default(null),
+
   updatedAt: timestampSchema,
 });
 

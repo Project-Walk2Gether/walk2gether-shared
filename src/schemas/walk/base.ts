@@ -55,6 +55,8 @@ export const walkBaseSchema = yup.object({
   collageUrl: yup.string().url().nullable().default(null),
   dayBeforeReminderSentAt: timestampSchema.optional().nullable(),
   recurrence: recurrenceSchema,
+  recurrenceGroupId: yup.string().optional().nullable().default(null),
+  nextWalkId: yup.string().optional().nullable().default(null),
 });
 
 // Export canonical types
