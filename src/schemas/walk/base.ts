@@ -5,6 +5,26 @@ import { baseParticipantSchema } from "../participant";
 import { walkRecentMessageSchema } from "./recentMessage";
 import { timestampSchema } from "../utils/timestamp";
 
+export const recurrenceFrequencies = [
+  "weekly",
+  "every2weeks",
+  "monthly",
+] as const;
+export type RecurrenceFrequency = (typeof recurrenceFrequencies)[number];
+
+export const recurrenceSchema = yup
+  .object({
+    frequency: yup
+      .string()
+      .oneOf([...recurrenceFrequencies])
+      .required(),
+  })
+  .optional()
+  .nullable()
+  .default(null);
+
+export type Recurrence = yup.InferType<typeof recurrenceSchema>;
+
 export const walkBaseSchema = yup.object({
   id: yup.string(),
   invitationCode: yup.string().optional(),
@@ -33,6 +53,8 @@ export const walkBaseSchema = yup.object({
   allowParticipantInvites: yup.boolean().optional().default(false),
   // URL of the generated selfie collage image for this walk
   collageUrl: yup.string().url().nullable().default(null),
+  dayBeforeReminderSentAt: timestampSchema.optional().nullable(),
+  recurrence: recurrenceSchema,
 });
 
 // Export canonical types

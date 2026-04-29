@@ -44,6 +44,12 @@ export const NOTIFICATION_PREFERENCES: NotificationPreferenceInfo[] = [
       "Be notified when someone joins the call for a remote walk you're in",
     defaultValue: true,
   },
+  {
+    key: "walkDayBeforeReminder",
+    label: "Day Before Reminder",
+    description: "Get a reminder 1 day before your upcoming walks",
+    defaultValue: true,
+  },
 ];
 
 /**
@@ -89,6 +95,7 @@ export const userDataSchema = yup.object({
   deviceInfo: yup.mixed(),
   aboutMe: yup.string().optional(),
   availability: availabilitySchema.optional().default(undefined),
+  topics: yup.array().of(yup.string().required()).optional().default(undefined),
   notificationPreferences: notificationPreferencesSchema,
   notificationsPermissionsSetAt: timestampSchema,
   distanceUnit: yup

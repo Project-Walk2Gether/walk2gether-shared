@@ -89,6 +89,20 @@ export const availabilityUpdateMessageSchema = baseMessageSchema.shape({
     .required(),
 });
 
+// Walk time confirmed message — posted when a user picks a specific slot from friend's availability
+export const walkTimeConfirmedMessageSchema = baseMessageSchema.shape({
+  role: yup.mixed<"system">().oneOf(["system"]).required(),
+  type: yup
+    .mixed<"walk_time_confirmed">()
+    .oneOf(["walk_time_confirmed"])
+    .required(),
+  message: yup.string().required(),
+  senderName: yup.string().required(),
+  confirmedDay: yup.number().min(0).max(6).required(),
+  confirmedStartMinutes: yup.number().min(0).max(1440).required(),
+  confirmedEndMinutes: yup.number().min(0).max(1440).required(),
+});
+
 // Location suggestions message schema for sending location options with images
 export const locationSuggestionsMessageSchema = baseMessageSchema.shape({
   role: yup.mixed<"assistant">().oneOf(["assistant"]).required(),
@@ -134,6 +148,8 @@ export const messageSchema = yup.lazy((value) => {
       return firstWalkPromptMessageSchema;
     case "availability_update":
       return availabilityUpdateMessageSchema;
+    case "walk_time_confirmed":
+      return walkTimeConfirmedMessageSchema;
     default:
       return userMessageSchema; // Default fallback
   }
@@ -154,6 +170,9 @@ export type FirstWalkPromptMessage = yup.InferType<
 export type AvailabilityUpdateMessage = yup.InferType<
   typeof availabilityUpdateMessageSchema
 >;
+export type WalkTimeConfirmedMessage = yup.InferType<
+  typeof walkTimeConfirmedMessageSchema
+>;
 
 // Union type for all messages
 export type Message =
@@ -164,7 +183,8 @@ export type Message =
   | TemplateMessage
   | LocationSuggestionsMessage
   | FirstWalkPromptMessage
-  | AvailabilityUpdateMessage;
+  | AvailabilityUpdateMessage
+  | WalkTimeConfirmedMessage;
 
 export type ToolCall = yup.InferType<typeof toolCallSchema>;
 
@@ -193,3 +213,7 @@ export const isAvailabilityUpdateMessage = (
   message: Message
 ): message is AvailabilityUpdateMessage =>
   message.type === "availability_update";
+export const isWalkTimeConfirmedMessage = (
+  message: Message
+): message is WalkTimeConfirmedMessage =>
+  message.type === "walk_time_confirmed";

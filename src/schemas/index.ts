@@ -29,6 +29,7 @@ export * from "./room";
 export * from "./roomAnnouncement";
 export * from "./route";
 export * from "./thread";
+export * from "./topic";
 export * from "./transcriptItem";
 export * from "./userData";
 export * from "./walk";

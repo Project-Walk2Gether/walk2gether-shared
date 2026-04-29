@@ -42,6 +42,9 @@ export interface InvitationValidateResponse {
     linkedInProfileUrl: string | null;
   };
   walk?: Walk;
+  walkDraft?: {
+    organizerName: string;
+  };
   group?: InvitationValidateGroupInfo;
   introduction?: {
     introducerName: string;
