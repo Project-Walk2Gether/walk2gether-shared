@@ -5,19 +5,13 @@ import { baseParticipantSchema } from "../participant";
 import { walkRecentMessageSchema } from "./recentMessage";
 import { timestampSchema } from "../utils/timestamp";
 
-export const recurrenceFrequencies = [
-  "weekly",
-  "every2weeks",
-  "monthly",
-] as const;
-export type RecurrenceFrequency = (typeof recurrenceFrequencies)[number];
+export const recurrenceUnits = ["weeks", "months"] as const;
+export type RecurrenceUnit = (typeof recurrenceUnits)[number];
 
 export const recurrenceSchema = yup
   .object({
-    frequency: yup
-      .string()
-      .oneOf([...recurrenceFrequencies])
-      .required(),
+    unit: yup.string().oneOf([...recurrenceUnits]).required(),
+    interval: yup.number().required().positive().integer().min(1).max(12),
   })
   .optional()
   .nullable()
