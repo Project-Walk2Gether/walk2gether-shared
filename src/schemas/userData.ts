@@ -96,6 +96,16 @@ export const userDataSchema = yup.object({
   aboutMe: yup.string().optional(),
   availability: availabilitySchema.optional().default(undefined),
   topics: yup.array().of(yup.string().required()).optional().default(undefined),
+  topicRankings: yup
+    .array()
+    .of(
+      yup.object({
+        topic: yup.string().required(),
+        rank: yup.number().required().positive().integer(),
+      }),
+    )
+    .optional()
+    .default(undefined),
   notificationPreferences: notificationPreferencesSchema,
   notificationsPermissionsSetAt: timestampSchema,
   distanceUnit: yup

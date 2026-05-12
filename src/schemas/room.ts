@@ -18,6 +18,7 @@ export const roomSchema = yup.object({
     .of(yup.string().required())
     .required()
     .default([]),
+  thirdWheelJoinedAt: timestampSchema.nullable().default(null),
 
   conversationStarterPrompt: yup.string().optional(),
   isActive: yup.boolean().required(),
