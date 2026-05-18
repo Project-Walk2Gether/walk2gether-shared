@@ -90,6 +90,8 @@ export const baseParticipantSchema = yup.object({
     .default([]),
   // Selfie URL taken before joining the final room (used for walk collage)
   selfieUrl: yup.string().url().nullable().default(null),
+  // Generated polaroid image URL for this participant's selfie
+  polaroidUrl: yup.string().url().nullable().default(null),
   // Whether this participant has RSVPed for the entire recurring series
   rsvpForSeries: yup.boolean().optional().default(false),
   createdAt: timestampSchema,
