@@ -7,11 +7,12 @@ import { walkRecentMessageSchema } from "./walk/recentMessage";
  * Rooms can be either:
  * - "friends": a room between two people that know each other
  * - "group": a room between two or more people that likely don't know each other
+ * - "aiAssistant": a 1:1 room between a single user and the Chester AI assistant
  */
 export const roomSchema = yup.object({
   id: yup.string(),
   walkId: yup.string().required(),
-  type: yup.mixed<"friends" | "group">().oneOf(["friends", "group"]).required(),
+  type: yup.mixed<"friends" | "group" | "aiAssistant">().oneOf(["friends", "group", "aiAssistant"]).required(),
   memberUids: yup.array().of(yup.string().required()).required(),
   thirdWheelMemberUids: yup
     .array()
