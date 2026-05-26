@@ -16,12 +16,15 @@ export const groupWalkSchema = walkBaseSchema.shape({
   notifiedFirstReady: yup.boolean().optional().default(false),
   // Track whether we've sent the first "connected" notification to the organizer
   notifiedFirstConnected: yup.boolean().optional().default(false),
-  // Whether to show a selfie prompt before the final "all together" room
+  // Whether to show a selfie prompt before the final "all together" round
   enableFinalRoomSelfie: yup.boolean().optional().default(false),
-  // Whether to reserve time for a final "all together" room at the end
+  // Whether to reserve time for a final "all together" round at the end
   enableFinalRoom: yup.boolean().optional().default(true),
-  // Target duration (in minutes) for the final room, computed at creation time
+  // Target duration (in minutes) for the final round, computed at creation time
   targetFinalRoomMinutes: yup.number().optional().integer().min(0).default(0),
+  // Number of pair rounds before the final round, computed at creation time.
+  // The final round is created once this many rounds have completed.
+  numRounds: yup.number().optional().integer().min(1),
 });
 
 export type GroupWalk = yup.InferType<typeof groupWalkSchema>;

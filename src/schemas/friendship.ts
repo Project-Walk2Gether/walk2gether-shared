@@ -51,7 +51,7 @@ export const friendshipSchema = yup.object({
   // Simplified schema specifically for friendship user data
   userDataByUid: objectOf(
     yup.object({
-      name: yup.string().required(),
+      name: yup.string().nullable().defined(),
       profilePicUrl: yup.string().nullable(),
       _isSettingUp: yup.boolean().optional(),
     }),

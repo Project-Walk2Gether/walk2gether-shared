@@ -11,6 +11,7 @@ export type SystemUpdateSeverity = yup.InferType<
 
 export const systemUpdateSchema = yup.object({
   severity: systemUpdateSeveritySchema,
+  nativeAppVersion: yup.string().optional(),
   createdAt: yup.mixed().required(),
   updatedAt: yup.mixed().nullable(),
 });
