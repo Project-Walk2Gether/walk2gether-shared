@@ -51,6 +51,9 @@ export const walkBaseSchema = yup.object({
   recurrence: recurrenceSchema,
   recurrenceGroupId: yup.string().optional().nullable().default(null),
   nextWalkId: yup.string().optional().nullable().default(null),
+  // Optional per-walk override for the end-of-walk Chester debrief questions.
+  // When unset, the global default (config/feedback) is used.
+  feedbackQuestions: yup.array().of(yup.string().required()).optional(),
 });
 
 // Export canonical types

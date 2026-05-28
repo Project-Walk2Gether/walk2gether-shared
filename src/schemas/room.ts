@@ -8,11 +8,16 @@ import { walkRecentMessageSchema } from "./walk/recentMessage";
  * - "friends": a room between two people that know each other
  * - "group": a room between two or more people that likely don't know each other
  * - "aiAssistant": a 1:1 room between a single user and the Chester AI assistant
+ * - "aiFeedback": a 1:1 end-of-walk debrief room where Chester asks the user
+ *   structured feedback questions
  */
 export const roomSchema = yup.object({
   id: yup.string(),
   walkId: yup.string().required(),
-  type: yup.mixed<"friends" | "group" | "aiAssistant">().oneOf(["friends", "group", "aiAssistant"]).required(),
+  type: yup
+    .mixed<"friends" | "group" | "aiAssistant" | "aiFeedback">()
+    .oneOf(["friends", "group", "aiAssistant", "aiFeedback"])
+    .required(),
   memberUids: yup.array().of(yup.string().required()).required(),
   thirdWheelMemberUids: yup
     .array()
@@ -66,6 +71,9 @@ export const roomSchema = yup.object({
     .oneOf(["selfie"])
     .nullable()
     .default(null),
+  // Structured questions for an "aiFeedback" debrief room, resolved and stamped
+  // at room creation (per-walk override → global default → fallback).
+  feedbackQuestions: yup.array().of(yup.string().required()).optional(),
 });
 
 export type Room = yup.InferType<typeof roomSchema>;

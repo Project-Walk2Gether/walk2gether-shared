@@ -7,6 +7,7 @@ export * from "./attachment";
 export * from "./audit";
 export * from "./availability";
 export * from "./favoriteLocation";
+export * from "./feedback";
 export * from "./friendship";
 export * from "./introduction";
 export * from "./group";
