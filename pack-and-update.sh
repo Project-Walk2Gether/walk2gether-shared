@@ -4,10 +4,15 @@ set -e
 SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
 SHARED_DIR="$SCRIPT_DIR"
 
-# Consumer short names, directories, and static flags (parallel arrays)
+# Consumer short names and directories (parallel arrays)
 ALL_NAMES=(    "functions"                               "expo"                               "admin"                                    "dashboard"                               "voice-agent"                               "website")
 ALL_DIRS=(     "$SCRIPT_DIR/../walk2gether-functions"    "$SCRIPT_DIR/../walk2gether-expo"    "$SCRIPT_DIR/../walk2gether-admin-next"    "$SCRIPT_DIR/../walk2gether-dashboard"    "$SCRIPT_DIR/../walk2gether-voice-agent"    "$SCRIPT_DIR/../walk2gether-website")
-ALL_STATIC=(   "false"                                   "false"                              "false"                                    "false"                                   "true"                                      "false")
+
+# Every consumer references the shared package under this single, stable filename.
+# Only this file is tracked in git (see each consumer's .gitignore); the npm version
+# bump below busts npm's cache, and we force a clean reinstall, so a stable filename
+# is enough — no per-build timestamped tarballs to accumulate.
+TARBALL_STATIC="walk2gether-shared.tgz"
 
 get_dir_for_name() {
   local target="$1"
@@ -18,17 +23,6 @@ get_dir_for_name() {
     fi
   done
   return 1
-}
-
-get_static_for_name() {
-  local target="$1"
-  for i in "${!ALL_NAMES[@]}"; do
-    if [ "${ALL_NAMES[$i]}" = "$target" ]; then
-      echo "${ALL_STATIC[$i]}"
-      return 0
-    fi
-  done
-  echo "false"
 }
 
 # Parse --only argument (comma-separated list of short names)
@@ -67,7 +61,7 @@ else
   TARGET_NAMES=("${ALL_NAMES[@]}")
 fi
 
-# Generate a timestamp-based prerelease version to bust npm cache
+# Generate a timestamp-based prerelease version to bust npm's cache on every run.
 TIMESTAMP=$(date +%s)
 VERSION="1.0.0-${TIMESTAMP}"
 TARBALL_NAME="walk2gether-shared-${VERSION}.tgz"
@@ -79,71 +73,55 @@ npm version "$VERSION" --no-git-tag-version --allow-same-version
 echo "==> Building walk2gether-shared"
 npm run build
 
-# Pack to each target consumer directory
-for name in "${TARGET_NAMES[@]}"; do
-  DIR=$(get_dir_for_name "$name")
-  if [ -d "$DIR" ]; then
-    echo "==> Packing to ${name}"
-    npm pack --pack-destination "$DIR"
+# Set the package.json "walk2gether-shared" ref to the static tarball.
+set_consumer_ref() {
+  local DIR="$1"
+  if [[ "$(uname)" == "Darwin" ]]; then
+    sed -i '' "s|\"walk2gether-shared\": \"[^\"]*\"|\"walk2gether-shared\": \"file:${TARBALL_STATIC}\"|" "$DIR/package.json"
+  else
+    sed -i "s|\"walk2gether-shared\": \"[^\"]*\"|\"walk2gether-shared\": \"file:${TARBALL_STATIC}\"|" "$DIR/package.json"
   fi
-done
+}
 
+# Pack + install for a single consumer. This is atomic per consumer: if the run is
+# interrupted, each consumer is either fully updated or untouched — never left with a
+# stray tarball and a stale package.json ref (the old two-loop approach could do that).
 update_consumer() {
   local DIR="$1"
   local NAME="$2"
-  local USE_STATIC="${3:-false}"
 
   if [ ! -d "$DIR" ]; then
     echo "==> Skipping ${NAME} (directory not found)"
     return
   fi
 
-  echo "==> Updating ${NAME}"
+  echo "==> Packing + updating ${NAME}"
 
-  # Remove old tarballs (but not the new one or the static copy)
-  find "$DIR" -maxdepth 1 -name "walk2gether-shared-*.tgz" ! -name "$TARBALL_NAME" -delete
+  # Pack a fresh tarball into the consumer dir (npm names it by version).
+  cd "$SHARED_DIR"
+  npm pack --pack-destination "$DIR"
 
-  if [ "$USE_STATIC" = "true" ]; then
-    # Dockerized consumers: use static name walk2gether-shared.tgz
-    cp "$DIR/$TARBALL_NAME" "$DIR/walk2gether-shared.tgz"
-    if [[ "$(uname)" == "Darwin" ]]; then
-      sed -i '' "s|\"walk2gether-shared\": \"[^\"]*\"|\"walk2gether-shared\": \"file:walk2gether-shared.tgz\"|" "$DIR/package.json"
-    else
-      sed -i "s|\"walk2gether-shared\": \"[^\"]*\"|\"walk2gether-shared\": \"file:walk2gether-shared.tgz\"|" "$DIR/package.json"
-    fi
-  else
-    # Non-Dockerized consumers: use dynamic name for cache busting
-    if [[ "$(uname)" == "Darwin" ]]; then
-      sed -i '' "s|\"walk2gether-shared\": \"[^\"]*\"|\"walk2gether-shared\": \"file:${TARBALL_NAME}\"|" "$DIR/package.json"
-    else
-      sed -i "s|\"walk2gether-shared\": \"[^\"]*\"|\"walk2gether-shared\": \"file:${TARBALL_NAME}\"|" "$DIR/package.json"
-    fi
-  fi
+  # Adopt the stable filename and remove any timestamped tarballs left by older runs.
+  mv -f "$DIR/$TARBALL_NAME" "$DIR/$TARBALL_STATIC"
+  find "$DIR" -maxdepth 1 -name "walk2gether-shared-*.tgz" -delete
 
-  echo "==> Cleaning npm cache and reinstalling in ${NAME}"
+  set_consumer_ref "$DIR"
+
+  # No global `npm cache clean` needed: the version bump above means every run installs
+  # a brand-new version, so npm never serves a stale same-version tarball from cache.
+  echo "==> Reinstalling in ${NAME}"
   cd "$DIR"
-  npm cache clean --force
   rm -rf node_modules/walk2gether-shared package-lock.json
   npm install
 
   # npm install rewrites package.json with resolved parent-relative paths for file: deps.
   # Re-apply the correct local path after install.
-  if [ "$USE_STATIC" = "true" ]; then
-    local FINAL_REF="file:walk2gether-shared.tgz"
-  else
-    local FINAL_REF="file:${TARBALL_NAME}"
-  fi
-  if [[ "$(uname)" == "Darwin" ]]; then
-    sed -i '' "s|\"walk2gether-shared\": \"[^\"]*\"|\"walk2gether-shared\": \"${FINAL_REF}\"|" "$DIR/package.json"
-  else
-    sed -i "s|\"walk2gether-shared\": \"[^\"]*\"|\"walk2gether-shared\": \"${FINAL_REF}\"|" "$DIR/package.json"
-  fi
+  set_consumer_ref "$DIR"
 }
 
 for name in "${TARGET_NAMES[@]}"; do
   DIR=$(get_dir_for_name "$name")
-  USE_STATIC=$(get_static_for_name "$name")
-  update_consumer "$DIR" "$name" "$USE_STATIC"
+  update_consumer "$DIR" "$name"
 done
 
 echo ""
