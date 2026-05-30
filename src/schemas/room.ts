@@ -74,6 +74,10 @@ export const roomSchema = yup.object({
   // Structured questions for an "aiFeedback" debrief room, resolved and stamped
   // at room creation (per-walk override → global default → fallback).
   feedbackQuestions: yup.array().of(yup.string().required()).optional(),
+  // Set by the Chester agent once it has joined and its session is live. Clients
+  // watch this to flip from "Connecting…" to "Chester is listening" rather than
+  // relying on counting LiveKit participants. Only present on aiFeedback rooms.
+  agentConnectedAt: timestampSchema.nullable(),
 });
 
 export type Room = yup.InferType<typeof roomSchema>;

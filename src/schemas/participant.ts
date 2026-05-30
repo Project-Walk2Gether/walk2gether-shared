@@ -54,6 +54,10 @@ export const baseParticipantSchema = yup.object({
   // When the participant actually starts and finishes their walk (used for tracking)
   startedAt: timestampSchema.nullable(),
   finishedAt: timestampSchema.nullable(),
+  // Set the first time the end-of-walk feedback prompt is auto-shown to this
+  // participant, so it's never auto-shown again (they can still re-open it
+  // manually via the "Give feedback" button).
+  feedbackPromptShownAt: timestampSchema.nullable(),
   // Estimated time of arrival - used when participant is running late
   eta: timestampSchema.nullable(),
   // After the user rejects a walk invitation, the invite will still be shown on their walks screen
