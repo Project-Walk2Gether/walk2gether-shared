@@ -78,6 +78,15 @@ export const roomSchema = yup.object({
   // watch this to flip from "Connecting…" to "Chester is listening" rather than
   // relying on counting LiveKit participants. Only present on aiFeedback rooms.
   agentConnectedAt: timestampSchema.nullable(),
+  // Live Chester agent state, mirrored from the LiveKit agent session's
+  // state-changed events. Clients watch this to show a speaking indicator
+  // (animated waveform) while Chester talks. Null when no agent is present /
+  // cleared on session end.
+  agentState: yup
+    .mixed<"initializing" | "idle" | "listening" | "thinking" | "speaking">()
+    .oneOf(["initializing", "idle", "listening", "thinking", "speaking"])
+    .nullable()
+    .default(null),
 });
 
 export type Room = yup.InferType<typeof roomSchema>;
