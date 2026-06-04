@@ -54,6 +54,11 @@ export const baseParticipantSchema = yup.object({
   // When the participant actually starts and finishes their walk (used for tracking)
   startedAt: timestampSchema.nullable(),
   finishedAt: timestampSchema.nullable(),
+  // Stamped when the participant finishes with Chester (end_chat) and is being
+  // matched into their next room. The app shows a brief "getting things ready"
+  // loading state instead of the lobby while this is recent (~10s timeout), to
+  // avoid a lobby flash between Chester and the selfie gate.
+  startedProcessingAt: timestampSchema.nullable(),
   // Set the first time the end-of-walk feedback prompt is auto-shown to this
   // participant, so it's never auto-shown again (they can still re-open it
   // manually via the "Give feedback" button).
@@ -96,6 +101,11 @@ export const baseParticipantSchema = yup.object({
   selfieUrl: yup.string().url().nullable().default(null),
   // Generated polaroid image URL for this participant's selfie
   polaroidUrl: yup.string().url().nullable().default(null),
+  // Pre-generated TTS audio (signed URL) played in the selfie "waiting for your
+  // friend" state, e.g. "Looking good! Now feel free to walk while we wait for
+  // <friend> to join". Stamped when the participant is assigned to a friends
+  // main room. Optional (only set on that path), so it's absent on most docs.
+  waitingForFriendAudioUrl: yup.string().url().nullable(),
   // Whether this participant has RSVPed for the entire recurring series
   rsvpForSeries: yup.boolean().optional().default(false),
   createdAt: timestampSchema,
