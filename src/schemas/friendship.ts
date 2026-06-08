@@ -71,6 +71,11 @@ export const friendshipSchema = yup.object({
   lastMessageAt: timestampSchema.nullable().defined(),
   lastMessagePreview: yup.string().optional(),
   totalMilesWalked: yup.number(),
+  // Cumulative steps each member has walked while paired with the other, across
+  // all walks together. Keyed by uid. The UI sums both members' values to show a
+  // single combined "steps walked together" figure (see getFriendshipSteps).
+  // Populated by the walk-end aggregation (aggregateFriendshipSteps).
+  stepsWalkedByUid: objectOf(yup.number().required()).optional(),
   introductionId: yup.string().nullable().optional(),
   introReason: yup.string().nullable().optional(),
   introducedByName: yup.string().nullable().optional(),

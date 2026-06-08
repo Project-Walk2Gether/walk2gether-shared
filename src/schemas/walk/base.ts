@@ -36,6 +36,9 @@ export const walkBaseSchema = yup.object({
   // When the walk actually started and ended (set at runtime)
   startedAt: timestampSchema.nullable(),
   endedAt: timestampSchema.nullable(),
+  // Set once friendship step counts have been aggregated for this walk, so the
+  // walk-end aggregation runs exactly once. See aggregateFriendshipSteps.
+  stepsAggregatedAt: timestampSchema.nullable(),
   // Whether in-person or remote, or both
   meetupType: meetupTypeSchema.required(),
   visibility: yup.string().oneOf(["public", "private"]).required(),
