@@ -45,9 +45,12 @@ export const NOTIFICATION_PREFERENCES: NotificationPreferenceInfo[] = [
     defaultValue: true,
   },
   {
+    // Key kept as-is to preserve existing users' opt-out choices; this now
+    // controls the "+24h after invite" reminder to respond (not a day-before).
     key: "walkDayBeforeReminder",
-    label: "Day Before Reminder",
-    description: "Get a reminder 1 day before your upcoming walks",
+    label: "Walk Reminders",
+    description:
+      "Get a reminder to respond to walk invitations you haven't answered yet",
     defaultValue: true,
   },
 ];

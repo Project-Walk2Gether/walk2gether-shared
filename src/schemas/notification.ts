@@ -32,6 +32,9 @@ export const notificationSchema = yup.object({
   title: yup.string().required(),
   body: yup.string().required(),
   data: yup.object().optional(),
+  // Expo notification category id, used to attach quick-action buttons
+  // (e.g. "Going" / "Can't make it") on the device.
+  categoryId: yup.string().optional(),
   expoPushToken: yup.string().required(),
   sentAt: timestampSchema.optional(),
   deliveryResponse: yup

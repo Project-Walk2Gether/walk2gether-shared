@@ -8,3 +8,4 @@ export * from "./persisted";
 export * from "./remoteParticipantLocations";
 export * from "./walks";
 export * from "./notifications";
+export * from "./inviteReminder";
