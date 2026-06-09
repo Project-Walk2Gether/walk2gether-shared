@@ -34,6 +34,7 @@ export const userDataFactory = Sync.makeFactory<UserData>({
   hasCreatedNeighborhoodWalk: false,
   walkCount: 0,
   allowLocationSharingForGroupWalks: null,
+  stepsTrackingEnabled: false,
   agreedPrivacyPolicyVersion: null,
   locationPermissions: null,
   currentLocation: null,
