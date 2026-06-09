@@ -14,6 +14,7 @@ export const baseLocationOptionSchema = yup.object({
   proposedAt: yup.date().optional(), // When this location was proposed
   isConfirmed: yup.boolean().optional().default(false),
   photo: attachmentSchema.optional().default(undefined), // Photo of the location (auto-fetched from Google Places if not provided)
+  cartoonMap: attachmentSchema.optional().default(undefined), // Cartoonified map of the area (auto-generated from a static map)
 });
 
 /**

@@ -99,6 +99,10 @@ export const baseParticipantSchema = yup.object({
     .default([]),
   // Selfie URL taken before joining the final room (used for walk collage)
   selfieUrl: yup.string().url().nullable().default(null),
+  // Id of the walk-level chat message that shares this participant's selfie.
+  // Tracked so that editing the selfie updates that message in place instead
+  // of posting a duplicate. Optional (only set once a selfie is shared).
+  selfieMessageId: yup.string().nullable(),
   // Generated polaroid image URL for this participant's selfie
   polaroidUrl: yup.string().url().nullable().default(null),
   // Pre-generated TTS audio (signed URL) played in the selfie "waiting for your
