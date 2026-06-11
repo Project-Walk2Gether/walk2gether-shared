@@ -28,6 +28,7 @@ export * from "./quote";
 export * from "./reminder";
 export * from "./room";
 export * from "./roomAnnouncement";
+export * from "./sharedSteps";
 export * from "./route";
 export * from "./thread";
 export * from "./topic";

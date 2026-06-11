@@ -6,6 +6,7 @@ export * from "./locationSharing";
 export * from "./name";
 export * from "./persisted";
 export * from "./remoteParticipantLocations";
+export * from "./sharedSteps";
 export * from "./walks";
 export * from "./notifications";
 export * from "./inviteReminder";

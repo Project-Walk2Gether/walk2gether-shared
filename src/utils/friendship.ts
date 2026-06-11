@@ -11,20 +11,5 @@ export const getFriendshipId = (uid1: string, uid2: string): string => {
   return [uid1, uid2].sort().join("_");
 };
 
-/**
- * Combined number of steps two friends have walked together, summed across both
- * members. We store each member's own contribution in `stepsWalkedByUid` but
- * surface a single combined figure ("we've walked N steps together").
- *
- * @param stepsWalkedByUid The friendship's per-member step map (may be undefined)
- * @returns Sum of all members' contributed steps (0 if none recorded)
- */
-export const getFriendshipSteps = (
-  stepsWalkedByUid?: Record<string, number> | null,
-): number => {
-  if (!stepsWalkedByUid) return 0;
-  return Object.values(stepsWalkedByUid).reduce(
-    (sum, steps) => sum + (typeof steps === "number" ? steps : 0),
-    0,
-  );
-};
+// NOTE: "steps walked together" helpers live in utils/sharedSteps.ts — the
+// data is keyed by pair (sharedSteps/{pairId}), not by friendship.
