@@ -51,6 +51,12 @@ export const roomAnnouncementSchema = yup.object({
   playAt: timestampSchema.required(),
   createdAt: timestampSchema.required(),
   processedAt: timestampSchema.nullable().default(null),
+  // Minimum number of remote participants that must be present for this
+  // announcement to play. Defaults to 2 (the room's normal audience). Closing
+  // announcements (wrap-up, final handoff) set this to 1 so they still play to a
+  // lone remaining listener — e.g. when a partner's connection has dropped right
+  // as the round ends, which previously caused the wrap-up to be skipped.
+  requireMinParticipants: yup.number().optional().default(2),
 });
 
 export type AnnouncementStep = yup.InferType<typeof announcementStepSchema>;
