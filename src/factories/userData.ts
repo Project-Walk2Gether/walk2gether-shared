@@ -21,6 +21,7 @@ export const userDataFactory = Sync.makeFactory<UserData>({
   distanceUnit: "mi",
   isAgent: true,
   aboutMe: "",
+  includeAboutMeInIntroductions: false,
   phoneNumber: "",
   notificationPreferences: {
     friendETA: true,

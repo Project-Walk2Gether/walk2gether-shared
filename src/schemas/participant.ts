@@ -14,6 +14,10 @@ export const baseParticipantSchema = yup.object({
   displayName: yup.string().required(),
   photoURL: yup.string().nullable(),
   aboutMe: yup.string().optional(),
+  // Denormalized from the user's includeAboutMeInIntroductions preference.
+  // Gates whether aboutMe is used when generating group-walk introductions.
+  // Opt-in: defaults to false unless the user turns it on.
+  includeAboutMeInIntroductions: yup.boolean().default(false),
   timezone: yup.string().required(),
   availability: availabilitySchema.optional().default(undefined),
   status: yup

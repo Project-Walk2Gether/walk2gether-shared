@@ -53,6 +53,7 @@ export function participantFromUser(
     displayName: displayNameOverride || user.name || "Anonymous",
     photoURL: profilePicUrlOverride ?? user.profilePicUrl ?? null,
     aboutMe: user.aboutMe || undefined,
+    includeAboutMeInIntroductions: user.includeAboutMeInIntroductions ?? false,
     timezone,
     availability: user.availability,
     status,

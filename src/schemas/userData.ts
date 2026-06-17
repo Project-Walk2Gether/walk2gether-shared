@@ -97,6 +97,9 @@ export const userDataSchema = yup.object({
   appVersionSetAt: timestampSchema,
   deviceInfo: yup.mixed(),
   aboutMe: yup.string().optional(),
+  // Whether the user's "about me" should be used when introducing them in
+  // group walks. Opt-in: defaults to false unless the user turns it on.
+  includeAboutMeInIntroductions: yup.boolean().default(false),
   availability: availabilitySchema.optional().default(undefined),
   topics: yup.array().of(yup.string().required()).optional().default(undefined),
   topicRankings: yup
