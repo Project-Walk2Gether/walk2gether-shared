@@ -81,6 +81,7 @@ export function participantFromUser(
     rsvpForSeries: false,
     lastLocation: undefined,
     homeLocation: user.location ?? null,
+    currentLocation: user.currentLocation ?? null,
     route: null,
     navigationMethod,
     meetupType,

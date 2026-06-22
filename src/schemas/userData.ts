@@ -2,7 +2,7 @@ import { keyBy, reduce } from "lodash";
 import * as yup from "yup";
 import { documentReferenceSchema } from "../firestore/documentReference";
 import { availabilitySchema } from "./availability";
-import { locationSchema } from "./location";
+import { currentLocationSchema, locationSchema } from "./location";
 import { timestampSchema } from "./utils/timestamp";
 
 /**
@@ -165,17 +165,7 @@ export const userDataSchema = yup.object({
   walkTourDismissedAt: timestampSchema.optional().nullable(),
   roomTourDismissedAt: timestampSchema.optional().nullable(),
   // GPS-derived current location, updated when the user opens the app with location permission
-  currentLocation: yup
-    .object({
-      city: yup.string().required(),
-      displayName: yup.string().required(),
-      latitude: yup.number().required(),
-      longitude: yup.number().required(),
-      updatedAt: timestampSchema,
-    })
-    .optional()
-    .nullable()
-    .default(null),
+  currentLocation: currentLocationSchema.optional().nullable().default(null),
 });
 
 export type UserData = yup.InferType<typeof userDataSchema>;
