@@ -133,6 +133,11 @@ export const participantSchema = baseParticipantSchema.shape({
     .mixed<"driving" | "walking">()
     .oneOf(["driving", "walking"])
     .default("walking"),
+  // APNs push token for this participant's iOS Live Activity (per-walk, per-device).
+  // Written by the app while a Live Activity is running for the walk; read by
+  // Functions to push live-activity updates. Cleared (null) when the activity ends.
+  // Not denormalized onto the walk doc — kept on the subcollection participant doc.
+  liveActivityPushToken: yup.string().nullable().default(null),
 });
 
 export type BaseParticipant = yup.InferType<typeof baseParticipantSchema>;
