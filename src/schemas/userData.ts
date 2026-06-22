@@ -81,6 +81,10 @@ export const notificationPreferencesSchema = yup.object(
 
 export const userDataSchema = yup.object({
   id: yup.string(),
+  firstName: yup.string().required(),
+  lastName: yup.string().required(),
+  // Combined "First Last", kept derived from firstName/lastName for backward
+  // compatibility with the many places that still read `name`.
   name: yup.string().required(),
   createdAt: timestampSchema,
   updatedAt: timestampSchema,

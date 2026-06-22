@@ -7,6 +7,8 @@ import { UserData } from "../schemas/userData";
  * This factory creates data that matches the UserData type from the userData schema
  */
 export const userDataFactory = Sync.makeFactory<UserData>({
+  firstName: "Michael",
+  lastName: "Moonboots",
   name: "Michael Moonboots",
   createdAt: { toDate: () => new Date() } as any, // Simulating Firestore Timestamp
   updatedAt: { toDate: () => new Date() } as any,

@@ -84,5 +84,6 @@ export function participantFromUser(
     route: null,
     navigationMethod,
     meetupType,
+    liveActivityPushToken: null,
   } as Omit<Participant, "createdAt" | "updatedAt">;
 }
