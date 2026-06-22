@@ -38,6 +38,7 @@ export const userDataFactory = Sync.makeFactory<UserData>({
   walkCount: 0,
   allowLocationSharingForGroupWalks: null,
   stepsTrackingEnabled: false,
+  liveActivitiesEnabled: false,
   agreedPrivacyPolicyVersion: null,
   locationPermissions: null,
   currentLocation: null,

@@ -140,6 +140,9 @@ export const userDataSchema = yup.object({
   // Whether the user allows location sharing for group walks (null = not yet decided)
   allowLocationSharingForGroupWalks: yup.boolean().nullable().default(null),
   stepsTrackingEnabled: yup.boolean().default(false),
+  // Per-user opt-in for the iOS Live Activity feature, toggled from admin.
+  // Used to enable it for specific testers while it's gated off globally.
+  liveActivitiesEnabled: yup.boolean().default(false),
   // Version of the privacy policy the user agreed to during signup
   agreedPrivacyPolicyVersion: yup.number().nullable().default(null),
   // Location permission status (synced from device for observability)
