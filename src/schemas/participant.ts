@@ -86,7 +86,7 @@ export const baseParticipantSchema = yup.object({
   // by updateParticipantInfo. Shown in the participant row (preferred over
   // homeLocation) so the UI reflects where they actually are, without
   // overwriting their chosen home location.
-  currentLocation: currentLocationSchema.optional().nullable(),
+  currentLocation: currentLocationSchema.optional().nullable().default(null),
   // Reference to the participant's current room document (waiting room or pair room)
   roomDoc: documentReferenceSchema.nullable().default(null),
   // Track which user UIDs this participant has previously been matched with in pair rooms
