@@ -23,8 +23,9 @@ export const namedLocationSchema = locationSchema.shape({
 
 /**
  * GPS-derived "where the user is right now", reverse-geocoded from foreground
- * location. Distinct from the manually-set home `location`/`homeLocation` —
- * lighter shape (no country/placeId) and carries an `updatedAt` for recency.
+ * location. Lighter shape than a full `location` (no country/placeId) and
+ * carries an `updatedAt` for recency. This is the only location we keep on
+ * users/participants — there is no manually-set home location.
  */
 export const currentLocationSchema = yup.object({
   city: yup.string().required(),

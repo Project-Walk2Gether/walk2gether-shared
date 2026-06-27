@@ -2,7 +2,7 @@ import { keyBy, reduce } from "lodash";
 import * as yup from "yup";
 import { documentReferenceSchema } from "../firestore/documentReference";
 import { availabilitySchema } from "./availability";
-import { currentLocationSchema, locationSchema } from "./location";
+import { currentLocationSchema } from "./location";
 import { timestampSchema } from "./utils/timestamp";
 
 /**
@@ -90,7 +90,6 @@ export const userDataSchema = yup.object({
   updatedAt: timestampSchema,
   lastActiveAt: timestampSchema,
   tourDismissedAt: timestampSchema,
-  location: locationSchema.optional().nullable(),
   timezone: yup.string().required(), // IANA timezone (e.g., "America/New_York")
   profilePicUrl: yup.string().url().optional(),
   linkedInProfileUrl: yup.string().url().optional(),

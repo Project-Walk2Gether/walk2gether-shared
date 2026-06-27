@@ -49,13 +49,13 @@ function hasNearbyLocation(
 }
 
 /**
- * Generate a location option from a participant's home location
+ * Generate a location option from a participant's GPS-derived current location
  */
 export function createLocationOptionFromParticipant(
   participant: BaseParticipant,
   participantId: string,
 ): LocationOption | null {
-  if (!participant.homeLocation) {
+  if (!participant.currentLocation) {
     return null;
   }
 
@@ -63,9 +63,8 @@ export function createLocationOptionFromParticipant(
     latitude,
     longitude,
     city,
-    country,
     displayName: locationDisplayName,
-  } = participant.homeLocation;
+  } = participant.currentLocation;
   const displayName = participant.displayName || "Unknown";
   const cityName = city || "Remote Location";
   const locDisplayName = locationDisplayName || `${displayName}'s Location`;
@@ -77,7 +76,8 @@ export function createLocationOptionFromParticipant(
       name: locDisplayName,
       displayName: locDisplayName,
       city: cityName,
-      country,
+      // currentLocation carries no country; namedLocationSchema requires it.
+      country: "",
     },
     votes: {},
     proposedBy: participantId,
@@ -126,10 +126,10 @@ export function getLocationOptionsForRemoteParticipants(
   });
 
   for (const [participantId, participant] of Object.entries(participants)) {
-    // Skip if participant has no home location
-    if (!participant.homeLocation) {
+    // Skip if participant has no current location
+    if (!participant.currentLocation) {
       console.warn(
-        `[remoteParticipantLocations] Remote participant ${participantId} has no homeLocation`,
+        `[remoteParticipantLocations] Remote participant ${participantId} has no currentLocation`,
       );
       continue;
     }

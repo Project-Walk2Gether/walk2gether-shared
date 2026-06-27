@@ -1,7 +1,7 @@
 import * as yup from "yup";
 import { documentReferenceSchema } from "../firestore/documentReference";
 import { availabilitySchema } from "./availability";
-import { currentLocationSchema, locationSchema } from "./location";
+import { currentLocationSchema } from "./location";
 import { timestampSchema } from "./utils/timestamp";
 
 /**
@@ -79,13 +79,9 @@ export const baseParticipantSchema = yup.object({
   isLocationShared: yup.boolean().default(true),
   // Whether there's a pending friendship request between current user and this participant
   isPending: yup.boolean().default(false),
-  // Home location for remote participants (needed for location options)
-  // Uses full locationSchema to include city and displayName for UI display
-  homeLocation: locationSchema.nullable().default(null),
   // GPS-derived current location, denormalized from the user's currentLocation
-  // by updateParticipantInfo. Shown in the participant row (preferred over
-  // homeLocation) so the UI reflects where they actually are, without
-  // overwriting their chosen home location.
+  // by updateParticipantInfo. Shown in the participant row to reflect where the
+  // participant actually is. Also used to seed location options for remote walks.
   currentLocation: currentLocationSchema.optional().nullable().default(null),
   // Reference to the participant's current room document (waiting room or pair room)
   roomDoc: documentReferenceSchema.nullable().default(null),
