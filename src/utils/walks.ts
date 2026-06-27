@@ -114,6 +114,45 @@ export function hasWalkEnded(rooms: Room[]): boolean {
   });
 }
 
+// --- Post-walk feedback window ----------------------------------------------
+//
+// Post-walk feedback (the quick form + the "Speak with Chester" voice debrief)
+// is only offered for a limited window after a walk ends. The voice agent worker
+// is held warm only that long (see the functions agentCapacityReconciler), so we
+// gate the interactive feedback sheet to the same window on the client — and use
+// the same constant on the backend to size how long the worker stays up.
+
+/** How long after a walk ends interactive feedback stays available. */
+export const FEEDBACK_WINDOW_MS = 30 * 60 * 1000;
+
+/**
+ * The moment a walk is considered "ended" for feedback purposes: the explicit
+ * `endedAt` stamp written when the walk is marked finished, falling back to its
+ * buffered end time (`endTimeWithBuffer`). Returns null if neither is available.
+ */
+export function getWalkEndedAtMs(
+  walk: Pick<Walk, "endedAt" | "endTimeWithBuffer">,
+): number | null {
+  const endedAtMs = walk.endedAt?.toMillis?.();
+  if (typeof endedAtMs === "number") return endedAtMs;
+  const bufferedMs = walk.endTimeWithBuffer?.toMillis?.();
+  return typeof bufferedMs === "number" ? bufferedMs : null;
+}
+
+/**
+ * Whether interactive post-walk feedback is still available — i.e. we're within
+ * FEEDBACK_WINDOW_MS of the walk's end. Gates the "Give feedback" sheet on the
+ * client; the backend uses the same window to keep the voice agent warm.
+ */
+export function isWalkFeedbackWindowOpen(
+  walk: Pick<Walk, "endedAt" | "endTimeWithBuffer">,
+  nowMs: number = Date.now(),
+): boolean {
+  const endedMs = getWalkEndedAtMs(walk);
+  if (endedMs == null) return false;
+  return nowMs < endedMs + FEEDBACK_WINDOW_MS;
+}
+
 // --- Group walk round planning ---------------------------------------------
 //
 // A group walk is split into a series of pair "rounds" (you meet one partner
