@@ -68,6 +68,11 @@ export function createLocationOptionFromParticipant(
   const displayName = participant.displayName || "Unknown";
   const cityName = city || "Remote Location";
   const locDisplayName = locationDisplayName || `${displayName}'s Location`;
+  // currentLocation has no structured `country` field, but locationSchema
+  // requires a NON-EMPTY country (yup `.required()` rejects ""). Derive one from
+  // the trailing segment of the display name ("…, CDMX, MX" -> "MX"), falling
+  // back to the city, so the generated option always validates and persists.
+  const country = locationDisplayName?.split(",").pop()?.trim() || cityName;
 
   return {
     location: {
@@ -76,8 +81,7 @@ export function createLocationOptionFromParticipant(
       name: locDisplayName,
       displayName: locDisplayName,
       city: cityName,
-      // currentLocation carries no country; namedLocationSchema requires it.
-      country: "",
+      country,
     },
     votes: {},
     proposedBy: participantId,
