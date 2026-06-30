@@ -7,7 +7,11 @@ export const locationSchema = yup.object({
   name: yup.string(),
   displayName: yup.string().required(), // City, state, country format for admin display
   city: yup.string().required(),
-  country: yup.string().required(),
+  // Optional: GPS-derived locations (the user's `currentLocation`, now the only
+  // location source) carry no country, so a walk location built from them has an
+  // empty country. It's only used for admin display. Defaults to "" so the
+  // inferred type stays `string` for existing consumers.
+  country: yup.string().optional().default(""),
   createdAt: timestampSchema,
   updatedAt: timestampSchema,
   placeId: yup.string(),

@@ -19,6 +19,19 @@ export const recurrenceSchema = yup
 
 export type Recurrence = yup.InferType<typeof recurrenceSchema>;
 
+/**
+ * A concrete time slot offered to the invitee when the walk is created in
+ * "availability" scheduling mode. Times are absolute UTC instants; the invitee
+ * sees them rendered in their own timezone and picks one to set the walk time.
+ */
+export const proposedSlotSchema = yup.object({
+  id: yup.string().required(),
+  startUtc: timestampSchema.required(),
+  endUtc: timestampSchema.required(),
+});
+
+export type ProposedSlot = yup.InferType<typeof proposedSlotSchema>;
+
 export const walkBaseSchema = yup.object({
   id: yup.string(),
   invitationCode: yup.string().optional(),
@@ -26,6 +39,19 @@ export const walkBaseSchema = yup.object({
   endTime: timestampSchema.required(),
   endTimeWithBuffer: timestampSchema.required(),
   status: yup.string().oneOf(["proposed", "confirmed", "expired"]).required(),
+  // How the walk time is decided:
+  // - "proposed": creator picks a fixed time (the existing flow). date is final.
+  // - "availability": creator offers proposedSlots; status stays "proposed" and
+  //   date holds the earliest slot as a placeholder until the invitee picks one
+  //   (via the chooseWalkSlot callable), which confirms the walk.
+  // Optional for back-compat: existing/legacy walks with no schedulingMode are
+  // treated as "proposed" (a fixed time) by readers. No default() so the
+  // inferred type stays optional and existing construction sites don't break.
+  schedulingMode: yup
+    .string()
+    .oneOf(["proposed", "availability"])
+    .optional(),
+  proposedSlots: yup.array().of(proposedSlotSchema).optional(),
   durationMinutes: yup.number().required().positive().integer(),
   organizerName: yup.string().required(),
   createdByUid: yup.string().required(),

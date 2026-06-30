@@ -115,6 +115,13 @@ export const baseParticipantSchema = yup.object({
   // <friend> to join". Stamped when the participant is assigned to a friends
   // main room. Optional (only set on that path), so it's absent on most docs.
   waitingForFriendAudioUrl: yup.string().url().nullable(),
+  // Pre-generated TTS audio (signed URL) played in the selfie "waiting" state
+  // when the friend is running late — generated lazily ~50s after the walk's
+  // start time (only if the friend still hasn't arrived) and played as soon as
+  // it lands, e.g. "Looks like <friend> is running a little late…". Its presence
+  // also marks that the late-friend nudge (audio + push to the friend) has
+  // already fired, so it isn't sent twice.
+  friendLateAudioUrl: yup.string().url().nullable(),
   // Whether this participant has RSVPed for the entire recurring series
   rsvpForSeries: yup.boolean().optional().default(false),
   createdAt: timestampSchema,

@@ -139,6 +139,10 @@ export const userDataSchema = yup.object({
   // Whether the user allows location sharing for group walks (null = not yet decided)
   allowLocationSharingForGroupWalks: yup.boolean().nullable().default(null),
   stepsTrackingEnabled: yup.boolean().default(false),
+  // Per-user opt-in for background route tracking. When true, the full GPS
+  // route is recorded (and streamed to Firestore) during walks; when false
+  // (the default) walks only record city + step count. Off by default.
+  routeTrackingEnabled: yup.boolean().default(false),
   // Per-user opt-in for the iOS Live Activity feature, toggled from admin.
   // Used to enable it for specific testers while it's gated off globally.
   liveActivitiesEnabled: yup.boolean().default(false),

@@ -6,6 +6,8 @@ export * from "./aiConversationState";
 export * from "./attachment";
 export * from "./audit";
 export * from "./availability";
+export * from "./calendarAccount";
+export * from "./calendarEvent";
 export * from "./favoriteLocation";
 export * from "./feedback";
 export * from "./friendship";
