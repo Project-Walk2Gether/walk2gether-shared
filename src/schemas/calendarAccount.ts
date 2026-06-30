@@ -38,6 +38,9 @@ export const calendarAccountSchema = yup.object({
     .default("active"),
   createdAt: timestampSchema,
   lastSyncedAt: timestampSchema.nullable().defined(),
+  // True while a sync is in flight (set by syncCalendarAccount, cleared when it
+  // finishes). Drives a spinner in the "Calendars" footer.
+  syncing: yup.boolean().optional(),
 });
 
 export type CalendarAccount = yup.InferType<typeof calendarAccountSchema>;
