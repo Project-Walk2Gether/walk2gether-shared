@@ -10,7 +10,10 @@ export type RecurrenceUnit = (typeof recurrenceUnits)[number];
 
 export const recurrenceSchema = yup
   .object({
-    unit: yup.string().oneOf([...recurrenceUnits]).required(),
+    unit: yup
+      .string()
+      .oneOf([...recurrenceUnits])
+      .required(),
     interval: yup.number().required().positive().integer().min(1).max(12),
   })
   .optional()
@@ -35,22 +38,26 @@ export type ProposedSlot = yup.InferType<typeof proposedSlotSchema>;
 export const walkBaseSchema = yup.object({
   id: yup.string(),
   invitationCode: yup.string().optional(),
-  date: timestampSchema.required(),
+  // Optional/nullable: an "availability" walk has NO date until the invitee
+  // picks a slot (the chooseWalkSlot callable then sets it). For "proposed"
+  // (fixed-time) walks the date is set at creation. Readers must treat date as
+  // possibly absent.
+  date: timestampSchema.optional().nullable(),
+  // endTime / endTimeWithBuffer stay required: they bound the offered window
+  // (for availability walks, the latest offered slot) and back the home query's
+  // `endTime > now` filter, so the walk surfaces and expires correctly.
   endTime: timestampSchema.required(),
   endTimeWithBuffer: timestampSchema.required(),
   status: yup.string().oneOf(["proposed", "confirmed", "expired"]).required(),
   // How the walk time is decided:
   // - "proposed": creator picks a fixed time (the existing flow). date is final.
-  // - "availability": creator offers proposedSlots; status stays "proposed" and
-  //   date holds the earliest slot as a placeholder until the invitee picks one
-  //   (via the chooseWalkSlot callable), which confirms the walk.
+  // - "availability": creator offers proposedSlots; status stays "proposed" with
+  //   no date until the invitee picks one (via the chooseWalkSlot callable),
+  //   which confirms the walk and sets its date.
   // Optional for back-compat: existing/legacy walks with no schedulingMode are
   // treated as "proposed" (a fixed time) by readers. No default() so the
   // inferred type stays optional and existing construction sites don't break.
-  schedulingMode: yup
-    .string()
-    .oneOf(["proposed", "availability"])
-    .optional(),
+  schedulingMode: yup.string().oneOf(["proposed", "availability"]).optional(),
   proposedSlots: yup.array().of(proposedSlotSchema).optional(),
   durationMinutes: yup.number().required().positive().integer(),
   organizerName: yup.string().required(),
@@ -65,6 +72,11 @@ export const walkBaseSchema = yup.object({
   // Set once friendship step counts have been aggregated for this walk, so the
   // walk-end aggregation runs exactly once. See aggregateFriendshipSteps.
   stepsAggregatedAt: timestampSchema.nullable(),
+  // Per-user walk-total step counts, keyed by uid, denormalized from each
+  // participant's telemetry doc at walk-end aggregation. Lets consumers (e.g.
+  // the Past walks summary) sum a user's steps across walks without an N-read
+  // fan-out into the telemetry subcollections. Written by aggregateSharedSteps.
+  stepsByUid: objectOf(yup.number().required()).optional(),
   // Whether in-person or remote, or both
   meetupType: meetupTypeSchema.required(),
   visibility: yup.string().oneOf(["public", "private"]).required(),
