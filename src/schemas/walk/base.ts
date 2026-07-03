@@ -59,6 +59,13 @@ export const walkBaseSchema = yup.object({
   // inferred type stays optional and existing construction sites don't break.
   schedulingMode: yup.string().oneOf(["proposed", "availability"]).optional(),
   proposedSlots: yup.array().of(proposedSlotSchema).optional(),
+  // The offer as originally created, immutable. proposedSlots holds the
+  // EFFECTIVE offer: original minus the creator's current calendar-busy times,
+  // recomputed on every calendar sync (see adjustProposedAvailabilityWalks in
+  // functions). A busy block is a temporary, dated override — if the calendar
+  // event moves or is deleted, the slot is restored from here. The creator's
+  // recurring weekly availability (userData.availability) is never modified.
+  originalProposedSlots: yup.array().of(proposedSlotSchema).optional(),
   // Which channel the walk was created through. WhatsApp-created walks (via the
   // agent) get WhatsApp lifecycle updates (invites, responses); in-app walks do
   // not. Optional for back-compat: legacy walks with no channel are treated as
