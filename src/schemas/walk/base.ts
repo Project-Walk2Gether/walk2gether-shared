@@ -69,6 +69,12 @@ export const walkBaseSchema = yup.object({
   // When the walk actually started and ended (set at runtime)
   startedAt: timestampSchema.nullable(),
   endedAt: timestampSchema.nullable(),
+  // Set when a friends walk transitions to having zero connected
+  // participants before its scheduled end time. Cleared if anyone
+  // reconnects. friendsWalkDisconnectCheckTask uses this to end the walk
+  // once it's been true for a grace period, without ending prematurely on a
+  // brief disconnect (e.g. a dropped call that gets rejoined).
+  allDisconnectedSince: timestampSchema.nullable().optional(),
   // Set once friendship step counts have been aggregated for this walk, so the
   // walk-end aggregation runs exactly once. See aggregateFriendshipSteps.
   stepsAggregatedAt: timestampSchema.nullable(),
