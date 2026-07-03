@@ -59,6 +59,11 @@ export const walkBaseSchema = yup.object({
   // inferred type stays optional and existing construction sites don't break.
   schedulingMode: yup.string().oneOf(["proposed", "availability"]).optional(),
   proposedSlots: yup.array().of(proposedSlotSchema).optional(),
+  // Which channel the walk was created through. WhatsApp-created walks (via the
+  // agent) get WhatsApp lifecycle updates (invites, responses); in-app walks do
+  // not. Optional for back-compat: legacy walks with no channel are treated as
+  // NOT WhatsApp, so they won't trigger WhatsApp outreach.
+  channel: yup.string().oneOf(["app", "whatsapp"]).optional(),
   durationMinutes: yup.number().required().positive().integer(),
   organizerName: yup.string().required(),
   createdByUid: yup.string().required(),
