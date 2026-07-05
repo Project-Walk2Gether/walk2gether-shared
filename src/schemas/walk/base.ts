@@ -66,6 +66,10 @@ export const walkBaseSchema = yup.object({
   // event moves or is deleted, the slot is restored from here. The creator's
   // recurring weekly availability (userData.availability) is never modified.
   originalProposedSlots: yup.array().of(proposedSlotSchema).optional(),
+  // When the creator last nudged the invitee about a pending availability
+  // invitation (sends a friendship-chat message). Gates the walk card's Nudge
+  // button to one nudge per cooldown window.
+  inviteNudgeSentAt: timestampSchema.optional().nullable(),
   // Which channel the walk was created through. WhatsApp-created walks (via the
   // agent) get WhatsApp lifecycle updates (invites, responses); in-app walks do
   // not. Optional for back-compat: legacy walks with no channel are treated as
