@@ -18,11 +18,42 @@ export const buildExpirySchema = yup.object({
 
 export type BuildExpiry = yup.InferType<typeof buildExpirySchema>;
 
+// expiredByUid value used when a build is expired automatically (new major released)
+// rather than by an admin.
+export const AUTO_EXPIRY_UID = "auto-expiry";
+
+export const buildPlatformReleaseSchema = yup.object({
+  // Set by the build pipeline (record-native-build.js) when a native binary for
+  // this platform is cut. A build can only be auto-released if it was primed.
+  primedAt: yup.mixed().nullable().default(null),
+  // Set when the first production (non-dev) client on this platform reports the
+  // version, i.e. the store has approved it and it's in the field.
+  confirmedAt: yup.mixed().nullable().default(null),
+  confirmedByUid: yup.string().nullable().default(null),
+});
+
+export type BuildPlatformRelease = yup.InferType<
+  typeof buildPlatformReleaseSchema
+>;
+
+export const buildReleaseSchema = yup.object({
+  ios: buildPlatformReleaseSchema.nullable().default(null),
+  android: buildPlatformReleaseSchema.nullable().default(null),
+});
+
+export type BuildRelease = yup.InferType<typeof buildReleaseSchema>;
+
 export const buildSchema = yup.object({
   version: yup.string().required(),
-  firstSeenAt: yup.mixed().required(),
-  lastSeenAt: yup.mixed().required(),
+  // Null until a client actually reports the version (pipeline-primed docs
+  // exist before any client has been seen).
+  firstSeenAt: yup.mixed().nullable().default(null),
+  lastSeenAt: yup.mixed().nullable().default(null),
   expiry: buildExpirySchema.nullable().default(null),
+  release: buildReleaseSchema.nullable().default(null),
+  // Set once every primed platform has been confirmed by a production client.
+  // The transition null -> set triggers auto-expiry of older major builds.
+  releasedAt: yup.mixed().nullable().default(null),
   createdAt: yup.mixed().required(),
 });
 
