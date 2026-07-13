@@ -21,6 +21,7 @@ export const userDataFactory = Sync.makeFactory<UserData>({
   deviceInfo: {},
   distanceUnit: "mi",
   isAgent: true,
+  isDeveloper: false,
   aboutMe: "",
   includeAboutMeInIntroductions: false,
   phoneNumber: "",

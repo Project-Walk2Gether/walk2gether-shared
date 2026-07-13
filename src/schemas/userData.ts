@@ -132,6 +132,13 @@ export const userDataSchema = yup.object({
   walkCount: yup.number().default(0),
   // Agentic accounts flag
   isAgent: yup.boolean().default(false),
+  // Developer/maintainer accounts. A developer's own device is a genuine App
+  // Store / Play Store install once they update — same installSource as any
+  // real user — so it would otherwise be indistinguishable from a real-world
+  // confirmation that a release has gone live. Excluded from build-release
+  // confirmation (maybeConfirmBuildRelease in functions) so the developer
+  // dogfooding a fresh release can't mark it "live" ahead of actual users.
+  isDeveloper: yup.boolean().default(false),
   // UI context: which plan the user is actively discussing in the plan screen
   activelyDiscussingPlanDoc: documentReferenceSchema.optional().nullable(),
   // AI response processing indicator
