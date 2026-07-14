@@ -121,7 +121,13 @@ export const userDataSchema = yup.object({
   // Whether the user's "about me" should be used when introducing them in
   // group walks. Opt-in: defaults to false unless the user turns it on.
   includeAboutMeInIntroductions: yup.boolean().default(false),
+  // Recurring "template" availability captured during onboarding. Seeds each
+  // week's confirmation prompt; the per-week confirmed availability lives in the
+  // users/{uid}/weeklyAvailability subcollection.
   availability: availabilitySchema.optional().default(undefined),
+  // Week key ("YYYY-MM-DD" Monday) of the last week we sent the availability-
+  // confirmation WhatsApp prompt for. Dedupes the weekly prompt scheduler.
+  availabilityPromptSentForWeekOf: yup.string().optional().nullable(),
   // Desired walking cadence, captured during onboarding and used for matching.
   // 1 = Gentle, 2 = Moderate, 3 = Active. null until the user has chosen.
   walksPerWeek: yup
