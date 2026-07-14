@@ -24,6 +24,7 @@ export const userDataFactory = Sync.makeFactory<UserData>({
   isDeveloper: false,
   aboutMe: "",
   includeAboutMeInIntroductions: false,
+  walksPerWeek: 2,
   phoneNumber: "",
   notificationPreferences: {
     friendETA: true,
