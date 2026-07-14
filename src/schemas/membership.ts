@@ -14,6 +14,11 @@ export const membershipSchema = yup.object({
     .required()
     .default("member"),
   notifyNewGroupWalks: yup.boolean().required().default(true),
+  // Whether this member is included in the group's automatic weekly walk
+  // matching (availability-based). Opt-OUT: on by default, and a legacy
+  // membership doc with no field is treated as opted in. Set false to exclude
+  // this member from auto-scheduled walks for this group.
+  optIntoAutomaticMatching: yup.boolean().default(true),
   shouldNotify: yup.boolean().required().default(false),
   notificationSentAt: timestampSchema.nullable().defined(),
   joinedAt: timestampSchema.required(),
