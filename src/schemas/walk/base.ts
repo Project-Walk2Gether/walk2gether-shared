@@ -114,6 +114,12 @@ export const walkBaseSchema = yup.object({
   recurrence: recurrenceSchema,
   recurrenceGroupId: yup.string().optional().nullable().default(null),
   nextWalkId: yup.string().optional().nullable().default(null),
+  // True for walks created by the automatic weekly group-matching job. Used to
+  // find/deduplicate auto-scheduled walks on re-runs (so re-running matching
+  // doesn't create duplicates) and to distinguish them from user-created walks.
+  // Optional (not defaulted) so legacy/user-created walk literals don't have to
+  // set it; readers treat a missing value as false (=== true).
+  autoMatched: yup.boolean().optional(),
   // Optional per-walk override for the end-of-walk Chester debrief questions.
   // When unset, the global default (config/feedback) is used.
   feedbackQuestions: yup.array().of(yup.string().required()).optional(),
