@@ -6,6 +6,7 @@ export * from "./aiConversationState";
 export * from "./attachment";
 export * from "./audit";
 export * from "./availability";
+export * from "./weeklyAvailability";
 export * from "./calendarAccount";
 export * from "./calendarEvent";
 export * from "./favoriteLocation";

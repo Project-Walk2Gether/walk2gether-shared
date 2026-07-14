@@ -11,4 +11,5 @@ export * from "./walks";
 export * from "./notifications";
 export * from "./inviteReminder";
 export * from "./timezone";
+export * from "./week";
 export * from "./availabilitySlots";
