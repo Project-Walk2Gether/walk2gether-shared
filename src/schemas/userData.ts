@@ -79,6 +79,24 @@ export const notificationPreferencesSchema = yup.object(
   ),
 );
 
+/**
+ * Walking cadence options captured during onboarding. The numeric value is the
+ * target number of walks per week and is what gets stored on `walksPerWeek`.
+ */
+export interface WalksPerWeekOption {
+  value: 1 | 2 | 3;
+  label: string;
+  description: string;
+}
+
+export const WALKS_PER_WEEK_OPTIONS: WalksPerWeekOption[] = [
+  { value: 1, label: "Gentle", description: "1 walk a week" },
+  { value: 2, label: "Moderate", description: "2 walks a week" },
+  { value: 3, label: "Active", description: "3 walks a week" },
+];
+
+export const DEFAULT_WALKS_PER_WEEK = 2 as const;
+
 export const userDataSchema = yup.object({
   id: yup.string(),
   firstName: yup.string().required(),
@@ -104,6 +122,13 @@ export const userDataSchema = yup.object({
   // group walks. Opt-in: defaults to false unless the user turns it on.
   includeAboutMeInIntroductions: yup.boolean().default(false),
   availability: availabilitySchema.optional().default(undefined),
+  // Desired walking cadence, captured during onboarding and used for matching.
+  // 1 = Gentle, 2 = Moderate, 3 = Active. null until the user has chosen.
+  walksPerWeek: yup
+    .number()
+    .oneOf([1, 2, 3])
+    .nullable()
+    .default(null),
   topics: yup.array().of(yup.string().required()).optional().default(undefined),
   topicRankings: yup
     .array()
