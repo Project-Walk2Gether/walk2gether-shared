@@ -32,6 +32,7 @@ export const userDataFactory = Sync.makeFactory<UserData>({
     invitedToFriendWalks: true,
   },
   notificationsPermissionsSetAt: { toDate: () => new Date() } as any,
+  whatsappEnabled: true,
   currentQuoteIndex: 0,
   neighborhoodWalksHowItWorksDontShowAgain: false,
   remoteWalksHowItWorksDontShowAgain: false,

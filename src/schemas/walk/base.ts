@@ -111,6 +111,11 @@ export const walkBaseSchema = yup.object({
   // URL of the generated selfie collage image for this walk
   collageUrl: yup.string().url().nullable().default(null),
   dayBeforeReminderSentAt: timestampSchema.optional().nullable(),
+  // Stamped once the WhatsApp "can you make it?" confirmation has been sent to
+  // this auto-matched walk's members. Firestore triggers are at-least-once, and
+  // each send writes a new aiMessages doc, so without this a re-fire would
+  // re-message everyone.
+  groupConfirmationSentAt: timestampSchema.optional().nullable(),
   recurrence: recurrenceSchema,
   recurrenceGroupId: yup.string().optional().nullable().default(null),
   nextWalkId: yup.string().optional().nullable().default(null),
