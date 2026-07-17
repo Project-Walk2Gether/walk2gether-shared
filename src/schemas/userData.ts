@@ -112,6 +112,13 @@ export const userDataSchema = yup.object({
   profilePicUrl: yup.string().url().optional(),
   linkedInProfileUrl: yup.string().url().optional(),
   friendInvitationCode: yup.string(),
+  // Set when this user signed up by following someone's friend-invite link. The
+  // friendship itself is created at auth time; these persist WHO invited them so
+  // onboarding can greet them by the inviter's name without a lookup ("Simon
+  // thought of you"). Absent for organic sign-ups.
+  referredByUid: yup.string().optional().nullable(),
+  referredByName: yup.string().optional().nullable(),
+  referredByPhotoUrl: yup.string().optional().nullable(),
   expoPushToken: yup.string().nullable(),
   expoPushTokenSetAt: timestampSchema,
   appVersion: yup.string().optional(),
