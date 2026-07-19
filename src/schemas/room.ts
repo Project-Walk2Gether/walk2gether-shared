@@ -1,4 +1,5 @@
 import * as yup from "yup";
+import { Timestamp } from "./utils/firebase";
 import { timestampSchema } from "./utils/timestamp";
 import { walkRecentMessageSchema } from "./walk/recentMessage";
 
@@ -33,6 +34,14 @@ export const roomSchema = yup.object({
   startedAt: timestampSchema.nullable(),
   shouldEndAt: timestampSchema.nullable(),
   endedAt: timestampSchema.nullable(),
+  // First time each member was issued a join token for this room's call, keyed
+  // by uid. Server-written (joinRoom API). Distinguishes "was actually in the
+  // call" from merely being assigned to the room (e.g. parked at the selfie
+  // gate) — the friends-walk early auto-end relies on this.
+  memberFirstJoinedAt: yup
+    .mixed<Record<string, Timestamp>>()
+    .nullable()
+    .default(null),
   durationMinutes: yup.number().required(),
   livekitRoomName: yup.string().nullable(),
   introductionText: yup.string().required(),
