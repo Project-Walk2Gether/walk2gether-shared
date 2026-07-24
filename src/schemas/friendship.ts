@@ -81,6 +81,11 @@ export const friendshipSchema = yup.object({
   tagsByUid: objectOf(
     yup.array().of(yup.string().oneOf(FRIEND_TAG_OPTIONS).required()).defined(),
   ).optional(),
+  // Per-user switch for auto-matching within THIS friendship, keyed by uid.
+  // Default true everywhere: absent (or an absent key) means enabled; only an
+  // explicit `false` excludes the pair from that user's friend matching. Only
+  // meaningful for users whose user-level friendMatchingEnabled is on.
+  matchingEnabledByUid: objectOf(yup.boolean().defined()).optional(),
 });
 
 export type Friendship = yup.InferType<typeof friendshipSchema>;

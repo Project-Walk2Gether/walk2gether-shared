@@ -135,6 +135,12 @@ export const userDataSchema = yup.object({
   // Week key ("YYYY-MM-DD" Monday) of the last week we sent the availability-
   // confirmation WhatsApp prompt for. Dedupes the weekly prompt scheduler.
   availabilityPromptSentForWeekOf: yup.string().optional().nullable(),
+  // Whether the weekly matcher may schedule this user into walks with their
+  // accepted friends. Opt-IN with a split default: new accounts are created
+  // with `true`; for existing users the field is absent, which counts as OFF —
+  // only an explicit `true` includes them in friend matching. (Group matching
+  // is governed separately by each membership's optIntoAutomaticMatching.)
+  friendMatchingEnabled: yup.boolean().optional(),
   // Desired walking cadence, captured during onboarding and used for matching.
   // 1 = Gentle, 2 = Moderate, 3 = Active. null until the user has chosen.
   walksPerWeek: yup
