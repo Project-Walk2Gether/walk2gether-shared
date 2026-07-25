@@ -19,6 +19,13 @@ export const weeklyAvailabilitySchema = yup.object({
   timezone: yup.string().required(),
   windows: yup.array().of(availabilityWindowSchema).default([]),
   confirmedAt: timestampSchema.required(),
+  /**
+   * One-week override for the user's `walksPerWeek` cap. Lives here rather than
+   * on the user doc precisely so it EXPIRES with the week — there's nothing to
+   * remember to reset. Used to let someone take extra walks in a given week
+   * (e.g. to fit a new member in) without permanently raising their cap.
+   */
+  walksPerWeekOverride: yup.number().min(0).optional(),
 });
 
 export type WeeklyAvailability = yup.InferType<typeof weeklyAvailabilitySchema>;
