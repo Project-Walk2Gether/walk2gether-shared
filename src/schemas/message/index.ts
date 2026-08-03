@@ -22,6 +22,13 @@ export const userMessageSchema = baseMessageSchema.shape({
   senderAvatarUrl: yup.string().url().optional(),
   // When true, the server skips push notifications and recent-message preview for this message
   suppressNotification: yup.boolean().optional(),
+  // Set server-side by the moderation trigger. "flagged" messages are hidden
+  // from all clients pending review; "removed" messages were deleted by
+  // moderation. Absent/"ok" messages render normally.
+  moderationStatus: yup
+    .mixed<"ok" | "flagged" | "removed">()
+    .oneOf(["ok", "flagged", "removed"])
+    .optional(),
 });
 
 // Assistant message schema

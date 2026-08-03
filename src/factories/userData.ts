@@ -43,6 +43,7 @@ export const userDataFactory = Sync.makeFactory<UserData>({
   routeTrackingEnabled: false,
   liveActivitiesEnabled: false,
   agreedPrivacyPolicyVersion: null,
+  agreedTermsOfServiceVersion: null,
   locationPermissions: null,
   currentLocation: null,
 });

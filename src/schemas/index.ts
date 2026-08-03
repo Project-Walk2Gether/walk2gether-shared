@@ -29,6 +29,7 @@ export * from "./participantTelemetry";
 // export * from "./plan";
 export * from "./quote";
 export * from "./reminder";
+export * from "./report";
 export * from "./room";
 export * from "./roomAnnouncement";
 export * from "./sharedSteps";

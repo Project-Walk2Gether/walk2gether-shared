@@ -207,6 +207,16 @@ export const userDataSchema = yup.object({
   liveActivitiesEnabled: yup.boolean().default(false),
   // Version of the privacy policy the user agreed to during signup
   agreedPrivacyPolicyVersion: yup.number().nullable().default(null),
+  // Version of the Terms of Service (EULA) the user explicitly agreed to at
+  // signup (TERMS_OF_SERVICE_VERSION in schemas/legalDocument.ts). Required
+  // by App Store Guideline 1.2: agreement must be explicit, not implied.
+  agreedTermsOfServiceVersion: yup.number().nullable().default(null),
+  // Uids this user has blocked. Content from blocked users is hidden
+  // client-side immediately; each block also files a report for review.
+  blockedUserIds: yup.array().of(yup.string().required()).optional(),
+  // Set when moderation ejects the user for objectionable content. A banned
+  // user is signed out and cannot use the app.
+  bannedAt: timestampSchema.optional().nullable(),
   // Location permission status (synced from device for observability)
   locationPermissions: yup
     .object({
