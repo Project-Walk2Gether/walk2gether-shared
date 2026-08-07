@@ -1,5 +1,6 @@
 import { Sync } from "factory.ts";
 import { UserData } from "../schemas/userData";
+import { TERMS_OF_SERVICE_VERSION } from "../schemas/legalDocument";
 
 /**
  * Factory for creating UserData objects for testing
@@ -43,6 +44,7 @@ export const userDataFactory = Sync.makeFactory<UserData>({
   routeTrackingEnabled: false,
   liveActivitiesEnabled: false,
   agreedPrivacyPolicyVersion: null,
+  agreedTermsOfServiceVersion: TERMS_OF_SERVICE_VERSION,
   locationPermissions: null,
   currentLocation: null,
 });

@@ -27,3 +27,8 @@ export const legalDocumentSchema = yup.object({
 });
 
 export type LegalDocument = yup.InferType<typeof legalDocumentSchema>;
+
+// Version of the in-app Terms of Service (hardcoded in the expo app, unlike
+// the CMS-driven privacy policy). Bump whenever the terms text changes so
+// users are re-prompted to agree; stamped on userData.agreedTermsOfServiceVersion.
+export const TERMS_OF_SERVICE_VERSION = 2;
