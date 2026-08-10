@@ -12,10 +12,41 @@ import { timestampSchema } from "./utils/timestamp";
 export type NotificationTypeInfo = NotificationPreferenceInfo;
 
 /**
- * Canonical list of all notification types in the system
- * (Reusing notification preferences from userData.ts)
+ * Notification types that are NOT user preferences.
+ *
+ * These go to staff about someone else's activity, so they differ from
+ * NOTIFICATION_PREFERENCES in two ways that matter: they must never appear in
+ * the notification settings screen (driven by notificationPreferenceLabels,
+ * which is keyed off NOTIFICATION_PREFERENCES alone), and they must not be
+ * suppressible by an end user's opt-out.
+ *
+ * crashAlert is listed because scripts/sendTestCrashAlert.ts has been writing
+ * it since before this list existed. It only ever worked because a direct
+ * collection write skips the yup validation that notificationSchema declares —
+ * so the `oneOf` below was quietly untrue. Naming it here makes it true again.
  */
-export const NOTIFICATION_TYPES = NOTIFICATION_PREFERENCES;
+export const INTERNAL_NOTIFICATION_TYPES: NotificationTypeInfo[] = [
+  {
+    key: "contentReport",
+    label: "Content Reports",
+    description:
+      "Sent to admins when a user reports content or blocks someone, so reports can be actioned within 24 hours",
+  },
+  {
+    key: "crashAlert",
+    label: "Crash Alerts",
+    description: "Sent to admins when a new Crashlytics issue appears",
+  },
+];
+
+/**
+ * Canonical list of all notification types in the system: the user-facing
+ * preferences, plus the internal ones above.
+ */
+export const NOTIFICATION_TYPES: NotificationTypeInfo[] = [
+  ...NOTIFICATION_PREFERENCES,
+  ...INTERNAL_NOTIFICATION_TYPES,
+];
 
 /**
  * Map of notification type keys for easy access
