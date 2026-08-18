@@ -162,13 +162,23 @@ export const userDataSchema = yup.object({
   notificationPreferences: notificationPreferencesSchema,
   notificationsPermissionsSetAt: timestampSchema,
   // Whether we may proactively message this user on WhatsApp (the weekly
-  // availability prompt, walk invitations, group-walk confirmations). Opt-OUT:
-  // absent/undefined means enabled, so existing users — who have always been
-  // messaged on the strength of having a phoneNumber alone — keep receiving
-  // their prompts. Only an explicit `false` turns the channel off. Read it via
-  // isWhatsappEnabled() rather than testing truthiness. Note this gates
-  // proactive sends only; if the user messages the bot, it still replies.
-  whatsappEnabled: yup.boolean().default(true),
+  // availability prompt, walk invitations, group-walk confirmations). Opt-IN:
+  // only an explicit `true` permits a proactive send, so absent means off.
+  //
+  // This was opt-out until 2026-08-18, on the reasoning that existing users had
+  // always been messaged on the strength of a phoneNumber alone. That reasoning
+  // was wrong: a number given to log in is not consent to be messaged, and the
+  // default silently enrolled every new signup. It produced two complaints
+  // (Sonya Ramsey 2026-07-28, Tonya Lockamy 2026-08-17) and a mass-disable
+  // sweep whose own note said it was "a stopgap until the consent gate is
+  // fixed". This is that gate.
+  //
+  // Consent is recorded explicitly in exactly two places: the Me-screen toggle,
+  // and findOrCreateUser for someone who messages the bot first. Read it via
+  // isWhatsappEnabled() — never test the field directly, or absent will slip
+  // through as permitted. Note this gates proactive sends only; if the user
+  // messages the bot, it still replies.
+  whatsappEnabled: yup.boolean().default(false),
   distanceUnit: yup
     .mixed<"km" | "mi">()
     .oneOf(["km", "mi"])
@@ -245,15 +255,19 @@ export type UserData = yup.InferType<typeof userDataSchema>;
 /**
  * Whether we may proactively message this user on WhatsApp.
  *
- * Opt-out: only an explicit `false` disables the channel. Raw Firestore docs
- * predate the field, so `undefined` must read as enabled — a plain truthiness
- * check would silently cut off every existing user, since yup's `.default(true)`
- * applies to parsed objects, not the raw snapshot data the functions read.
+ * Opt-in: only an explicit `true` permits a proactive send. Raw Firestore docs
+ * that predate consent being recorded have no field at all, and those must read
+ * as disabled — the whole point of the gate is that silence is not permission.
+ *
+ * Note yup's `.default(false)` applies to parsed objects, not the raw snapshot
+ * data the functions read, which is why this helper exists rather than callers
+ * testing the field. A direct `=== false` check is the specific bug to avoid:
+ * it treats absent as permitted and reopens the hole.
  *
  * Takes a loose shape so callers can pass raw snapshot data without casting.
  */
 export function isWhatsappEnabled(
   user: Pick<UserData, "whatsappEnabled"> | Record<string, any> | undefined | null,
 ): boolean {
-  return user?.whatsappEnabled !== false;
+  return user?.whatsappEnabled === true;
 }
