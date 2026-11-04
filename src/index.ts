@@ -8,3 +8,4 @@ export * from "./firestore/e2eTestReference";
 export * from "./firestore/roomReference";
 export * from "./schemas";
 export * from "./utils";
+export * from "./brain/relationshipBrain";

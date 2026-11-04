@@ -91,6 +91,15 @@ export const roomSchema = yup.object({
   // state-changed events. Clients watch this to show a speaking indicator
   // (animated waveform) while Chester talks. Null when no agent is present /
   // cleared on session end.
+  // Jottie relationship-memory capture, written by the voice agent. True while
+  // it is transcribing this room for memories (every person present opted
+  // in); clients show a "Jottie is remembering" indicator. Null/false = off.
+  memoryCaptureActive: yup.boolean().optional().nullable(),
+  // Every uid that was present in the call while capture ran — the scope the
+  // extracted memories are stored under. Server-written.
+  memoryCaptureUids: yup.array().of(yup.string().required()).optional().nullable(),
+  // Set once memories have been extracted from this room (idempotency marker).
+  memoriesExtractedAt: timestampSchema.optional().nullable(),
   agentState: yup
     .mixed<"initializing" | "idle" | "listening" | "thinking" | "speaking">()
     .oneOf(["initializing", "idle", "listening", "thinking", "speaking"])
