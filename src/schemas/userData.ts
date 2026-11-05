@@ -215,6 +215,13 @@ export const userDataSchema = yup.object({
   // Per-user opt-in for the iOS Live Activity feature, toggled from admin.
   // Used to enable it for specific testers while it's gated off globally.
   liveActivitiesEnabled: yup.boolean().default(false),
+  // Jottie relationship memory (opt-in, per user). When true, Jottie may
+  // capture memories from walks where EVERY person present has opted in, and
+  // store them in the shared brain scoped to that exact set of people.
+  // Opting out stops NEW capture only; existing memories stay until the user
+  // separately asks for deletion (POST /api/relationship-memory/delete).
+  relationshipMemoryEnabled: yup.boolean().optional(),
+  relationshipMemoryUpdatedAt: timestampSchema.optional().nullable(),
   // Version of the privacy policy the user agreed to during signup
   agreedPrivacyPolicyVersion: yup.number().nullable().default(null),
   // Version of the Terms of Service (EULA) the user explicitly agreed to at

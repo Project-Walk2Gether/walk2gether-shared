@@ -26,6 +26,7 @@ export * from "./message";
 export * from "./notification";
 export * from "./participant";
 export * from "./participantTelemetry";
+export * from "./memoryTranscriptItem";
 // export * from "./plan";
 export * from "./quote";
 export * from "./reminder";
