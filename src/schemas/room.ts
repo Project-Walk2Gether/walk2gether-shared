@@ -95,8 +95,10 @@ export const roomSchema = yup.object({
   // it is transcribing this room for memories (every person present opted
   // in); clients show a "Jottie is remembering" indicator. Null/false = off.
   memoryCaptureActive: yup.boolean().optional().nullable(),
-  // Every uid that was present in the call while capture ran — the scope the
-  // extracted memories are stored under. Server-written.
+  // Every uid that was present in the call while capture ran (the union over
+  // the whole room). Observability only: it is NOT the scope memories are
+  // stored under — each memoryTranscript line carries its own presentUids and
+  // extraction scopes per segment of identical presentUids. Server-written.
   memoryCaptureUids: yup.array().of(yup.string().required()).optional().nullable(),
   // Set once memories have been extracted from this room (idempotency marker).
   memoriesExtractedAt: timestampSchema.optional().nullable(),
